@@ -24,7 +24,7 @@ export const Center_Section = styled.div(({ theme: {} }) => ({
     marginRight: "10px",
 
     background: "#1a2730",
-    
+
     borderRadius: "10px",
     padding: "1rem 20px 1rem 20px",
   
@@ -44,5 +44,8 @@ export const Right_Section = styled.div(({ theme: {} }) => ({
 
     borderRadius: "10px",
     padding: "1rem 20px 1rem 20px",
+
+
+    
 
 }));

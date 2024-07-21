@@ -9,11 +9,10 @@ export const Home = () => {
 			<Center_Section className='center_section'></Center_Section>
 
 			<Right_Section className='center_section'>
+				{/* top account info  */}
 
-                {/* top account info  */}
-
-                    {/* other users top account info  */}
-            </Right_Section>
+				{/* other users top account info  */}
+			</Right_Section>
 		</Home_Container>
 	);
 };
