@@ -15,13 +15,13 @@ import { GlobalStyled } from "./common.styled";
 // comps
 import { Signin } from "./comps/auth/elements/Signin";
 import { Signup } from "./comps/auth/elements/Signup";
-import { Main } from "../src/comps/main/Main";
 
 // LAYOUT
 import { AppLayout } from "./comps/layouts/AppLayout";
 import { PersistentLayout } from "./comps/layouts/PersistentLayout";
 import { RegisterLayout } from "./comps/layouts/RegisterLayout";
-
+import { HomeLayout } from "./comps/layouts/HomeLayout";
+import { Home } from "./comps/home/Home";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -33,7 +33,9 @@ const router = createBrowserRouter(
 					<Route path='/signup' element={<Signup />} />
 				</Route>
 				<Route path='/' element={<AppLayout />}>
-					<Route index element={<Main />} />
+					<Route path='/' element={<HomeLayout />}>
+						<Route path='/' element={<Home/>}/>
+					</Route>
 				</Route>
 			</Route>
 		</Fragment>

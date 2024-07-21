@@ -1,6 +1,18 @@
 /* eslint-disable */
 import styled, { createGlobalStyle } from "styled-components";
 
+
+/* eslint-disable */
+// import styled from "styled-components";
+// import { motion } from "framer-motion";
+
+
+// export const Project_Content = styled.div(({ theme: {} }) => ({}));
+// export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
+
+
+
+
 export const clr = {
 	white: "#fff",
 	white01: "#EBECF0",
