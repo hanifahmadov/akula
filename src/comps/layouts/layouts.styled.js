@@ -67,7 +67,7 @@ export const HomeLayout_Container = styled.div(({ theme: {} }) => ({
 }));
 
 export const Navbar_Container = styled.div(({ theme: {} }) => ({
-	maxWidth: "23rem",
+	maxWidth: "20rem",
 	width: "100%",
 
 	padding: "14px 5px 14px 14px",

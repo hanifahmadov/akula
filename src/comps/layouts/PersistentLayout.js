@@ -37,11 +37,17 @@ export const PersistentLayout = () => {
 					for not to use Refresh Token to retrieve user data
 				*/
 
-				const { user: temp } = res?.data;
+
+
+				const { user: temp } = await res.data;
+
 
 				const tempUser = produce(user, (draft) => {
 					draft = temp;
 					draft.avatar = apiUrl + "/" + temp.avatar;
+					// this return keeps the user signed in when page reloaded
+					// mf prodcue need a return statement, this is the fact
+					return draft
 				});
 
 				setUser(tempUser);

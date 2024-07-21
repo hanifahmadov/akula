@@ -5,6 +5,8 @@ import styled from "styled-components";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
+import spc from "./images/spc3.jpg";
+
 export const Home_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
 	height: "100%",
@@ -21,31 +23,51 @@ export const Center_Section = styled.div(({ theme: {} }) => ({
 	width: "100%",
 	height: "100%",
 
-    marginRight: "10px",
+	marginRight: "14px",
 
-    background: "#1a2730",
+	background: "#1a2730",
 
-    borderRadius: "10px",
-    padding: "1rem 20px 1rem 20px",
-  
-
-
+	borderRadius: "10px",
+	padding: "1rem 20px 1rem 20px",
 }));
 
 export const Right_Section = styled.div(({ theme: {} }) => ({
-	maxWidth: "23rem",
+	maxWidth: "20rem",
 	width: "100%",
-    height: "100%",
+	height: "100%",
 
+	borderRadius: "10px",
+	// padding: "1rem 20px 1rem 20px",
 
+	overflow: "hidden",
 
-   
-    background: "#1a2730",
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	justifyContent: "space-between",
 
-    borderRadius: "10px",
-    padding: "1rem 20px 1rem 20px",
+	".account_section": {
+		width: "100%",
+		height: "100%",
 
+		background: "#1a2730",
+		borderRadius: "10px",
+		overflow: "hidden",
 
-    
+		backgroundImage: `url(${spc})`,
+		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
+	},
 
+	".allusers_section": {
+		width: "100%",
+		height: "100%",
+
+		marginTop: "1rem",
+
+		background: "#1a2730",
+		borderRadius: "10px",
+		// padding: "1rem 20px 1rem 20px",
+		overflow: "hidden",
+	},
 }));

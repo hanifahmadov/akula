@@ -50,7 +50,7 @@ export const HomeLayout = () => {
 						</div>
 
 						<Links_Section className='left_navlinks_section'>
-							<Link to={"home"}>
+							<Link to={"/"}>
 								<FontAwesomeIcon className='icon' icon={faHouse} />
 								<span>Home</span>
 							</Link>

@@ -22,6 +22,7 @@ import { PersistentLayout } from "./comps/layouts/PersistentLayout";
 import { RegisterLayout } from "./comps/layouts/RegisterLayout";
 import { HomeLayout } from "./comps/layouts/HomeLayout";
 import { Home } from "./comps/home/Home";
+import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -32,9 +33,11 @@ const router = createBrowserRouter(
 					<Route path='/signin' element={<Signin />} />
 					<Route path='/signup' element={<Signup />} />
 				</Route>
-				<Route path='/' element={<AppLayout />}>
-					<Route path='/' element={<HomeLayout />}>
-						<Route path='/' element={<Home/>}/>
+				<Route element={<RequireAuthLayout />}>
+					<Route path='/' element={<AppLayout />}>
+						<Route path='/' element={<HomeLayout />}>
+							<Route path='/' element={<Home />} />
+						</Route>
 					</Route>
 				</Route>
 			</Route>
