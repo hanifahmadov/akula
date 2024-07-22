@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import FormData from "form-data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faImage, faVideo, faMasksTheater } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faCircleXmark);
+library.add(faCircleXmark, faImage, faVideo, faMasksTheater);
 
 /* STYLED */
-import { Home_Container, Center_Section, Right_Section, Post_Section } from "./home.styled";
+import { Home_Container, Center_Section, Right_Section, Post_Section, Buttons_Section } from "./home.styled";
 
 /* COMPS */
 import { Account } from "../auth/account/Account";
@@ -68,22 +68,56 @@ export const Home = () => {
 						</div>
 					</div>
 					<div className='bottom_section'>
-						<div className='select_image'>
-							<input
-								type='file'
-								id='image'
-								name='image'
-								className='d-none'
-								ref={imageRef}
-								accept='image/png, image/jpeg, image/jpg'
-								onChange={handleImageChange}
-							/>
-							<label htmlFor='image' className='label_avatar'>
-								Photo
-							</label>
-						</div>
+						<Buttons_Section className='group_buttons'>
+							<div className='select_image'>
+								<input
+									type='file'
+									id='image'
+									name='image'
+									className='d-none'
+									ref={imageRef}
+									accept='image/png, image/jpeg, image/jpg'
+									onChange={handleImageChange}
+								/>
+								<label htmlFor='image' className='label image'>
+									<FontAwesomeIcon icon={faImage} className='icon image' />
+								</label>
+							</div>
 
-						<div className='select_video'></div>
+							<div className='select_video'>
+								{/* <input
+									type='file'
+									id='image'
+									name='image'
+									className='d-none'
+									ref={imageRef}
+									accept='image/png, image/jpeg, image/jpg'
+									onChange={handleImageChange}
+								/> */}
+								<label htmlFor='' className='label video'>
+									<FontAwesomeIcon icon={faVideo} className='icon video' />
+								</label>
+							</div>
+
+							<div className='select_poll'>
+								{/* <input
+									type='file'
+									id='image'
+									name='image'
+									className='d-none'
+									ref={imageRef}
+									accept='image/png, image/jpeg, image/jpg'
+									onChange={handleImageChange}
+								/> */}
+								<label htmlFor='' className='label poll'>
+									<FontAwesomeIcon icon={faMasksTheater} className='icon poll' />
+								</label>
+							</div>
+						</Buttons_Section>
+
+						<div className="post_button_wrapper">
+							<button>POST</button>
+						</div>
 					</div>
 				</Post_Section>
 			</Center_Section>

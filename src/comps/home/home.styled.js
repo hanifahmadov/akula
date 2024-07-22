@@ -122,7 +122,6 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 			borderRadius: "10px",
 			background: "#07161d",
 
-
 			".textarea": {
 				width: "100%",
 				height: "100%",
@@ -162,7 +161,7 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 				},
 
 				".faCircleXmark": {
-					display: 'block',
+					display: "block",
 					lineHeight: "0px",
 					textAlign: "center",
 					overflow: "hidden",
@@ -174,7 +173,7 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 					background: "white",
 					color: "red",
 					borderRadius: "50%",
-					border: '1px solid white',
+					border: "1px solid white",
 				},
 			},
 		},
@@ -182,10 +181,150 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 
 	".bottom_section": {
 		display: "flex",
-		justifyContent: "flex-start",
+		justifyContent: "space-between",
 		alignItems: "center",
 
 		width: "100%",
-		marginLeft: "9rem",
+		paddingLeft: "3.5rem",
+		marginTop: ".5rem",
+
+		// background: 'red',
+
+		".post_button_wrapper": {
+			button: {
+				width: "100%",
+				textDecoration: "none",
+				color: "#fff",
+				fontSize: "1rem",
+				fontWeight: "700",
+
+				padding: "5px 14px",
+				border: "1px solid #ffffff30",
+				background: "#003787",
+				borderRadius: "20px",
+
+				transition: "all .2s ease-in-out",
+				"&:hover": {
+					background: "#052c65",
+					borderColor: "#ffffff40",
+				},
+			},
+		},
+	},
+}));
+
+export const Buttons_Section = styled.div(({ theme: {} }) => ({
+	display: "flex",
+
+	".select_image": {
+		fontWeight: "600",
+		fontSize: ".8rem",
+		background: "#07161d99",
+		borderRadius: "20px",
+		cursor: "pointer",
+		color: "#ffffff99",
+
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+
+		borderRadius: "50%",
+
+		transition: "all .1s ease-in-out",
+
+		label: {
+			cursor: "pointer",
+			width: "100%",
+			height: "100%",
+			padding: "12px",
+			lineHeight: "0px",
+			borderRadius: "50%",
+		},
+
+		".icon ": {
+			fontSize: "1.2rem",
+			borderRadius: "50%",
+			lineHeight: "0px",
+		},
+
+		"&:hover": {
+			background: "#07161d",
+			color: "white",
+		},
+	},
+
+	".select_video": {
+		"& > *": {
+			pointerEvents: "none",
+		},
+
+		fontWeight: "600",
+		fontSize: ".9rem",
+		background: "#07161d90",
+		borderRadius: "20px",
+		cursor: "pointer",
+		color: "#ffffff50",
+
+		marginLeft: "15px",
+
+		transition: "all .1s ease-in-out",
+
+		label: {
+			width: "100%",
+			height: "100%",
+			padding: "12px",
+			lineHeight: "0px",
+			borderRadius: "50%",
+			pointerEvents: "none",
+		},
+
+		".icon": {
+			fontSize: "1.2rem",
+			borderRadius: "50%",
+			lineHeight: "0px",
+		},
+
+		"&:hover": {
+			// background: "#07161d",
+			// color: "white",
+
+			cursor: "not-allowed",
+		},
+	},
+
+	".select_poll": {
+		"& > *": {
+			pointerEvents: "none",
+		},
+
+		fontWeight: "600",
+		fontSize: ".9rem",
+		background: "#07161d90",
+		borderRadius: "20px",
+		cursor: "pointer",
+		color: "#ffffff50",
+
+		marginLeft: "15px",
+
+		transition: "all .1s ease-in-out",
+
+		label: {
+			width: "100%",
+			height: "100%",
+			padding: "12px",
+			lineHeight: "0px",
+			borderRadius: "50%",
+			pointerEvents: "none",
+		},
+
+		".icon": {
+			fontSize: "1.2rem",
+			borderRadius: "50%",
+			lineHeight: "0px",
+		},
+
+		"&:hover": {
+			cursor: "not-allowed",
+		},
 	},
 }));
