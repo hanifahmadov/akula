@@ -5,7 +5,7 @@ import styled from "styled-components";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
-import spc from "./images/spc3.jpg";
+// import spc from "./images/spc1.jpg";
 
 export const Home_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
@@ -54,9 +54,9 @@ export const Right_Section = styled.div(({ theme: {} }) => ({
 		borderRadius: "10px",
 		overflow: "hidden",
 
-		backgroundImage: `url(${spc})`,
-		backgroundSize: "cover",
-		backgroundRepeat: "no-repeat",
+		// backgroundImage: `url(${spc})`,
+		// backgroundSize: "cover",
+		// backgroundRepeat: "no-repeat",
 	},
 
 	".allusers_section": {

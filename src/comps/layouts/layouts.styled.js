@@ -120,16 +120,18 @@ export const Links_Section = styled.div(({ theme: {} }) => ({
 		fontSize: "1.5rem",
 		fontWeight: "600",
 
-		margin: "10px 0px",
-		padding: "3px 17px",
+		margin: "8px 0px",
+		padding: "5px 17px",
 		border: "1px solid #ffffff10",
 		borderRadius: "20px",
 
 		background: "#ffffff10",
 		transition: "all .2s ease-in-out",
+		letterSpacing: '.5px',
 
 		".icon": {
-			fontSize: "1.25rem",
+			fontSize: "1.2rem",
+			paddingBottom: '.5px',
 		},
 
 		span: {
@@ -147,13 +149,15 @@ export const Links_Section = styled.div(({ theme: {} }) => ({
 		textDecoration: "none",
 		color: "#fff",
 		fontSize: "1.5rem",
-		fontWeight: "600",
+		fontWeight: "700",
 
 		margin: "20px 0px",
 		padding: "3px 17px",
 		border: "1px solid #ffffff30",
 		background: "#003787",
 		borderRadius: "20px",
+		letterSpacing: '1px',
+
 
 		transition: "all .2s ease-in-out",
 		"&:hover": {
