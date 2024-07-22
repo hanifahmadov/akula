@@ -59,15 +59,10 @@ export const HomeLayout_Container = styled.div(({ theme: {} }) => ({
 
 		margin: "0px 3px",
 	},
-
-	".right": {
-		maxWidth: "23rem",
-		width: "100%",
-	},
 }));
 
 export const Navbar_Container = styled.div(({ theme: {} }) => ({
-	maxWidth: "20rem",
+	maxWidth: "22rem",
 	width: "100%",
 
 	padding: "14px 5px 14px 14px",

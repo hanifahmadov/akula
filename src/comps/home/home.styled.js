@@ -32,7 +32,7 @@ export const Center_Section = styled.div(({ theme: {} }) => ({
 }));
 
 export const Right_Section = styled.div(({ theme: {} }) => ({
-	maxWidth: "20rem",
+	maxWidth: "22rem",
 	width: "100%",
 	height: "100%",
 
