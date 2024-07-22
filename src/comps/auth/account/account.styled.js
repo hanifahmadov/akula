@@ -20,7 +20,6 @@ export const Logo_Section = styled.div(({ theme: {} }) => ({
 
 	textAlign: "center",
 
-	position: "relative",
 
 	backgroundImage: `url(${spc})`,
 	backgroundSize: "cover",
@@ -32,7 +31,7 @@ export const Logo_Section = styled.div(({ theme: {} }) => ({
 		width: "7rem",
 		borderRadius: "50%",
 		position: 'relative',
-		top: '60px',
+		top: '40px',
 		border: '10px solid #00000050'
 	},
 }));
@@ -80,7 +79,7 @@ export const Content_Section = styled.div(({ theme: {} }) => ({
 		".following": {
 			textAlign: "center",
 			fontWeight: "600",
-			fontSize: "1rem",
+			fontSize: "1.1rem",
 			color: "#ffffff70",
 			letterSpacing: "1px",
 		},

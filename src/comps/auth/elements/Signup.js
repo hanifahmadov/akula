@@ -36,6 +36,9 @@ export const Signup = () => {
 
 
 
+
+		// TODO 
+		// when signing out open modal and delay the rolling circle like 2-3 seccond
 		signupApi(data)
 			.then((response) => {
 			

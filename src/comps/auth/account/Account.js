@@ -10,8 +10,6 @@ import { userDefault } from "../shared/store/states";
 export const Account = () => {
 	const signedUser = useRecoilValue(userDefault);
 
-	console.log(signedUser);
-
 	return (
 		<Account_Container>
 			<Logo_Section>

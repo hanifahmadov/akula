@@ -8,7 +8,7 @@ export const userDefault = atom({
 
 export const activeLinkDefault = atom({
 	key: "activeLinkDefault",
-	default: 0,
+	default: 1,
 });
 
 export const darkmodeDefault = atom({

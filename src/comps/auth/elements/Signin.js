@@ -17,13 +17,10 @@ export const Signin = () => {
 	const [user, setUser] = useRecoilState(userDefault);
 	const [email, setEmail] = useState("");
 	const [pwd, setPwd] = useState("");
-	
+
 	// const [remember, setRemember] = useState(false);
 
 	const navigate = useNavigate();
-
-
-	
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -31,17 +28,14 @@ export const Signin = () => {
 
 		signinApi({ email, password: pwd, remember: false })
 			.then((res) => {
-				console.log("result", res.data);
-
 				// user gets fetched
 				const { user } = res.data;
 
 				// updating global state using immer.js lib
 				const updatedUser = produce(user, (draft) => {
 					draft.avatar = apiUrl + "/" + user.avatar;
+					return draft
 				});
-
-				console.log("updatedUser", updatedUser);
 
 				setUser(updatedUser); // seting global state
 				navigate("/"); // navigate to main "/"
