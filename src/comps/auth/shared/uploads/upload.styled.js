@@ -5,5 +5,5 @@ import { motion } from "framer-motion";
 
 export const UploadImage_Container = styled.div(({ theme: {} }) => ({
 
-    Í
+    
 }));

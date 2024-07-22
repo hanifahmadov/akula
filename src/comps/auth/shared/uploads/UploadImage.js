@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 /*  STYLED  & LOGO */
-import { UploadImage_Container } from "./avatar.styled";
+import { UploadImage_Container } from "./upload.styled";
 
 export const UploadImage = ({ image, setImage }) => {
 	const imageRef = useRef();
@@ -11,7 +11,7 @@ export const UploadImage = ({ image, setImage }) => {
 	const handleImageChange = () => {
 		const [file] = imageRef.current?.files;
 
-		setAvatar(file);
+		setImage(file);
 	};
 
 	return (

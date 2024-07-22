@@ -79,6 +79,7 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 	background: "#1a2730",
 
 	display: "flex",
+	flexDirection: "column",
 	justifyContent: "center",
 	alignItems: "center",
 
@@ -102,31 +103,54 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 			top: "3px",
 		},
 
-		".textArea": {
+		".textarea_wrapper": {
 			width: "100%",
-			padding: "12px",
-			fontSize: '1.1rem',
-			resize: "none",
+			height: '100%',
+			height: 'fit-content',
+			// padding: "12px",
+			// fontSize: "1.1rem",
+			// resize: "none",
 			marginLeft: "3.5rem",
-			borderRadius: "10px",
-			background: "#07161d",
-			color: "white",
+			// borderRadius: "10px",
+			// background: "#07161d",
+			// color: "white",
 
-			border: "none",
-			overflow: "auto",
-			outline: "none",
-			WebkitBoxShadow: "none", // -webkit-box-shadow
-			MozBoxShadow: "none", // -moz-box-shadow
-			boxShadow: "none",
+			// border: "none",
+			// overflow: "auto",
+			// outline: "none",
+			// WebkitBoxShadow: "none", // -webkit-box-shadow
+			// MozBoxShadow: "none", // -moz-box-shadow
+			// boxShadow: "none",
 
-			"&::placeholder": {
-				color: "#ffffff80",
-				paddingLeft: "5px",
-			},
+			// "&::placeholder": {
+			// 	color: "#ffffff80",
+			// 	paddingLeft: "5px",
+			// },
 
 			// overflow: "hidden",
 			//
 			// fontSize: "16px",
+
+			".textarea": {
+				width: "100%",
+				border: "none",
+				overflow: "auto",
+				outline: "none",
+				WebkitBoxShadow: "none", // -webkit-box-shadow
+				MozBoxShadow: "none", // -moz-box-shadow
+				boxShadow: "none",
+				resize: "none",
+				padding: "12px",
+			},
 		},
+	},
+
+	".bottom_section": {
+		display: "flex",
+		justifyContent: "flex-start",
+		alignItems: "center",
+
+		width: "100%",
+		marginLeft: "9rem",
 	},
 }));

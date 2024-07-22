@@ -7,9 +7,11 @@ import { Home_Container, Center_Section, Right_Section, Post_Section } from "./h
 import { Account } from "../auth/account/Account";
 import { useRecoilValue } from "recoil";
 import { userDefault } from "../auth/shared/store/states";
+import { UploadImage } from "../auth/shared/uploads/UploadImage";
 
 export const Home = () => {
 	const signedUsed = useRecoilValue(userDefault);
+	const [image, setImage] = useState(undefined);
 
 	const [text, setText] = useState("");
 	const textareaRef = useRef(null);
@@ -36,17 +38,28 @@ export const Home = () => {
 				<Post_Section>
 					<div className='top_section'>
 						<img src={signedUsed.avatar} />
-						<textarea
-							className='textArea'
-							ref={textareaRef}
-							value={text}
-							onChange={handleChange}
-							placeholder='Whats going on...'
-							rows={1} // Start with one row
-						/>
+						<div className='textarea_wrapper'>
+							<textarea
+								className='textarea'
+								ref={textareaRef}
+								value={text}
+								onChange={handleChange}
+								placeholder='Whats going on...'
+								rows={1} // Start with one row
+							/>
+							{image && (
+								<div className='image_preview'>
+									<img src={image} alt='Uploaded' />
+								</div>
+							)}
+						</div>
 					</div>
 					<div className='bottom_section'>
+						<div className='image'>
+							<UploadImage image={image} setImage={setImage} />
+						</div>
 
+						<div className='video'></div>
 					</div>
 				</Post_Section>
 			</Center_Section>
