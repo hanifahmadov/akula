@@ -21,7 +21,6 @@ export const Home = () => {
 
 				{/* other users top account info  */}
                 <section className="allusers_section"></section>
-                
 			</Right_Section>
 		</Home_Container>
 	);

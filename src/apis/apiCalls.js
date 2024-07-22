@@ -53,7 +53,7 @@ export const changePwdApi = ({ oldPassword, newPassword }, accessToken) => {
 	});
 };
 
-export const signOutApi = ({ accessToken, _id }) => {
+export const signoutApi = ({ accessToken, _id }) => {
 	return axios({
 		url: apiUrl + "/signout",
 		method: "DELETE",

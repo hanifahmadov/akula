@@ -20,6 +20,7 @@ export const Home_Container = styled.div(({ theme: {} }) => ({
 }));
 
 export const Center_Section = styled.div(({ theme: {} }) => ({
+	minWidth: '30rem',
 	width: "100%",
 	height: "100%",
 
@@ -32,6 +33,7 @@ export const Center_Section = styled.div(({ theme: {} }) => ({
 }));
 
 export const Right_Section = styled.div(({ theme: {} }) => ({
+	minWidth: '18rem',
 	maxWidth: "22rem",
 	width: "100%",
 	height: "100%",
@@ -52,7 +54,7 @@ export const Right_Section = styled.div(({ theme: {} }) => ({
 
 		background: "#1a2730",
 		borderRadius: "10px",
-		overflow: "hidden",
+		// overflow: "hidden",
 
 		// backgroundImage: `url(${spc})`,
 		// backgroundSize: "cover",

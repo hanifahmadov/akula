@@ -30,10 +30,10 @@ export const Logo_Section = styled.div(({ theme: {} }) => ({
 	img: {
 		height: "7rem",
 		width: "7rem",
-		position: "absolute",
-		left: "90px",
-		bottom: "-40px",
 		borderRadius: "50%",
+		position: 'relative',
+		top: '60px',
+		border: '10px solid #00000050'
 	},
 }));
 
