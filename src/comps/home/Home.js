@@ -1,4 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+import FormData from "form-data";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+library.add(faCircleXmark);
 
 /* STYLED */
 import { Home_Container, Center_Section, Right_Section, Post_Section } from "./home.styled";
@@ -7,14 +12,14 @@ import { Home_Container, Center_Section, Right_Section, Post_Section } from "./h
 import { Account } from "../auth/account/Account";
 import { useRecoilValue } from "recoil";
 import { userDefault } from "../auth/shared/store/states";
-import { UploadImage } from "../auth/shared/uploads/UploadImage";
 
 export const Home = () => {
-	const signedUsed = useRecoilValue(userDefault);
+	const signedUser = useRecoilValue(userDefault);
 	const [image, setImage] = useState(undefined);
 
 	const [text, setText] = useState("");
 	const textareaRef = useRef(null);
+	const imageRef = useRef();
 
 	const handleChange = (event) => {
 		setText(event.target.value);
@@ -28,6 +33,11 @@ export const Home = () => {
 		}
 	};
 
+	const handleImageChange = () => {
+		const [file] = imageRef.current?.files;
+		setImage(file);
+	};
+
 	useEffect(() => {
 		adjustTextareaHeight(); // Adjust height on initial render
 	}, [text]); // Adjust height on every text change
@@ -37,7 +47,7 @@ export const Home = () => {
 			<Center_Section className='center_section'>
 				<Post_Section>
 					<div className='top_section'>
-						<img src={signedUsed.avatar} />
+						<img src={signedUser.avatar} className='signedUser_avatar' />
 						<div className='textarea_wrapper'>
 							<textarea
 								className='textarea'
@@ -49,17 +59,31 @@ export const Home = () => {
 							/>
 							{image && (
 								<div className='image_preview'>
-									<img src={image} alt='Uploaded' />
+									<img src={URL.createObjectURL(image)} className='selected_image' />
+									<span className='faCircleXmark'>
+										<FontAwesomeIcon icon={faCircleXmark} onClick={() => setImage(undefined)} />
+									</span>
 								</div>
 							)}
 						</div>
 					</div>
 					<div className='bottom_section'>
-						<div className='image'>
-							<UploadImage image={image} setImage={setImage} />
+						<div className='select_image'>
+							<input
+								type='file'
+								id='image'
+								name='image'
+								className='d-none'
+								ref={imageRef}
+								accept='image/png, image/jpeg, image/jpg'
+								onChange={handleImageChange}
+							/>
+							<label htmlFor='image' className='label_avatar'>
+								Photo
+							</label>
 						</div>
 
-						<div className='video'></div>
+						<div className='select_video'></div>
 					</div>
 				</Post_Section>
 			</Center_Section>

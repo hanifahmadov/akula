@@ -21,6 +21,7 @@ export const Home_Container = styled.div(({ theme: {} }) => ({
 
 export const Center_Section = styled.div(({ theme: {} }) => ({
 	minWidth: "30rem",
+	maxWidth: "50rem",
 	width: "100%",
 	height: "100%",
 
@@ -88,6 +89,9 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 
 	".top_section": {
 		width: "100%",
+		height: "100%",
+
+		padding: "0px",
 
 		display: "flex",
 		justifyContent: "flex-start",
@@ -95,44 +99,33 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 
 		position: "relative",
 
-		img: {
+		".signedUser_avatar": {
 			height: "2.75rem",
 			width: "2.75rem",
 			borderRadius: "50%",
 			position: "absolute",
-			top: "3px",
+			top: "4px",
 		},
 
 		".textarea_wrapper": {
 			width: "100%",
-			height: '100%',
-			height: 'fit-content',
-			// padding: "12px",
-			// fontSize: "1.1rem",
-			// resize: "none",
+			height: "100%",
+			height: "10rem",
+			height: "fit-content",
+
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "flex-start",
+			alignItems: "center",
+
 			marginLeft: "3.5rem",
-			// borderRadius: "10px",
-			// background: "#07161d",
-			// color: "white",
+			borderRadius: "10px",
+			background: "#07161d",
 
-			// border: "none",
-			// overflow: "auto",
-			// outline: "none",
-			// WebkitBoxShadow: "none", // -webkit-box-shadow
-			// MozBoxShadow: "none", // -moz-box-shadow
-			// boxShadow: "none",
-
-			// "&::placeholder": {
-			// 	color: "#ffffff80",
-			// 	paddingLeft: "5px",
-			// },
-
-			// overflow: "hidden",
-			//
-			// fontSize: "16px",
 
 			".textarea": {
 				width: "100%",
+				height: "100%",
 				border: "none",
 				overflow: "auto",
 				outline: "none",
@@ -141,6 +134,48 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 				boxShadow: "none",
 				resize: "none",
 				padding: "12px",
+
+				fontSize: "1.1rem",
+				borderRadius: "10px",
+				background: "transparent",
+				color: "white",
+
+				"&::placeholder": {
+					color: "#ffffff80",
+					paddingLeft: "5px",
+				},
+				// border: "1px solid #ffffff30",
+			},
+
+			".image_preview": {
+				margin: ".5rem",
+				alignSelf: "flex-start",
+				border: "1px solid #ffffff30",
+				borderRadius: "10px",
+
+				position: "relative",
+
+				".selected_image": {
+					height: "15rem",
+					width: "15rem",
+					borderRadius: "10px",
+				},
+
+				".faCircleXmark": {
+					display: 'block',
+					lineHeight: "0px",
+					textAlign: "center",
+					overflow: "hidden",
+					position: "absolute",
+					top: "-7px",
+					right: "-7px",
+					fontSize: "1.4rem",
+					cursor: "pointer",
+					background: "white",
+					color: "red",
+					borderRadius: "50%",
+					border: '1px solid white',
+				},
 			},
 		},
 	},
