@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import FormData from "form-data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 /* FONTAWESOME */
 import {
 	faCircleXmark,
@@ -80,6 +79,7 @@ export const Home = () => {
 	useEffect(() => {
 		adjustTextareaHeight(); // Adjust height on initial render
 	}, [text]); // Adjust height on every text change
+
 
 	useEffect(() => {
 		postsAPI(signedUser)

@@ -1,12 +1,4 @@
 import React from "react";
-import TimeAgo from "javascript-time-ago";
-
-/* TimeAgo English setup */
-import en from "javascript-time-ago/locale/en";
-TimeAgo.addDefaultLocale(en);
-
-/* Create formatter (English)  */
-const timeAgo = new TimeAgo("en-US");
 
 /* STYLED */
 import { Post_Container } from "./support.styled";
@@ -18,6 +10,7 @@ export const Post = ({ post }) => {
 			{/* <section className='postowner_avatar_section'>
 				<img src={avatar} />
 			</section> */}
+
 
 			<section className='post_content_section'>
 				<section className='content_section'>{post.content}</section>
