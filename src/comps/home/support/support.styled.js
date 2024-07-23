@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 
 export const Post_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
-	height: "10rem",
 
 	display: "flex",
 	flexDirection: "row",
@@ -17,7 +16,7 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 	borderRadius: "10px",
 	overflow: "hidden",
 
-	paddingTop: "1rem",
+	padding: "1rem 1rem 1rem 0rem",
 	marginTop: "1rem",
 
 	".postowner_avatar_section": {
@@ -47,8 +46,12 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 
 		".header_section": {
 			".title_wrapper": {
+				display: "flex",
+				justifyContent: "flex-start",
+				alignItems: "center",
+
 				".title": {
-					fontSize: "1.75rem",
+					fontSize: "1.5rem",
 					lineHeight: "1.5rem",
 				},
 
@@ -69,6 +72,20 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 					fontSize: "12px",
 					color: "#ffffff90",
 				},
+			},
+		},
+
+		".text_section": {
+			marginTop: "10px",
+		},
+
+		".media_section": {
+			marginTop: "10px",
+			borderRadius: "10px",
+			img: {
+				height: "25rem",
+				width: "25rem",
+				borderRadius: "10px",
 			},
 		},
 	},

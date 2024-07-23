@@ -335,9 +335,10 @@ export const Buttons_Section = styled.div(({ theme: {} }) => ({
 
 export const Display_Section = styled.div(({ theme: {} }) => ({
 	width: "100%",
+	height: "100%",
+	marginTop: '1rem',
+	overflow: "scroll",
 
-	overflow: 'scroll',
 
 
-	
 }));

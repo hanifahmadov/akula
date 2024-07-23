@@ -31,13 +31,7 @@ export const Signin = () => {
 				// user gets fetched
 				const { user } = res.data;
 
-				// updating global state using immer.js lib
-				const updatedUser = produce(user, (draft) => {
-					draft.avatar = apiUrl + "/" + user.avatar;
-					return draft
-				});
-
-				setUser(updatedUser); // seting global state
+				setUser(user); // seting global state
 				navigate("/"); // navigate to main "/"
 			})
 			.catch((err) => {

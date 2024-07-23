@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormData from "form-data";
 
 /* STYLED & API */
+import apiUrl from "../../../apis/apiUrl";
 import { signupApi } from "../../../apis/apiCalls";
 import { Signup_Container } from "./styled/signup.styled";
 import { Form } from "./styled/signin.styled";
@@ -33,16 +34,13 @@ export const Signup = () => {
 		data.append("password", pwd);
 		data.append("passwordConfirmation", confirmPwd);
 		data.append("avatar", avatar);
+		data.append("baseurl", apiUrl);
 
-
-
-
-		// TODO 
+		// TODO
 		// when signing out open modal and delay the rolling circle like 2-3 seccond
 		signupApi(data)
 			.then((response) => {
-			
-				console.log(response)
+				console.log(response);
 				// TODO
 				/*  Notify the user that  */
 

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import FormData from "form-data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRecoilValue } from "recoil";
 
 /* FONTAWESOME */
 import {
@@ -25,12 +26,17 @@ import {
 	Display_Section,
 } from "./home.styled";
 
+/* APIS */
+import apiUrl from "../../apis/apiUrl";
+import { newpostAPI, postsAPI } from "../../apis/apiCalls";
+
+/* STATES */
+import { userDefault } from "../auth/shared/store/states";
+
 /* COMPS */
 import { Account } from "../auth/account/Account";
-import { useRecoilValue } from "recoil";
-import { userDefault } from "../auth/shared/store/states";
-import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 import { Post } from "./support/Post";
+
 
 export const Home = () => {
 	const signedUser = useRecoilValue(userDefault);
@@ -64,6 +70,7 @@ export const Home = () => {
 
 		data.append("text", text);
 		data.append("image", image);
+		data.append('baseurl', apiUrl)
 
 		newpostAPI(signedUser, data)
 			.then((res) => {
@@ -80,21 +87,22 @@ export const Home = () => {
 		adjustTextareaHeight(); // Adjust height on initial render
 	}, [text]); // Adjust height on every text change
 
-
 	useEffect(() => {
 		postsAPI(signedUser)
-		.then(res => {
-
-		})
-		.catch(err => {
-			console.log(err)
-		})
+			.then((res) => {
+				const { posts } = res.data;
+				setPosts(posts);
+			})
+			.catch((err) => {
+				console.log("postsAPI ERROR =>");
+				console.log(err);
+			});
 	}, [submit]); // Adjust height on every text change
 
 	return (
 		<Home_Container className='home'>
 			<Center_Section className='center_section'>
-				<Post_Section>
+				<Post_Section className="post_section">
 					<div className='top_section'>
 						<img src={signedUser.avatar} className='signedUser_avatar' />
 						<div className='textarea_wrapper'>
@@ -155,7 +163,7 @@ export const Home = () => {
 				{/* this section is displaying all posts from all users, so the section is devided into 2 columns 
 					for post owner avatar and post itself details */}
 
-				<Display_Section>
+				<Display_Section className="display_section">
 					{posts.map((post, id) => (
 						<Post key={id} post={post} />
 					))}
