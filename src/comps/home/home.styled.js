@@ -78,6 +78,9 @@ export const Right_Section = styled.div(({ theme: {} }) => ({
 
 export const Post_Section = styled.div(({ theme: {} }) => ({
 	width: "100%",
+
+	// paddingBottom: '10px',
+
 	background: "#1a2730",
 
 	display: "flex",
@@ -332,69 +335,9 @@ export const Buttons_Section = styled.div(({ theme: {} }) => ({
 
 export const Display_Section = styled.div(({ theme: {} }) => ({
 	width: "100%",
-	height: "20rem",
 
-	display: "flex",
-	flexDirection: "row",
+	overflow: 'scroll',
 
-	background: "#1a2730",
 
-	borderRadius: "10px",
-	overflow: "hidden",
-
-	paddingTop: "1rem",
-	marginTop: "1rem",
-
-	".postOwener_avatar_section": {
-		width: "5.5rem",
-		height: "100%",
-
-		// background: "blue",
-
-		display: "flex",
-		justifyContent: "center",
-
-		img: {
-			height: "3rem",
-			width: "3rem",
-			borderRadius: "50%",
-		},
-	},
-
-	".post_content_section": {
-		width: "100%",
-		height: "100%",
-
-		// background: "green",
-
-		display: "flex",
-		flexDirection: "column",
-
-		".header_section": {
-			".title_wrapper": {
-				".title": {
-					fontSize: "1.75rem",
-					lineHeight: "1.5rem",
-				},
-
-				".faCircleCheck": {
-					marginLeft: "10px",
-				},
-			},
-
-			".timeline_wrapper": {
-				".timeline": {
-					fontSize: ".75rem",
-					color: "#ffffff80",
-				},
-
-				".faUniversalAccess": {
-					marginLeft: "5px",
-					cursor: "not-allowed",
-					fontSize: "12px",
-					color: "#ffffff90",
-				},
-			},
-		},
-	},
+	
 }));

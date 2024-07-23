@@ -1,14 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import FormData from "form-data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TimeAgo from "javascript-time-ago";
 
-/* TimeAgo English setup */
-import en from "javascript-time-ago/locale/en";
-TimeAgo.addDefaultLocale(en);
-
-/* Create formatter (English)  */
-const timeAgo = new TimeAgo("en-US");
 
 /* FONTAWESOME */
 import {
@@ -37,12 +30,14 @@ import {
 import { Account } from "../auth/account/Account";
 import { useRecoilValue } from "recoil";
 import { userDefault } from "../auth/shared/store/states";
-import { newpostAPI } from "../../apis/apiCalls";
+import { newpostAPI, postsAPI } from "../../apis/apiCalls";
+import { Post } from "./support/Post";
 
 export const Home = () => {
 	const signedUser = useRecoilValue(userDefault);
 	const [image, setImage] = useState(undefined);
-	const [post, setPost] = useState({});
+	const [submit, setSubmit] = useState(false);
+	const [posts, setPosts] = useState([]);
 
 	const [text, setText] = useState("");
 	const textareaRef = useRef(null);
@@ -73,12 +68,9 @@ export const Home = () => {
 
 		newpostAPI(signedUser, data)
 			.then((res) => {
-				const { post } = res.data;
-
-				console.log(post);
-
 				setImage(undefined);
 				setText("");
+				setSubmit((submit) => !submit);
 			})
 			.catch((err) => {
 				console.log("newpostAPI error", err);
@@ -88,6 +80,16 @@ export const Home = () => {
 	useEffect(() => {
 		adjustTextareaHeight(); // Adjust height on initial render
 	}, [text]); // Adjust height on every text change
+
+	useEffect(() => {
+		postsAPI(signedUser)
+		.then(res => {
+
+		})
+		.catch(err => {
+			console.log(err)
+		})
+	}, [submit]); // Adjust height on every text change
 
 	return (
 		<Home_Container className='home'>
@@ -152,33 +154,11 @@ export const Home = () => {
 
 				{/* this section is displaying all posts from all users, so the section is devided into 2 columns 
 					for post owner avatar and post itself details */}
-				<Display_Section>
-					<section className='postOwener_avatar_section'>
-						<img src={signedUser.avatar} />
-					</section>
-					<section className='post_content_section'>
-						<section className='header_section'>
-							<div className='title_wrapper'>
-								<span className='title'>{signedUser.username}</span>
-								<span className='faCircleCheck'>
-									<FontAwesomeIcon icon={faCircleCheck} style={{ color: "#005eff" }} />
-								</span>
-								<span>{/* add username here, if user is kokuma, username must be @kokuma */}</span>
-							</div>
-							<div className='timeline_wrapper'>
-								<span className='timeline'>
-									{timeAgo.format(new Date(signedUser.createdAt))}
-								</span>
-								<span className='faUniversalAccess'>
-									<FontAwesomeIcon icon={faEarthAmericas} />
-								</span>
-							</div>
-						</section>
 
-						<section className='content_section'>{}</section>
-						<section className='media_section'></section>
-						<section className='header_section'></section>
-					</section>
+				<Display_Section>
+					{posts.map((post, id) => (
+						<Post key={id} post={post} />
+					))}
 				</Display_Section>
 			</Center_Section>
 

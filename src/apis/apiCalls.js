@@ -126,3 +126,15 @@ export const newpostAPI = ({ accessToken }, data) => {
 		},
 	});
 };
+
+export const postsAPI = ({ accessToken }) => {
+	return axios({
+		url: apiUrl + "/posts",
+		method: "GET",
+		withCredentials: true,
+		credentials: "include",
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		},
+	});
+};
