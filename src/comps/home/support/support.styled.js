@@ -88,5 +88,38 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 				borderRadius: "10px",
 			},
 		},
+
+		".media_related_section": {
+            marginTop: '1rem',
+			width: "100%",
+			display: "flex",
+			justifyContent: "space-between",
+
+			span: {
+				fontSize: "1rem",
+				fontWeight: "500",
+                width:'7rem',
+
+                border: '1px solid #ffffff80',
+                borderRadius: '5px',
+                padding: '5px 8px',
+                textAlign: 'center',
+                lineHeight: '20px',
+                cursor: 'pointer',
+                
+			},
+
+            ".bookmark" :{
+                border: 'none',
+                fontSize: "1.1rem",
+                width:'2.3rem',
+                height: '2.3rem',
+
+                border: '1px solid #ffffff80',
+                borderRadius: '50%',
+
+
+            }
+		},
 	},
 }));

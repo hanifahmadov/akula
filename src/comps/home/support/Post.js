@@ -2,6 +2,13 @@ import React from "react";
 import TimeAgo from "javascript-time-ago";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faComment,
+	faHeart as faRegularHeart,
+	faThumbsDown as faRegularThumbsDown,
+	faBookmark as faRegularBookmark,
+} from "@fortawesome/free-regular-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 /* FONTAWESOME */
 import {
@@ -12,11 +19,8 @@ import {
 	faCircleCheck,
 	faUniversalAccess,
 	faEarthAmericas,
-	faComment,
 } from "@fortawesome/free-solid-svg-icons";
-import { faComment } from '@fortawesome/free-regular-svg-icons';
 
-import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(
 	faCircleXmark,
 	faImage,
@@ -25,7 +29,10 @@ library.add(
 	faCircleCheck,
 	faUniversalAccess,
 	faEarthAmericas,
-	faComment
+	faComment,
+	faRegularHeart,
+	faRegularThumbsDown,
+	faRegularBookmark
 );
 
 /* STYLED */
@@ -84,15 +91,13 @@ export const Post = ({
 					</section>
 				)}
 				<section className='media_related_section'>
-					<div className='comments'>
-						<FontAwesomeIcon icon={faComment} className="icon" />
-                        <span>{10}</span>
-					</div>
-					<div className='likes'></div>
-					<div className='dislikes'></div>
-					<div className='views'></div>
-					<div className='bookmark'></div>
-					<div className='share'></div>
+					<span className='likes'>Like</span>
+					<span className='comments'>Comment</span>
+					<span className='dislikes'>Share</span>
+
+					<span className='bookmark'>
+						<FontAwesomeIcon icon={faRegularBookmark} />
+					</span>
 				</section>
 				<section className=''></section>
 			</section>
