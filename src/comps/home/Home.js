@@ -12,6 +12,7 @@ import { Home_Container, Center_Section, Right_Section, Post_Section, Buttons_Se
 import { Account } from "../auth/account/Account";
 import { useRecoilValue } from "recoil";
 import { userDefault } from "../auth/shared/store/states";
+import { newpostAPI } from "../../apis/apiCalls";
 
 export const Home = () => {
 	const signedUser = useRecoilValue(userDefault);
@@ -36,6 +37,25 @@ export const Home = () => {
 	const handleImageChange = () => {
 		const [file] = imageRef.current?.files;
 		setImage(file);
+	};
+
+	const handlePostClick = (e) => {
+
+		const data = new FormData();
+
+		data.append("text", text);
+		data.append("image", image);
+
+		newpostAPI(signedUser, data)
+			.then((res) => {
+				console.log("res", res);
+
+				setImage(undefined)
+				setText('')
+			})
+			.catch((err) => {
+				console.log("newpostAPI error", err);
+			});
 	};
 
 	useEffect(() => {
@@ -85,41 +105,29 @@ export const Home = () => {
 							</div>
 
 							<div className='select_video'>
-								{/* <input
-									type='file'
-									id='image'
-									name='image'
-									className='d-none'
-									ref={imageRef}
-									accept='image/png, image/jpeg, image/jpg'
-									onChange={handleImageChange}
-								/> */}
 								<label htmlFor='' className='label video'>
 									<FontAwesomeIcon icon={faVideo} className='icon video' />
 								</label>
 							</div>
 
 							<div className='select_poll'>
-								{/* <input
-									type='file'
-									id='image'
-									name='image'
-									className='d-none'
-									ref={imageRef}
-									accept='image/png, image/jpeg, image/jpg'
-									onChange={handleImageChange}
-								/> */}
 								<label htmlFor='' className='label poll'>
 									<FontAwesomeIcon icon={faMasksTheater} className='icon poll' />
 								</label>
 							</div>
 						</Buttons_Section>
 
-						<div className="post_button_wrapper">
+						<div className='post_button_wrapper' onClick={handlePostClick}>
 							<button>POST</button>
 						</div>
 					</div>
 				</Post_Section>
+
+				<Display_Section>
+					
+				</Display_Section>
+
+
 			</Center_Section>
 
 			<Right_Section className='center_section'>

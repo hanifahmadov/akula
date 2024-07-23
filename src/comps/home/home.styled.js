@@ -147,7 +147,7 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 			},
 
 			".image_preview": {
-				margin: ".5rem",
+				margin: "2rem .5rem .5rem .5rem",
 				alignSelf: "flex-start",
 				border: "1px solid #ffffff30",
 				borderRadius: "10px",
@@ -186,7 +186,7 @@ export const Post_Section = styled.div(({ theme: {} }) => ({
 
 		width: "100%",
 		paddingLeft: "3.5rem",
-		marginTop: ".5rem",
+		marginTop: ".75rem",
 
 		// background: 'red',
 
