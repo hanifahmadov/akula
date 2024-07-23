@@ -3,10 +3,10 @@ import TimeAgo from "javascript-time-ago";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-	faComment,
 	faHeart as faRegularHeart,
 	faThumbsDown as faRegularThumbsDown,
 	faBookmark as faRegularBookmark,
+	faThumbsUp as faRegularThumbsUp,
 } from "@fortawesome/free-regular-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -19,6 +19,8 @@ import {
 	faCircleCheck,
 	faUniversalAccess,
 	faEarthAmericas,
+	faThumbsUp,
+    faComment
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -32,7 +34,10 @@ library.add(
 	faComment,
 	faRegularHeart,
 	faRegularThumbsDown,
-	faRegularBookmark
+	faRegularBookmark,
+	faThumbsUp,
+	faRegularThumbsUp,
+    faComment
 );
 
 /* STYLED */
@@ -90,6 +95,20 @@ export const Post = ({
 						<img src={media} alt='upload-media' />
 					</section>
 				)}
+
+				<section className='media_counts_section'>
+					<span className='likes_count'>
+						<FontAwesomeIcon className='faThumbsUp' icon={faThumbsUp} style={{ color: "#0060fa70" }} />
+						<span className="numbers">{0}</span>
+                        <span className="likes text">likes</span>
+					</span>
+					<span className='comments_count'>
+						<FontAwesomeIcon className='faComment' icon={faComment} style={{ color: "#0060fa70" }} />
+						<span className="numbers">{0}</span>
+                        <span className="comments text">comments</span>
+					</span>
+				</section>
+
 				<section className='media_related_section'>
 					<span className='likes'>Like</span>
 					<span className='comments'>Comment</span>

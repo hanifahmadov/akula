@@ -89,8 +89,33 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 			},
 		},
 
+		".media_counts_section": {
+			padding: "8px 10px 0px 10px",
+
+			width: "100%",
+			display: "flex",
+			justifyContent: "space-between",
+
+			".numbers": {
+				marginLeft: "5px",
+                fontWeight: "600",
+                fontSize:'.9rem',
+			},
+
+			".text": {
+				marginLeft: "8px",
+				color: "#ffffff70",
+				fontWeight: "500",
+                fontSize:'.9rem',
+			},
+
+			".comments_count": {
+				marginLeft: "10px",
+			},
+		},
+
 		".media_related_section": {
-            marginTop: '1rem',
+			marginTop: "1rem",
 			width: "100%",
 			display: "flex",
 			justifyContent: "space-between",
@@ -98,28 +123,25 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 			span: {
 				fontSize: "1rem",
 				fontWeight: "500",
-                width:'7rem',
+				width: "7rem",
 
-                border: '1px solid #ffffff80',
-                borderRadius: '5px',
-                padding: '5px 8px',
-                textAlign: 'center',
-                lineHeight: '20px',
-                cursor: 'pointer',
-                
+				border: "1px solid #ffffff80",
+				borderRadius: "5px",
+				padding: "5px 8px",
+				textAlign: "center",
+				lineHeight: "20px",
+				cursor: "pointer",
 			},
 
-            ".bookmark" :{
-                border: 'none',
-                fontSize: "1.1rem",
-                width:'2.3rem',
-                height: '2.3rem',
+			".bookmark": {
+				border: "none",
+				fontSize: "1.1rem",
+				width: "2.3rem",
+				height: "2.3rem",
 
-                border: '1px solid #ffffff80',
-                borderRadius: '50%',
-
-
-            }
+				border: "1px solid #ffffff80",
+				borderRadius: "50%",
+			},
 		},
 	},
 }));
