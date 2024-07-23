@@ -3,6 +3,7 @@ import styled from "styled-components";
 // import { motion } from "framer-motion";
 
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
+
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
 // import spc from "./images/spc1.jpg";
@@ -326,5 +327,53 @@ export const Buttons_Section = styled.div(({ theme: {} }) => ({
 		"&:hover": {
 			cursor: "not-allowed",
 		},
+	},
+}));
+
+export const Display_Section = styled.div(({ theme: {} }) => ({
+
+
+	width: "100%",
+	height: "20rem",
+
+	display: "flex",
+	flexDirection: "row",
+
+	background: "red",
+	borderRadius: "10px",
+	overflow: "hidden",
+
+	".postOwener_avatar_section": {
+		width: "5.5rem",
+		height: "100%",
+
+		background: "blue",
+
+		display:'flex',
+		justifyContent: 'center',
+
+		paddingTop: '1rem',
+
+		img: {
+			height: "3rem",
+			width: "3rem",
+			borderRadius: "50%",
+		},
+	},
+
+	".post_content_section": {
+		width: "100%",
+		height: "100%",
+
+		background: "green",
+
+		display: 'flex',
+		flexDirection:'column',
+
+		".header_section": {
+			
+		}
+
+		
 	},
 }));

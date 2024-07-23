@@ -6,7 +6,14 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faCircleXmark, faImage, faVideo, faMasksTheater);
 
 /* STYLED */
-import { Home_Container, Center_Section, Right_Section, Post_Section, Buttons_Section } from "./home.styled";
+import {
+	Home_Container,
+	Center_Section,
+	Right_Section,
+	Post_Section,
+	Buttons_Section,
+	Display_Section,
+} from "./home.styled";
 
 /* COMPS */
 import { Account } from "../auth/account/Account";
@@ -40,7 +47,6 @@ export const Home = () => {
 	};
 
 	const handlePostClick = (e) => {
-
 		const data = new FormData();
 
 		data.append("text", text);
@@ -50,8 +56,8 @@ export const Home = () => {
 			.then((res) => {
 				console.log("res", res);
 
-				setImage(undefined)
-				setText('')
+				setImage(undefined);
+				setText("");
 			})
 			.catch((err) => {
 				console.log("newpostAPI error", err);
@@ -123,11 +129,21 @@ export const Home = () => {
 					</div>
 				</Post_Section>
 
+				{/* this section is displaying all posts from all users, so the section is devided into 2 columns 
+					for post owner avatar and post itself details */}
 				<Display_Section>
-					
+					<section className='postOwener_avatar_section'>
+						<img src={signedUser.avatar} />
+					</section>
+					<section className='post_content_section'>
+						<section className="header_section">
+							
+						</section>
+						<section className="content_section"></section>
+						<section className="media_section"></section>
+						<section className="header_section"></section>
+					</section>
 				</Display_Section>
-
-
 			</Center_Section>
 
 			<Right_Section className='center_section'>
