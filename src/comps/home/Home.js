@@ -1,9 +1,27 @@
 import React, { useState, useRef, useEffect } from "react";
 import FormData from "form-data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark, faImage, faVideo, faMasksTheater } from "@fortawesome/free-solid-svg-icons";
+import TimeAgo from "javascript-time-ago";
+
+/* TimeAgo English setup */
+import en from "javascript-time-ago/locale/en";
+TimeAgo.addDefaultLocale(en);
+
+/* Create formatter (English)  */
+const timeAgo = new TimeAgo("en-US");
+
+/* FONTAWESOME */
+import {
+	faCircleXmark,
+	faImage,
+	faVideo,
+	faMasksTheater,
+	faCircleCheck,
+	faUniversalAccess,
+	faEarthAmericas,
+} from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faCircleXmark, faImage, faVideo, faMasksTheater);
+library.add(faCircleXmark, faImage, faVideo, faMasksTheater, faCircleCheck, faUniversalAccess, faEarthAmericas);
 
 /* STYLED */
 import {
@@ -24,6 +42,7 @@ import { newpostAPI } from "../../apis/apiCalls";
 export const Home = () => {
 	const signedUser = useRecoilValue(userDefault);
 	const [image, setImage] = useState(undefined);
+	const [post, setPost] = useState({});
 
 	const [text, setText] = useState("");
 	const textareaRef = useRef(null);
@@ -54,7 +73,9 @@ export const Home = () => {
 
 		newpostAPI(signedUser, data)
 			.then((res) => {
-				console.log("res", res);
+				const { post } = res.data;
+
+				console.log(post);
 
 				setImage(undefined);
 				setText("");
@@ -136,12 +157,27 @@ export const Home = () => {
 						<img src={signedUser.avatar} />
 					</section>
 					<section className='post_content_section'>
-						<section className="header_section">
-							
+						<section className='header_section'>
+							<div className='title_wrapper'>
+								<span className='title'>{signedUser.username}</span>
+								<span className='faCircleCheck'>
+									<FontAwesomeIcon icon={faCircleCheck} style={{ color: "#005eff" }} />
+								</span>
+								<span>{/* add username here, if user is kokuma, username must be @kokuma */}</span>
+							</div>
+							<div className='timeline_wrapper'>
+								<span className='timeline'>
+									{timeAgo.format(new Date(signedUser.createdAt))}
+								</span>
+								<span className='faUniversalAccess'>
+									<FontAwesomeIcon icon={faEarthAmericas} />
+								</span>
+							</div>
 						</section>
-						<section className="content_section"></section>
-						<section className="media_section"></section>
-						<section className="header_section"></section>
+
+						<section className='content_section'>{}</section>
+						<section className='media_section'></section>
+						<section className='header_section'></section>
 					</section>
 				</Display_Section>
 			</Center_Section>
