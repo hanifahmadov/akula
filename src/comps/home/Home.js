@@ -35,7 +35,7 @@ import { userDefault } from "../auth/shared/store/states";
 
 /* COMPS */
 import { Account } from "../auth/account/Account";
-import { Post } from "./support/Post";
+import { Post } from "./supports/post/Post";
 
 
 export const Home = () => {

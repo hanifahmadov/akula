@@ -1,6 +1,6 @@
 import React from "react";
 import TimeAgo from "javascript-time-ago";
-
+import { useRecoilValue } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faHeart as faRegularHeart,
@@ -20,7 +20,7 @@ import {
 	faUniversalAccess,
 	faEarthAmericas,
 	faThumbsUp,
-    faComment
+	faComment,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -37,7 +37,7 @@ library.add(
 	faRegularBookmark,
 	faThumbsUp,
 	faRegularThumbsUp,
-    faComment
+	faComment
 );
 
 /* STYLED */
@@ -48,14 +48,21 @@ TimeAgo.addDefaultLocale(en);
 // Create formatter (English).
 const timeAgo = new TimeAgo("en-US");
 
-/* STYLED */
+/* IMPORTS */
+import { likePostAPI } from "../../../../apis/apiCalls";
 import { Post_Container } from "./support.styled";
+
+import { userDefault } from "../../../auth/shared/store/states";
+
+/* //# POPOVER */
+import * as Popover from '@radix-ui/react-popover';
 
 export const Post = ({
 	post: {
 		content,
 		media,
 		createdAt,
+		_id,
 		owner: { avatar, username },
 	},
 }) => {
@@ -65,6 +72,20 @@ export const Post = ({
 	// console.log("renders")
 
 	// console.log(typeof media);
+
+	const signedUser = useRecoilValue(userDefault);
+
+	const handleLikeClick = (e) => {
+		likePostAPI({ accessToken: signedUser.accessToken, postId: _id, likeType: "like" })
+			.then((res) => {
+				console.log("res inside like click", res);
+			})
+			.catch((err) => {
+				console.log("error inside like click", err);
+			});
+	};
+
+	const handleCommentClick = (e) => {};
 
 	return (
 		<Post_Container>
@@ -99,20 +120,24 @@ export const Post = ({
 				<section className='media_counts_section'>
 					<span className='likes_count'>
 						<FontAwesomeIcon className='faThumbsUp' icon={faThumbsUp} style={{ color: "#0060fa70" }} />
-						<span className="numbers">{0}</span>
-                        <span className="likes text">likes</span>
+						<span className='numbers'>{0}</span>
+						<span className='likes text'>reactions</span>
 					</span>
 					<span className='comments_count'>
 						<FontAwesomeIcon className='faComment' icon={faComment} style={{ color: "#0060fa70" }} />
-						<span className="numbers">{0}</span>
-                        <span className="comments text">comments</span>
+						<span className='numbers'>{0}</span>
+						<span className='comments text'>comments</span>
 					</span>
 				</section>
 
 				<section className='media_related_section'>
 					<span className='likes'>Like</span>
-					<span className='comments'>Comment</span>
-					<span className='dislikes'>Share</span>
+					<span className='comments' onClick={handleCommentClick}>
+						Comment
+					</span>
+					<span className='share'>
+				
+					</span>
 
 					<span className='bookmark'>
 						<FontAwesomeIcon icon={faRegularBookmark} />

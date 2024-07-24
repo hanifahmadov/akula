@@ -42,6 +42,7 @@ export const changePwdApi = ({ oldPassword, newPassword }, accessToken) => {
 		credentials: "include",
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
 		},
 		data: {
 			passwords: {
@@ -60,6 +61,7 @@ export const signoutApi = ({ accessToken, _id }) => {
 		credentials: "include",
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
 		},
 		data: {
 			_id,
@@ -84,6 +86,7 @@ export const useVerifyAccessApi = ({ accessToken }) => {
 		credentials: "include",
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
 		},
 	});
 };
@@ -135,6 +138,26 @@ export const postsAPI = ({ accessToken }) => {
 		credentials: "include",
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
 		},
 	});
 };
+
+export const likePostAPI = ({ accessToken, postId, likeType }) => {
+	return axios({
+		url: `${apiUrl}/posts/${postId}/like`,
+		method: "PUT",
+		withCredentials: true,
+		credentials: "include",
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
+		},
+		data: { likeType },
+	});
+};
+
+/* JUST ADDED THIS LINE TO ALL APIS. Ensure proper content type if sending a body. 
+If any problem on the apis, check out this additions   */
+
+// # 'Content-Type': 'application/json'
