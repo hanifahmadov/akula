@@ -55,7 +55,7 @@ import { Post_Container } from "./support.styled";
 import { userDefault } from "../../../auth/shared/store/states";
 
 /* //# POPOVER */
-import * as Popover from '@radix-ui/react-popover';
+import { PopoverRadix } from "../popover/PopoverRadix";
 
 export const Post = ({
 	post: {
@@ -136,7 +136,7 @@ export const Post = ({
 						Comment
 					</span>
 					<span className='share'>
-				
+						<PopoverRadix text={"share"} />
 					</span>
 
 					<span className='bookmark'>
