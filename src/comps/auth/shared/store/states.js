@@ -35,9 +35,14 @@ export const modalDefault= atom({
 
 
 
+/** likeType support to be change on every like click
+ * i keep the assign it on the classname but when user click on the same element and its the same class
+ * its doesnt get updated so, now i have to go with true !true mehtod here. i know it doesnt make sense 
+ * but for now it seems good to me
+ */
 export const likeTypeDefault= atom({
 	key: "likeTypeDefault",
-	default: undefined,
+	default: true,
 });
 
 

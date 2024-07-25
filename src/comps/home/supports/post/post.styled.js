@@ -96,6 +96,13 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 			display: "flex",
 			justifyContent: "space-between",
 
+
+
+			".likes_counts_main_section": {
+				
+
+			},
+
 			".numbers": {
 				marginLeft: "5px",
 				fontWeight: "600",

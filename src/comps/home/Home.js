@@ -90,19 +90,24 @@ export const Home = () => {
 	/**
 	 * use hooks gets/retrieves all posts when new post posted,
 	 * 201 code then works (line 75 above, this file) and
-	 * globaly likeType state changes (when user likes the post from popover)
+	 * globaly likeType state changes, when user likes the post from popover it will change the likeType 
+	 * on Popover.js inside likepostAPI, because of that this useEffect must re-call the all posts with updated posts
+	 * so, we have to get all fields, owners, like-owner with populated ones. //# ALL FIELD MUST BE POPULATED.
+	 * 
 	 */
 	useEffect(() => {
 		postsAPI(signedUser)
 			.then((res) => {
 				const { posts } = res.data;
 				setPosts(posts);
+
+				console.log("post insdie the useEffect hooks", posts)
 			})
 			.catch((err) => {
 				console.log("postsAPI ERROR =>");
 				console.log(err);
 			});
-	}, [submit]); // Adjust height on every text change
+	}, [submit, likeType]);
 
 	return (
 		<Home_Container className='home'>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TimeAgo from "javascript-time-ago";
 import { useRecoilValue } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -61,6 +61,7 @@ import { Popover } from "../popover/Popover";
 /* POST COMPONENT */
 export const Post = ({
 	post: {
+		likes,
 		content,
 		media,
 		createdAt,
@@ -100,6 +101,40 @@ export const Post = ({
 
 	const handleCommentClick = (e) => {};
 
+	/** process the likes
+	 * we can set the counts directly, like likes.length.
+	 * so, the post can have 1 or 100 likes how to control and get these data
+	 *
+	 * solution for now
+	 * 1. loop the likes and group them based on their reaction type
+	 * 2. iterate the groups and present the detailed info
+	 */
+	let [heart, setHeart] = useState([]);
+	let [smile, setSmile] = useState([]);
+	let [dislike, setDislike] = useState([]);
+
+	useEffect(() => {
+		/* loops the likes array and group them */
+		likes.map((like) => {
+			if (like.reaction == "heart") {
+				heart.push(like);
+			}
+
+			if (like.reaction == "smile") {
+				smile.push(like);
+			}
+
+			if (like.reaction == "dislike") {
+				dislike.push(like);
+			}
+		});
+
+		/* set the final values as a result */
+		setSmile(heart);
+		setSmile(smile);
+		setSmile(dislike);
+	}, []);
+
 	return (
 		<Post_Container>
 			<section className='postowner_avatar_section'>
@@ -131,11 +166,23 @@ export const Post = ({
 				)}
 
 				<section className='media_counts_section'>
-					<span className='likes_count'>
-						<FontAwesomeIcon className='faThumbsUp' icon={faThumbsUp} style={{ color: "#0060fa70" }} />
-						<span className='numbers'>{0}</span>
+					{/**
+					 * like count section stores the data of the likes under the post and above the like button
+					 * its displaying the counts and a valid likes with its owner images and counts
+					 */}
+					<section className='likes_counts_main_section'>
+						<div className='likes_icons_display_container'>
+							<div className='heart_container'>
+
+							</div>
+
+							<div className='funny_container'></div>
+
+							<div className='dislike_container'></div>
+						</div>
+						<span className='numbers'>{likes.length}</span>
 						<span className='likes text'>reactions</span>
-					</span>
+					</section>
 					<span className='comments_count'>
 						<FontAwesomeIcon className='faComment' icon={faComment} style={{ color: "#0060fa70" }} />
 						<span className='numbers'>{0}</span>
@@ -149,7 +196,7 @@ export const Post = ({
 						 * 	also popoverOpen and Setter will be update the open after the like type is clicked.
 						 * 	popoverOpen will be false right after the post like getting updated in the backed server
 						 * 	and getting 200 code back in the Popover child component
-						*/}
+						 */}
 						<Popover popoverOpen={popoverOpen} setPopoverOpen={setPopoverOpen} postId={_id} />
 
 						<div className='sikko_like' onClick={handleLikeClick}>

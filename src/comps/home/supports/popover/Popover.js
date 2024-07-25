@@ -39,7 +39,6 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId }) => {
 
 	// setPopoverOpen((popoverOpen) => !popoverOpen);
 
-
 	/* click handler - when like type select or click  */
 	const handlePopoverClick = (e) => {
 		/** Getting className of clicked likeType here */
@@ -51,14 +50,25 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId }) => {
 		 * */
 		likePostAPI({ accessToken: signedUser.accessToken, postId, likeType: classname })
 			.then((res) => {
-				/** when success,then will work and will get the result of success, just a text not the updated object.  
+				/** when success,then will work and will get the result of success, just a text not the updated object.
 				 * 	again, for now i am getting just a success text here but //# in the nearest future
-				 * 	we have to find a way how to get the current post updated only here, so after that 
+				 * 	we have to find a way how to get the current post updated only here, so after that
 				 * 	we dont need to re-render all posts again by changig global state likeType to trigger useEffect on Homejs.
 				 * 	extra work and useless recalls no needed!
-				 * */ 
-				console.log("res inside like click", res);
+				 * */
 
+				/** in positive resolve here, i am updating the global state to run the get allpost hooks in the Homejs */
+				//# important
+				/**
+				 * likeType global state only getting updated when Likepost apis success so when user click the funny or dislike
+				 * this will not get changed and it will not get trigger the useEffect.
+				 * so, we have to find the way to use $en to modifiy specific field of the Like object so this can re-run
+				 * means to.
+				 */
+				setLikeType((likeType) => !likeType);
+
+				/** also we have to close the popover right after the response */
+				setPopoverOpen((popoverOpen) => !popoverOpen);
 			})
 			.catch((err) => {
 				/** catch the error here */
