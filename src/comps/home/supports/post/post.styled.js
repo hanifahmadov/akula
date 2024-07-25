@@ -98,15 +98,15 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 
 			".numbers": {
 				marginLeft: "5px",
-                fontWeight: "600",
-                fontSize:'.9rem',
+				fontWeight: "600",
+				fontSize: ".9rem",
 			},
 
 			".text": {
 				marginLeft: "8px",
 				color: "#ffffff70",
 				fontWeight: "500",
-                fontSize:'.9rem',
+				fontSize: ".9rem",
 			},
 
 			".comments_count": {
@@ -141,6 +141,18 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 
 				border: "1px solid #ffffff80",
 				borderRadius: "50%",
+			},
+
+			".likes": {
+				padding: "0px",
+				display: "inline-block !important",
+				position: "relative",
+
+				".sikko_like": {
+					width: "100%",
+					height: "100%",
+					padding: "5px 8px",
+				},
 			},
 		},
 	},

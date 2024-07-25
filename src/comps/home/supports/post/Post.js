@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import TimeAgo from "javascript-time-ago";
 import { useRecoilValue } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
 import {
 	faHeart as faRegularHeart,
 	faThumbsDown as faRegularThumbsDown,
 	faBookmark as faRegularBookmark,
 	faThumbsUp as faRegularThumbsUp,
 } from "@fortawesome/free-regular-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 
 /* FONTAWESOME */
 import {
@@ -50,12 +51,12 @@ const timeAgo = new TimeAgo("en-US");
 
 /* IMPORTS */
 import { likePostAPI } from "../../../../apis/apiCalls";
-import { Post_Container } from "./support.styled";
+import { Post_Container } from "./post.styled";
 
 import { userDefault } from "../../../auth/shared/store/states";
 
 /* //# POPOVER */
-import { PopoverRadix } from "../popover/PopoverRadix";
+import { Popover } from "../popover/Popover";
 
 export const Post = ({
 	post: {
@@ -74,15 +75,20 @@ export const Post = ({
 	// console.log(typeof media);
 
 	const signedUser = useRecoilValue(userDefault);
+	const [popoverOpen, setPopoverOpen] = useState(false);
 
 	const handleLikeClick = (e) => {
-		likePostAPI({ accessToken: signedUser.accessToken, postId: _id, likeType: "like" })
-			.then((res) => {
-				console.log("res inside like click", res);
-			})
-			.catch((err) => {
-				console.log("error inside like click", err);
-			});
+		// likePostAPI({ accessToken: signedUser.accessToken, postId: _id, likeType: "like" })
+		// 	.then((res) => {
+		// 		console.log("res inside like click", res);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log("error inside like click", err);
+		// 	});
+
+		console.log("like clicked");
+
+		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
 
 	const handleCommentClick = (e) => {};
@@ -131,13 +137,14 @@ export const Post = ({
 				</section>
 
 				<section className='media_related_section'>
-					<span className='likes'>Like</span>
+					<span className='likes'>
+						<Popover popoverOpen={popoverOpen} setPopoverOpen={setPopoverOpen} />
+						<div className="sikko_like" onClick={handleLikeClick}>Like</div>
+					</span>
 					<span className='comments' onClick={handleCommentClick}>
 						Comment
 					</span>
-					<span className='share'>
-						<PopoverRadix text={"share"} />
-					</span>
+					<span className='share'>share</span>
 
 					<span className='bookmark'>
 						<FontAwesomeIcon icon={faRegularBookmark} />
