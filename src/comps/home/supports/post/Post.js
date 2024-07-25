@@ -46,18 +46,19 @@ library.add(
 import en from "javascript-time-ago/locale/en";
 TimeAgo.addDefaultLocale(en);
 
-// Create formatter (English).
+/* Create formatter (English) */
 const timeAgo = new TimeAgo("en-US");
 
-/* IMPORTS */
-import { likePostAPI } from "../../../../apis/apiCalls";
+/* STYLED COMPONENTS */
 import { Post_Container } from "./post.styled";
 
-import { userDefault } from "../../../auth/shared/store/states";
+/* GLOBAL STATES */
+import { likeTypeDefault, userDefault } from "../../../auth/shared/store/states";
 
-/* //# POPOVER */
+/* SUB COMPONENTS */
 import { Popover } from "../popover/Popover";
 
+/* POST COMPONENT */
 export const Post = ({
 	post: {
 		content,
@@ -72,22 +73,28 @@ export const Post = ({
 	/* which means whole Home is rendering and posts are itereating every time, soo fix that shit */
 	// console.log("renders")
 
-	// console.log(typeof media);
+	/**
+	 * 	IMPORTANT WE DO NOT NEED
+	 * 	global state likeType here. cause Popover.js will update it and Home.js will rerun the usehooks to
+	 * 	retrieve all posts again, soo it doesnt make sense keep global likType state here.
+	 * 	I commented it out but I will keep it here for future reminders
+	 *
+	 * */
 
+	/** retrieving global state likeType */
+	// const likeType = useRecoilValue(likeTypeDefault)
+
+	/* retrieving global state signedUser */
 	const signedUser = useRecoilValue(userDefault);
+
+	/** defining local state popoverOpen. which makes popover to be open and closed.
+	 * 	used in this file and sending as a prop to this comp's child, <Popover />, line 146, this file.
+	 * */
 	const [popoverOpen, setPopoverOpen] = useState(false);
 
+	/*  */
 	const handleLikeClick = (e) => {
-		// likePostAPI({ accessToken: signedUser.accessToken, postId: _id, likeType: "like" })
-		// 	.then((res) => {
-		// 		console.log("res inside like click", res);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log("error inside like click", err);
-		// 	});
-
 		console.log("like clicked");
-
 		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
 
@@ -138,8 +145,16 @@ export const Post = ({
 
 				<section className='media_related_section'>
 					<span className='likes'>
-						<Popover popoverOpen={popoverOpen} setPopoverOpen={setPopoverOpen} />
-						<div className="sikko_like" onClick={handleLikeClick}>Like</div>
+						{/** Post id passing down for a likepostAPI argument, please read the Popover notes
+						 * 	also popoverOpen and Setter will be update the open after the like type is clicked.
+						 * 	popoverOpen will be false right after the post like getting updated in the backed server
+						 * 	and getting 200 code back in the Popover child component
+						*/}
+						<Popover popoverOpen={popoverOpen} setPopoverOpen={setPopoverOpen} postId={_id} />
+
+						<div className='sikko_like' onClick={handleLikeClick}>
+							Like
+						</div>
 					</span>
 					<span className='comments' onClick={handleCommentClick}>
 						Comment
@@ -159,6 +174,19 @@ export const Post = ({
 /* 
 
 
+	// TODO
+
+	1 - when I click like button, it open popover, its great.
+		so, when I click to popover icons, I need to send that data to server as a liketype.
+		when I get liketyope change, useEffect will gets all posts and update all posts, for now. but read below cons!
+
+		# cons:
+			if one post get liked, whole posts will get pulled and updared if there is no change the other posts 
+			why all those are getting updated, so figure out how to stop that shit
+
+		-	solution 1: right now I am gonna get the specific post back which just got updated, and updated that post only.
+						
+		
 
 
 */

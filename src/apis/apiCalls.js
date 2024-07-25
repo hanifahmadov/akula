@@ -143,6 +143,7 @@ export const postsAPI = ({ accessToken }) => {
 	});
 };
 
+
 export const likePostAPI = ({ accessToken, postId, likeType }) => {
 	return axios({
 		url: `${apiUrl}/posts/${postId}/like`,
@@ -159,5 +160,4 @@ export const likePostAPI = ({ accessToken, postId, likeType }) => {
 
 /* JUST ADDED THIS LINE TO ALL APIS. Ensure proper content type if sending a body. 
 If any problem on the apis, check out this additions   */
-
 // # 'Content-Type': 'application/json'

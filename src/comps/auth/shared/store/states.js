@@ -34,6 +34,13 @@ export const modalDefault= atom({
 });
 
 
+
+export const likeTypeDefault= atom({
+	key: "likeTypeDefault",
+	default: undefined,
+});
+
+
 export const messageDefault = atom({
 	key: "messageDefault",
 	default: {
@@ -44,6 +51,8 @@ export const messageDefault = atom({
 		// reaction: { likes: 0, dis: 0, funny: 0 }
 	},
 });
+
+
 
 
 

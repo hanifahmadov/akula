@@ -13,8 +13,25 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
 	justifyContent: "center",
 	alignItems: "center",
 	background: "white",
+ 
 
+
+
+
+
+	/**
+	 * 	this code makes no click on itself which means there is no way to click its child elements.
+	 * 	but when we add its child element a porperty like ` pointerEvent: auto ` then only that child
+	 *  element will be clickable, only that child. 
+	 * 	So this makes a lot of easer than to get a className of all clicked elements and check it their values are equal
+	 * 	to what we expect and bla bla bla.
+	 * 
+	 * 	So, great invent on my side
+	 * 	
+	*/
 	pointerEvents: "none",
+
+
 
 	position: "absolute",
 	zIndex: "100",

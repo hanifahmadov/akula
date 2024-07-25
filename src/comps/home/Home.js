@@ -31,15 +31,15 @@ import apiUrl from "../../apis/apiUrl";
 import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 
 /* STATES */
-import { userDefault } from "../auth/shared/store/states";
+import { userDefault, likeTypeDefault } from "../auth/shared/store/states";
 
 /* COMPS */
 import { Account } from "../auth/account/Account";
 import { Post } from "./supports/post/Post";
 
-
 export const Home = () => {
 	const signedUser = useRecoilValue(userDefault);
+	const likeType = useRecoilValue(likeTypeDefault);
 	const [image, setImage] = useState(undefined);
 	const [submit, setSubmit] = useState(false);
 	const [posts, setPosts] = useState([]);
@@ -70,7 +70,7 @@ export const Home = () => {
 
 		data.append("text", text);
 		data.append("image", image);
-		data.append('baseurl', apiUrl)
+		data.append("baseurl", apiUrl);
 
 		newpostAPI(signedUser, data)
 			.then((res) => {
@@ -87,6 +87,11 @@ export const Home = () => {
 		adjustTextareaHeight(); // Adjust height on initial render
 	}, [text]); // Adjust height on every text change
 
+	/**
+	 * use hooks gets/retrieves all posts when new post posted,
+	 * 201 code then works (line 75 above, this file) and
+	 * globaly likeType state changes (when user likes the post from popover)
+	 */
 	useEffect(() => {
 		postsAPI(signedUser)
 			.then((res) => {
@@ -101,8 +106,9 @@ export const Home = () => {
 
 	return (
 		<Home_Container className='home'>
+			{console.log("likeType", likeType)}
 			<Center_Section className='center_section'>
-				<Post_Section className="post_section">
+				<Post_Section className='post_section'>
 					<div className='top_section'>
 						<img src={signedUser.avatar} className='signedUser_avatar' />
 						<div className='textarea_wrapper'>
@@ -163,7 +169,7 @@ export const Home = () => {
 				{/* this section is displaying all posts from all users, so the section is devided into 2 columns 
 					for post owner avatar and post itself details */}
 
-				<Display_Section className="display_section">
+				<Display_Section className='display_section'>
 					{posts.map((post, id) => (
 						<Post key={id} post={post} />
 					))}
@@ -182,3 +188,22 @@ export const Home = () => {
 		</Home_Container>
 	);
 };
+
+/* 
+
+
+	// TODO
+
+	1 -	retrieve all posts when reloaded, useEffect hooks.
+
+	2 - posts are getting retrieving here on Home component and hirearchy is like Home -> Post -> Like -> Popover.
+		the issue is when I click the popover, then I need to retrieve all posts again because that one post is updated
+		and need reload the page with new updated posts. So how I can trigger the useEffect hooks which will get all posts
+		inside the Home component ?!
+
+		-	solution A for now:  I am going to add global likeType, and ig that updated , get posts useEffect inside Home js
+			line 
+
+
+
+*/
