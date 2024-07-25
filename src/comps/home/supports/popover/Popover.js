@@ -39,6 +39,8 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId }) => {
 
 	// setPopoverOpen((popoverOpen) => !popoverOpen);
 
+
+	/* click handler - when like type select or click  */
 	const handlePopoverClick = (e) => {
 		/** Getting className of clicked likeType here */
 		const classname = e.target.className;
