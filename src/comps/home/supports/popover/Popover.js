@@ -51,8 +51,8 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId }) => {
 		 * */
 		likePostAPI({ accessToken: signedUser.accessToken, postId, likeType: classname })
 			.then((res) => {
-				/** when success,then will work and will get the result of success.  
-				 * 	again, for now i am getting just a success text here but in the nearest future
+				/** when success,then will work and will get the result of success, just a text not the updated object.  
+				 * 	again, for now i am getting just a success text here but //# in the nearest future
 				 * 	we have to find a way how to get the current post updated only here, so after that 
 				 * 	we dont need to re-render all posts again by changig global state likeType to trigger useEffect on Homejs.
 				 * 	extra work and useless recalls no needed!
