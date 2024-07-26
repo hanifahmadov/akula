@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -12,7 +12,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 // // Add other locales
 // TimeAgo.addLocale(es);
 
-import TimeAgo from './timeAgoConfig'; // Import the configured TimeAgo
+import TimeAgo from "./timeAgoConfig"; // Import the configured TimeAgo
 
 import {
 	faHeart as faRegularHeart,
@@ -66,10 +66,11 @@ import {
 } from "./post.styled";
 
 /* GLOBAL STATES */
-import { likeTypeDefault, userDefault } from "../../../auth/shared/store/states";
+import { backdropDefault, likeTypeDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* SUB COMPONENTS */
 import { Popover } from "../popover/Popover";
+import { Comment } from "../comment/Comment";
 
 /* POST COMPONENT */
 export const Post = ({
@@ -81,11 +82,14 @@ export const Post = ({
 		_id,
 		owner: { avatar, username },
 	},
+
+	post,
 }) => {
 	/* TODO */
 	/* everytime when user types something in the post textarea, this POST renders on every letter */
 	/* which means whole Home is rendering and posts are itereating every time, soo fix that shit */
 	// console.log("renders")
+
 
 	// Create an instance of TimeAgo
 	const timeAgo = new TimeAgo("en-US");
@@ -104,18 +108,51 @@ export const Post = ({
 	/* retrieving global state signedUser */
 	const signedUser = useRecoilValue(userDefault);
 
+	/* retrieving globa backdrop state to trigger Backdrop display block inside HomeLayout.js, when comment button clicked */
+	const [backdrop, setBackdrop] = useRecoilState(backdropDefault);
+
 	/** defining local state popoverOpen. which makes popover to be open and closed.
 	 * 	used in this file and sending as a prop to this comp's child, <Popover />, line 146, this file.
+	 *
+	 * this technique is applying also to comment section only
 	 * */
 	const [popoverOpen, setPopoverOpen] = useState(false);
+	const [commentOpen, setCommentOpen] = useState(false);
+
+	/** userList is a local state that opens the div of users list who liked the post.
+	 * 	if someone liked the post and it will be on this list. the state default is false,
+	 * 	but when user clicked the number next to icons then this will be true.
+	 *
+	 * so, there are 3 like icons, heart, smile and dislike. so we have to create a sparate states for all of them.
+	 * when user clicks on number next to heart then heart list need to be open, an so on relatively.
+	 *
+	 *  #bug
+	 * when hearlist is open, the items in the background is clickable, and its not okey.
+	 * // TODO
+	 * 	1. create its ::before element and positon absolute, hight and with 100vh vw and zindex index bla bla. figureit out
+	 * 	2. whe I click outside the box, the close it.
+	 * 	3. applu the same clicks for popover like section also.
+	 * 	4. thanks
+	 */
+	const [heartList, setHeartList] = useState(false);
+	const [smileList, setSmileList] = useState(false);
+	const [dislikeList, setDislikeList] = useState(false);
 
 	/*  */
-	const handleLikeClick = (e) => {
-		console.log("like clicked");
+	const handleLikeButtonClick = (e) => {
+		console.log("like button clicked");
 		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
 
-	const handleCommentClick = (e) => {};
+	/** comment button clicked */
+	const handleCommentButtonClick = (e) => {
+		console.log("comment button clicked");
+		setCommentOpen((commentOpen) => !commentOpen);
+		setBackdrop((backdrop) => !backdrop);
+	};
+
+	const handleShareButtonClick = (e) => {};
+	const handleBookmarkButtonClick = (e) => {};
 
 	/** process the likes
 	 * we can set the counts directly, like likes.length.
@@ -172,7 +209,7 @@ export const Post = ({
 					<div className='title_wrapper'>
 						<span className='title'>{username}</span>
 						<span className='faCircleCheck'>
-							<FontAwesomeIcon icon={faCircleCheck} style={{ color: "#005eff" }} />
+							<FontAwesomeIcon icon={faCircleCheck} />
 						</span>
 						<span>{/* add username here, if user is kokuma, username must be @kokuma */}</span>
 					</div>
@@ -201,10 +238,10 @@ export const Post = ({
 						{/* likes icons (3 icons) and their counts next to each other */}
 						<Heart_Container className='heart_container' $heart={heart}>
 							<div className='heart_icon'>❤️</div>
-							<div className='heart_number'>{heart.length}</div>
-							<div className="liked_users_lists">
-
+							<div className='heart_number' onClick={() => setHeartList((heartList) => !heartList)}>
+								{heart.length}
 							</div>
+							{heartList && <div className='heart_list users_list'></div>}
 						</Heart_Container>
 
 						<Smile_Container className='smile_container' $smile={smile}>
@@ -226,7 +263,11 @@ export const Post = ({
 				</MediaCounts_Section>
 
 				<section className='media_related_section'>
-					<span className='likes'>
+					{/** media related section has 4 divs and all divs classnames are related_section.wrapper
+					 * do not use section or contaiern inside small sections,
+					 * remember container -> section -> wrapper -> block
+					 */}
+					<div className='like_wrapper'>
 						{/** Post id passing down for a likepostAPI argument, please read the Popover notes
 						 * 	also popoverOpen and Setter will be update the open after the like type is clicked.
 						 * 	popoverOpen will be false right after the post like getting updated in the backed server
@@ -234,18 +275,27 @@ export const Post = ({
 						 */}
 						<Popover popoverOpen={popoverOpen} setPopoverOpen={setPopoverOpen} postId={_id} />
 
-						<div className='sikko_like' onClick={handleLikeClick}>
+						<div className='like_button button' onClick={handleLikeButtonClick}>
 							Like
 						</div>
-					</span>
-					<span className='comments' onClick={handleCommentClick}>
-						Comment
-					</span>
-					<span className='share'>share</span>
+					</div>
+					<div className='comment_wrapper'>
+						<div className='comment_button button' onClick={handleCommentButtonClick}>
+							Comment
+						</div>
+						<Comment commentOpen={commentOpen} setCommentOpen={setCommentOpen} post={post} />
+					</div>
+					<div className='share_wrapper'>
+						<div className='share_button button' onClick={handleShareButtonClick}>
+							share
+						</div>
+					</div>
 
-					<span className='bookmark'>
-						<FontAwesomeIcon icon={faRegularBookmark} />
-					</span>
+					<div className='bookmark_wrapper'>
+						<div className='bookmark_button button' onClick={handleBookmarkButtonClick}>
+							<FontAwesomeIcon icon={faRegularBookmark} />
+						</div>
+					</div>
 				</section>
 				<section className=''></section>
 			</section>

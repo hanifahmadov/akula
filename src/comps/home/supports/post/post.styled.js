@@ -14,7 +14,6 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 	background: "#1a2730",
 
 	borderRadius: "10px",
-	overflow: "hidden",
 
 	padding: "1rem 1rem 1rem 0rem",
 	marginTop: "1rem",
@@ -56,7 +55,9 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 				},
 
 				".faCircleCheck": {
-					marginLeft: "10px",
+					marginLeft: "7px",
+					paddingTop: "4px",
+					color: "#005eff",
 				},
 			},
 
@@ -95,39 +96,43 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 			display: "flex",
 			justifyContent: "space-between",
 
-			span: {
+			/** 
+			 * a like_button inside wrapper and that button is just in the center, which means when user
+			 * click the center, it triggers popover to opne but when user clicks away from the center, it doesnt.
+			 * in this case we have to make its height and width qoo% to make sure button keeps its parents full width and height.
+			 * make sure to add the padding to the buttons after height and width already set up
+			 * height and width is 100%
+			 *
+			 * button classname is like_button and button, select the button for common classname
+			 */
+
+			".like_wrapper, .comment_wrapper, .share_wrapper, .bookmark_wrapper": {
 				fontSize: "1rem",
 				fontWeight: "500",
 				width: "7rem",
 
 				border: "1px solid #ffffff80",
 				borderRadius: "5px",
-				padding: "5px 8px",
 				textAlign: "center",
 				lineHeight: "20px",
 				cursor: "pointer",
-			},
 
-			".bookmark": {
-				border: "none",
-				fontSize: "1.1rem",
-				width: "2.3rem",
-				height: "2.3rem",
-
-				border: "1px solid #ffffff80",
-				borderRadius: "50%",
-			},
-
-			".likes": {
-				padding: "0px",
-				display: "inline-block !important",
-				position: "relative",
-
-				".sikko_like": {
-					width: "100%",
+				".button": {
+					padding: "5px",
 					height: "100%",
-					padding: "5px 8px",
+					width: "100%",
 				},
+			},
+
+			/** likes_wrapper is a mother of like_button and Popoverjs. Popoverjs is a absolute position
+			 * so that this mother wrapper must be relative. */
+			".like_wrapper": {
+				position: "relative",
+			},
+
+			/* bookmark_wrapper is just a small icon. no need to hold 7rem width in this case */
+			".bookmark_wrapper": {
+				width: '2.5rem'
 			},
 		},
 	},
@@ -173,12 +178,37 @@ export const Heart_Container = styled.div(({ theme: {}, $heart }) => ({
 	".heart_number": {
 		marginLeft: "5px",
 		fontWeight: "700",
+		cursor: "pointer",
 	},
 
-	".liked_users_lists": {
-		height: "20rem",
+	position: "relative",
+
+	/** this is the div that will hold the usernames and maybe user avatart
+	 * who like the post and this will pop up when a user click the number next to likes.
+	 *
+	 * lets say 2 people smiled the post and in the media section, there will be a smile icon and number 2 next to it.
+	 * when user clicks the number 2, then this div will be pop-up and will show those 2 users username and avatar maybe.
+	 *
+	 * in this case, this div position must be absolute, and its parents position must be relative. just mentioned it in the
+	 * above of this comment.
+	 *
+	 * // TODO
+	 * will do it later, after comment is done
+	 */
+
+	".heart_list": {
+		height: "15rem",
 		width: "10rem",
-		background: "white",
+		background: "gray",
+
+		borderRadius: "10px",
+
+		position: "absolute",
+		zIndex: "10",
+		top: "2px",
+		left: "30px",
+
+		overflow: "auto", // or scroll
 	},
 }));
 

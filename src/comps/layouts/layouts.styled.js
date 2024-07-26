@@ -17,7 +17,6 @@ export const AppLayout_Content = styled.div(({ theme: {} }) => ({
 	alignItems: "center",
 
 	background: "#bfd3e0",
-	
 }));
 
 // PERSISTENT
@@ -63,12 +62,32 @@ export const HomeLayout_Container = styled.div(({ theme: {} }) => ({
 	justifyContent: "center",
 	alignItems: "center",
 
+	/** this is for backdrop and other absolute positions mother element */
+	position: "relative",
+
 	".column": {
 		width: "100%",
 		height: "100%",
 
 		margin: "0px 3px",
 	},
+}));
+
+/** EXPLAIN whats going on later //TODO */
+export const Backdrop = styled.div(({ theme: { backdrop } }) => ({
+	display: backdrop ? "block" : "none",
+
+	position: "fixed", // Use fixed to cover the entire viewport
+	zIndex: "10",
+
+	top: 0, // Ensure it covers from the top
+	left: 0, // Ensure it covers from the left
+	height: "100%", // Cover full height
+	width: "100%", // Cover full width
+
+	background: "rgba(0, 0, 0, 0.75)",
+	pointerEvents: "auto", // Allow the backdrop to intercept clicks
+	
 }));
 
 export const Navbar_Container = styled.div(({ theme: {} }) => ({
@@ -148,8 +167,6 @@ export const Links_Section = styled.div(({ theme: {} }) => ({
 			borderColor: "#ffffff20",
 			color: "#ffffff",
 		},
-
-
 	},
 
 	button: {

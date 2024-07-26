@@ -36,7 +36,7 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
 
 
 	position: "absolute",
-	zIndex: "100",
+	zIndex: "1",
 	top: "-40px",
 	left: "-10px",
 

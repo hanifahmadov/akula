@@ -35,6 +35,7 @@ import {
 	Links_Section,
 	Logout_Section,
 	Content_Container,
+	Backdrop,
 } from "./layouts.styled";
 import { activeLinkDefault, userDefault } from "../auth/shared/store/states";
 import { signoutApi } from "../../apis/apiCalls";
@@ -42,6 +43,8 @@ import { signoutApi } from "../../apis/apiCalls";
 export const HomeLayout = () => {
 	const signedUser = useRecoilValue(userDefault);
 	const [activeLink, setActiveLink] = useRecoilState(activeLinkDefault);
+
+
 	const navigate = useNavigate();
 	const activeLinkStyled = {
 		background: "#ffffff99",
@@ -68,6 +71,7 @@ export const HomeLayout = () => {
 
 	return (
 		<HomeLayout_Container className='homeLayout'>
+			{/* <Backdrop className='backdrop' /> */}
 			<Navbar_Container className='navbar column'>
 				<div className='left_content_wrapper'>
 					{/* this div is just for to keep the logout button in the end */}

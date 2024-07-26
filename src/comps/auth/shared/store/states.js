@@ -46,6 +46,21 @@ export const likeTypeDefault= atom({
 });
 
 
+
+/** backdrop is a global state and makes the Backdrop div element displays block or non
+ * depending on this state true or false value
+ * Backdrop element position is absolute and its parent element is HomeLayout
+ * this state is imported as a initially in App.js and passed into theme provider for reaching out in evert styled comps.
+ */
+export const backdropDefault= atom({
+	key: "backdropDefault",
+	default: false,
+});
+
+
+
+
+
 export const messageDefault = atom({
 	key: "messageDefault",
 	default: {

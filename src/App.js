@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Fragment, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useMediaQuery } from "react-responsive";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +9,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import { ThemeProvider } from "styled-components";
 
 // STATES & STYLED
-import { darkmodeDefault, deviceDefault } from "./comps/auth/shared/store/states";
+import { backdropDefault, darkmodeDefault, deviceDefault } from "./comps/auth/shared/store/states";
 import { GlobalStyled } from "./common.styled";
 
 // comps
@@ -51,6 +51,10 @@ const router = createBrowserRouter(
 export const App = () => {
 	let [device, setDevice] = useRecoilState(deviceDefault);
 	let [darkmode, setDarkmode] = useRecoilState(darkmodeDefault);
+
+	/** bcakdrop global state */
+	const backdrop = useRecoilValue(backdropDefault);
+
 	device = JSON.parse(JSON.stringify(device));
 
 	// mobile
@@ -87,7 +91,7 @@ export const App = () => {
 	}, [mobile, tablet, laptop, desktop]);
 
 	return (
-		<ThemeProvider theme={{ device, darkmode }}>
+		<ThemeProvider theme={{ device, darkmode, backdrop }}>
 			<ToastContainer />
 			<GlobalStyled />
 			<RouterProvider router={router} />

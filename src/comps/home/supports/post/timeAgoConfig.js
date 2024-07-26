@@ -1,10 +1,13 @@
+/*  */
+/*  */
+
 /** TimeAgo makes an error on the terminal like below:
  * 
  *  Post.js:11 
  * [javascript-time-ago] `TimeAgo.addDefaultLocale()` can only be called once. 
  * To add other locales, use `TimeAgo.addLocale()`.
  * 
- * and chatGPT referes to move it out from Postjs and put it in saparate file like here.
+ * and chatGPT referes to move it out from Post.js and put it in saparate file like here.
  * 
  */
 
