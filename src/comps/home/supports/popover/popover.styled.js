@@ -13,6 +13,8 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
 	justifyContent: "center",
 	alignItems: "center",
 	background: "white",
+
+	/** design background and opening animation, use different icons and add animation when like type clicked //TODO */
  
 
 

@@ -134,6 +134,7 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 }));
 
 /* used in Post.js line 168 */
+/** this main section holds 2 container */
 export const MediaCounts_Section = styled.div(({ theme: {} }) => ({
 	margin: "10px 0px 0px 0px",
 	padding: "2px 0px",
@@ -145,71 +146,80 @@ export const MediaCounts_Section = styled.div(({ theme: {} }) => ({
 
 	// background: "gray",
 
-	/** main section holds 2 container
-	 * one is images and icons like heart smiles and dislikes
-	 * the other one is total number of likes (like.length and text 'reaction')
-	 */
-	".likes_counts_main_section": {
+	".likesIcons_withTheirCounts_container": {
 		display: "flex",
-		justifyContent: "center",
+		justifyContent: "space-between",
 		alignItems: "center",
 
-		".likes_icons_usernames_container": {
-			display: "flex",
-			justifyContent: "space-between",
-			alignItems: "center",
-		},
+		/** all 3 likes icons with their counts under the text or image are inside this container  */
 	},
 }));
 
 /* this container is used inside .likes_counts_main_section */
-export const Heart_Container = styled.div(({ theme: {} }) => ({
-	display: "flex",
+export const Heart_Container = styled.div(({ theme: {}, $heart }) => ({
+	/*  create animation for these elements.fyi transition animation doesnt work on display none.
+		for now, use opacity 0 and then dipslay none use framer motion, //TODO
+	 */
+	display: $heart.length ? "flex" : "none",
 	justifyContent: "center",
 	alignItems: "center",
 
+	marginRight: "15px",
+
 	".heart_icon": {
-		fontSize: "1.15rem",
+		fontSize: "1rem",
 	},
 
 	".heart_number": {
-		marginLeft: "3px",
+		marginLeft: "5px",
 		fontWeight: "700",
+	},
+
+	".liked_users_lists": {
+		height: "20rem",
+		width: "10rem",
+		background: "white",
 	},
 }));
 
 /* this container is used inside .likes_counts_main_section */
-export const Smile_Container = styled.div(({ theme: {} }) => ({
-	display: "flex",
+export const Smile_Container = styled.div(({ theme: {}, $smile }) => ({
+	/*  create animation for these elements.fyi transition animation doesnt work on display none.
+		for now, use opacity 0 and then dipslay none use framer motion, //TODO
+	 */
+	display: $smile.length ? "flex" : "none",
 	justifyContent: "center",
 	alignItems: "center",
 
-	marginLeft: '10px',
+	marginRight: "15px",
 
 	".smile_icon": {
-		fontSize: "1.15rem",
+		fontSize: "1rem",
 	},
 
 	".smile_number": {
-		marginLeft: "3px",
+		marginLeft: "5px",
 		fontWeight: "700",
 	},
 }));
 
 /* this container is used inside .likes_counts_main_section */
-export const Dislike_Container = styled.div(({ theme: {} }) => ({
-	display: "flex",
+export const Dislike_Container = styled.div(({ theme: {}, $dislike }) => ({
+	/*  create animation for these elements.fyi transition animation doesnt work on display none.
+		for now, use opacity 0 and then dipslay none use framer motion, //TODO
+	 */
+	display: $dislike.length ? "flex" : "none",
 	justifyContent: "center",
 	alignItems: "center",
 
-	marginLeft: '10px',
+	marginRight: "15px",
 
 	".dislike": {
-		fontSize: "1.15rem",
+		fontSize: "1rem",
 	},
 
 	".dislike_number": {
-		marginLeft: "3px",
+		marginLeft: "5px",
 		fontWeight: "700",
 	},
 }));

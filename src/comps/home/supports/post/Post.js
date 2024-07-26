@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
-import TimeAgo from "javascript-time-ago";
 import { useRecoilValue } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
+
+// import TimeAgo from "javascript-time-ago";
+// import en from "javascript-time-ago/locale/en";
+// import es from "javascript-time-ago/locale/es";
+
+// // Add the default locale
+// TimeAgo.addDefaultLocale(en);
+// // Add other locales
+// TimeAgo.addLocale(es);
+
+import TimeAgo from './timeAgoConfig'; // Import the configured TimeAgo
 
 import {
 	faHeart as faRegularHeart,
@@ -46,12 +56,6 @@ library.add(
 
 /* STYLED */
 
-import en from "javascript-time-ago/locale/en";
-TimeAgo.addDefaultLocale(en);
-
-/* Create formatter (English) */
-const timeAgo = new TimeAgo("en-US");
-
 /* STYLED COMPONENTS */
 import {
 	Dislike_Container,
@@ -83,6 +87,9 @@ export const Post = ({
 	/* which means whole Home is rendering and posts are itereating every time, soo fix that shit */
 	// console.log("renders")
 
+	// Create an instance of TimeAgo
+	const timeAgo = new TimeAgo("en-US");
+
 	/**
 	 * 	IMPORTANT WE DO NOT NEED
 	 * 	global state likeType here. cause Popover.js will update it and Home.js will rerun the usehooks to
@@ -92,7 +99,7 @@ export const Post = ({
 	 * */
 
 	/** retrieving global state likeType */
-	const likeType = useRecoilValue(likeTypeDefault)
+	const likeType = useRecoilValue(likeTypeDefault);
 
 	/* retrieving global state signedUser */
 	const signedUser = useRecoilValue(userDefault);
@@ -123,10 +130,15 @@ export const Post = ({
 	const [dislike, setDislike] = useState([]);
 
 	useEffect(() => {
-		let newHeart = []
-		let newSmile = []
-		let newDislike = []
-		/* loops the likes array and group them */
+		/** these values are local and every time this useEffect runs (wehn likes gets updated on Homejs useEffect )
+		 * 	these arrays defines empty, cause new updated likes need to be stored. cant over loaded the new one to old one
+		 * 	important!
+		 * */
+		let newHeart = [];
+		let newSmile = [];
+		let newDislike = [];
+
+		/* loops the new likes array and group them based on their reaction */
 		likes.map((like) => {
 			if (like.reaction == "heart") {
 				newHeart.push(like);
@@ -151,7 +163,6 @@ export const Post = ({
 
 	return (
 		<Post_Container>
-			{console.log("Post Container runs")}
 			<section className='postowner_avatar_section'>
 				<img src={avatar} />
 			</section>
@@ -182,35 +193,31 @@ export const Post = ({
 
 				<MediaCounts_Section className='media_counts_section'>
 					{/**
-					 * like count section stores the data of the likes under the post and above the like button
-					 * its displaying the counts and a valid likes with its owner images and counts.
-					 * this section holds likes and comments sections together.
+					 ** classsname "like_count_section" stores the data of the likes and located under the post text
+					 *	or image file and above the like-comment-share-bookmark buttons section
+					 * 	this section holds likes icons with numbres(counts) and comments text and comments counts sections together.
 					 */}
-					<section className='likes_counts_main_section'>
-						{/**
-						 * like counts main section covers heart, smile and dislike containers
-						 */}
-						<div className='likes_icons_usernames_container'>
-							<Heart_Container className='heart_container'>
-								<div className='heart_icon'>❤️</div>
-								<div className='heart_number'>{heart.length}</div>
-							</Heart_Container>
+					<div className='likesIcons_withTheirCounts_container'>
+						{/* likes icons (3 icons) and their counts next to each other */}
+						<Heart_Container className='heart_container' $heart={heart}>
+							<div className='heart_icon'>❤️</div>
+							<div className='heart_number'>{heart.length}</div>
+							<div className="liked_users_lists">
 
-							<Smile_Container className='smile_container'>
-								<div className='smile_icon'>😂</div>
-								<div className='smile_number'>{smile.length}</div>
-							</Smile_Container>
+							</div>
+						</Heart_Container>
 
-							<Dislike_Container className='dislike_container'>
-								<div className='dislike_icon'>👎</div>
-								<div className='dislike_number'>{dislike.length}</div>
-							</Dislike_Container>
-						</div>
-						{/* <div className='number_reaction_container'>
-							<span className='numbers'>{likes.length}</span>
-							<span className='likes text'>reactions</span>
-						</div> */}
-					</section>
+						<Smile_Container className='smile_container' $smile={smile}>
+							<div className='smile_icon'>😂</div>
+							<div className='smile_number'>{smile.length}</div>
+						</Smile_Container>
+
+						<Dislike_Container className='dislike_container' $dislike={dislike}>
+							<div className='dislike_icon'>👎</div>
+							<div className='dislike_number'>{dislike.length}</div>
+						</Dislike_Container>
+					</div>
+
 					{/* <span className='comments_count'>
 						<FontAwesomeIcon className='faComment' icon={faComment} style={{ color: "#0060fa70" }} />
 						<span className='numbers'>{0}</span>
