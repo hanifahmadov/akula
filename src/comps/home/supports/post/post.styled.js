@@ -89,38 +89,6 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 			},
 		},
 
-		".media_counts_section": {
-			padding: "8px 10px 0px 10px",
-
-			width: "100%",
-			display: "flex",
-			justifyContent: "space-between",
-
-
-
-			".likes_counts_main_section": {
-				
-
-			},
-
-			".numbers": {
-				marginLeft: "5px",
-				fontWeight: "600",
-				fontSize: ".9rem",
-			},
-
-			".text": {
-				marginLeft: "8px",
-				color: "#ffffff70",
-				fontWeight: "500",
-				fontSize: ".9rem",
-			},
-
-			".comments_count": {
-				marginLeft: "10px",
-			},
-		},
-
 		".media_related_section": {
 			marginTop: "1rem",
 			width: "100%",
@@ -162,5 +130,86 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 				},
 			},
 		},
+	},
+}));
+
+/* used in Post.js line 168 */
+export const MediaCounts_Section = styled.div(({ theme: {} }) => ({
+	margin: "10px 0px 0px 0px",
+	padding: "2px 0px",
+
+	width: "100%",
+	display: "flex",
+	justifyContent: "space-between",
+	alignItems: "center",
+
+	// background: "gray",
+
+	/** main section holds 2 container
+	 * one is images and icons like heart smiles and dislikes
+	 * the other one is total number of likes (like.length and text 'reaction')
+	 */
+	".likes_counts_main_section": {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+
+		".likes_icons_usernames_container": {
+			display: "flex",
+			justifyContent: "space-between",
+			alignItems: "center",
+		},
+	},
+}));
+
+/* this container is used inside .likes_counts_main_section */
+export const Heart_Container = styled.div(({ theme: {} }) => ({
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+
+	".heart_icon": {
+		fontSize: "1.15rem",
+	},
+
+	".heart_number": {
+		marginLeft: "3px",
+		fontWeight: "700",
+	},
+}));
+
+/* this container is used inside .likes_counts_main_section */
+export const Smile_Container = styled.div(({ theme: {} }) => ({
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+
+	marginLeft: '10px',
+
+	".smile_icon": {
+		fontSize: "1.15rem",
+	},
+
+	".smile_number": {
+		marginLeft: "3px",
+		fontWeight: "700",
+	},
+}));
+
+/* this container is used inside .likes_counts_main_section */
+export const Dislike_Container = styled.div(({ theme: {} }) => ({
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+
+	marginLeft: '10px',
+
+	".dislike": {
+		fontSize: "1.15rem",
+	},
+
+	".dislike_number": {
+		marginLeft: "3px",
+		fontWeight: "700",
 	},
 }));

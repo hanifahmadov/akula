@@ -22,6 +22,8 @@ import {
 	faEarthAmericas,
 	faThumbsUp,
 	faComment,
+	faHeart,
+	faFaceLaughBeam,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -38,7 +40,8 @@ library.add(
 	faRegularBookmark,
 	faThumbsUp,
 	faRegularThumbsUp,
-	faComment
+	faComment,
+	faHeart
 );
 
 /* STYLED */
@@ -50,7 +53,13 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo("en-US");
 
 /* STYLED COMPONENTS */
-import { Post_Container } from "./post.styled";
+import {
+	Dislike_Container,
+	Heart_Container,
+	MediaCounts_Section,
+	Post_Container,
+	Smile_Container,
+} from "./post.styled";
 
 /* GLOBAL STATES */
 import { likeTypeDefault, userDefault } from "../../../auth/shared/store/states";
@@ -83,7 +92,7 @@ export const Post = ({
 	 * */
 
 	/** retrieving global state likeType */
-	// const likeType = useRecoilValue(likeTypeDefault)
+	const likeType = useRecoilValue(likeTypeDefault)
 
 	/* retrieving global state signedUser */
 	const signedUser = useRecoilValue(userDefault);
@@ -109,34 +118,40 @@ export const Post = ({
 	 * 1. loop the likes and group them based on their reaction type
 	 * 2. iterate the groups and present the detailed info
 	 */
-	let [heart, setHeart] = useState([]);
-	let [smile, setSmile] = useState([]);
-	let [dislike, setDislike] = useState([]);
+	const [heart, setHeart] = useState([]);
+	const [smile, setSmile] = useState([]);
+	const [dislike, setDislike] = useState([]);
 
 	useEffect(() => {
+		let newHeart = []
+		let newSmile = []
+		let newDislike = []
 		/* loops the likes array and group them */
 		likes.map((like) => {
 			if (like.reaction == "heart") {
-				heart.push(like);
+				newHeart.push(like);
 			}
 
 			if (like.reaction == "smile") {
-				smile.push(like);
+				newSmile.push(like);
 			}
 
 			if (like.reaction == "dislike") {
-				dislike.push(like);
+				newDislike.push(like);
 			}
 		});
 
 		/* set the final values as a result */
-		setSmile(heart);
-		setSmile(smile);
-		setSmile(dislike);
-	}, []);
+		setHeart(newHeart);
+		setSmile(newSmile);
+		setDislike(newDislike);
+
+		console.log(heart, smile, dislike);
+	}, [likes]);
 
 	return (
 		<Post_Container>
+			{console.log("Post Container runs")}
 			<section className='postowner_avatar_section'>
 				<img src={avatar} />
 			</section>
@@ -165,30 +180,43 @@ export const Post = ({
 					</section>
 				)}
 
-				<section className='media_counts_section'>
+				<MediaCounts_Section className='media_counts_section'>
 					{/**
 					 * like count section stores the data of the likes under the post and above the like button
-					 * its displaying the counts and a valid likes with its owner images and counts
+					 * its displaying the counts and a valid likes with its owner images and counts.
+					 * this section holds likes and comments sections together.
 					 */}
 					<section className='likes_counts_main_section'>
-						<div className='likes_icons_display_container'>
-							<div className='heart_container'>
+						{/**
+						 * like counts main section covers heart, smile and dislike containers
+						 */}
+						<div className='likes_icons_usernames_container'>
+							<Heart_Container className='heart_container'>
+								<div className='heart_icon'>❤️</div>
+								<div className='heart_number'>{heart.length}</div>
+							</Heart_Container>
 
-							</div>
+							<Smile_Container className='smile_container'>
+								<div className='smile_icon'>😂</div>
+								<div className='smile_number'>{smile.length}</div>
+							</Smile_Container>
 
-							<div className='funny_container'></div>
-
-							<div className='dislike_container'></div>
+							<Dislike_Container className='dislike_container'>
+								<div className='dislike_icon'>👎</div>
+								<div className='dislike_number'>{dislike.length}</div>
+							</Dislike_Container>
 						</div>
-						<span className='numbers'>{likes.length}</span>
-						<span className='likes text'>reactions</span>
+						{/* <div className='number_reaction_container'>
+							<span className='numbers'>{likes.length}</span>
+							<span className='likes text'>reactions</span>
+						</div> */}
 					</section>
-					<span className='comments_count'>
+					{/* <span className='comments_count'>
 						<FontAwesomeIcon className='faComment' icon={faComment} style={{ color: "#0060fa70" }} />
 						<span className='numbers'>{0}</span>
 						<span className='comments text'>comments</span>
-					</span>
-				</section>
+					</span> */}
+				</MediaCounts_Section>
 
 				<section className='media_related_section'>
 					<span className='likes'>
@@ -234,6 +262,28 @@ export const Post = ({
 		-	solution 1: right now I am gonna get the specific post back which just got updated, and updated that post only.
 						
 		
+
+			<div className='heart_owner'>
+									<div className='image_wrapper'>
+										<img src={signedUser.avatar} />
+									</div>
+									<div className='image_wrapper' style={{ left: "0px" }}>
+										<img src={signedUser.avatar} />
+									</div>
+
+									<div className='image_wrapper' style={{ left: "11px" }}>
+										<img src={signedUser.avatar} />
+									</div>
+									<div className='image_wrapper' style={{ left: "21px" }}>
+										<img src={signedUser.avatar} />
+									</div>
+									<div className='image_wrapper' style={{ left: "31px" }}>
+										<img src={signedUser.avatar} />
+									</div>
+									<div className='image_wrapper' style={{ left: "20px" }}>
+										<img src={signedUser.avatar} />
+									</div>
+								</div>
 
 
 */
