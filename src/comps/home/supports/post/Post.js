@@ -36,6 +36,8 @@ import {
 	faFaceLaughBeam,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { faFaceSmile } from "@fortawesome/free-regular-svg-icons";
+
 library.add(
 	faCircleXmark,
 	faImage,
@@ -51,7 +53,9 @@ library.add(
 	faThumbsUp,
 	faRegularThumbsUp,
 	faComment,
-	faHeart
+	faHeart,
+	faImage,
+	faFaceSmile
 );
 
 /* STYLED */
@@ -340,27 +344,38 @@ export const Post = ({
 									ref={textareaRef}
 									value={text}
 									onChange={handleChange}
-									placeholder='Whats going on...'
-									rows={1} // Start with one row
+									placeholder='Please be respectful to everyone...'
+									rows={2} // Start with one row
 								/>
 
 								{/* this is for send button and adding sctiker and image to the reply comments */}
 								<div className='comment_send_button_with_sticker_gifs_wrapper'>
 									{/* doing groping, left side is upload imaage and gif, right side is send button
-									  * like this wway its easy to array distance between like space-between justtify content
-									*/}
-									<div className="reply_with_images_and_gifs_block">
-										<div>{/* images here */}</div>
-										<div>{/* gifs here */}</div>
+									 * like this wway its easy to array distance between like space-between justtify content
+									 */}
+									<div className='reply_with_images_smile_and_gifs_block'>
+										<div>
+											{/* image icon here */}
+
+											<span>
+												<FontAwesomeIcon icon={faImage} />
+											</span>
+										</div>
+										<div>
+											{/* gifs here, mf fontawesome has no free gifs icon, i added smile for now */}
+											<span>
+												<FontAwesomeIcon icon={faFaceSmile} />
+											</span>
+										</div>
 									</div>
-									<div className="comment_send_button_block">
-										<span>send</span>
+									{/*comment send button block  */}
+									<div className='comment_send_button_block'>
+										{/* // TODO add comment with image or gif or  */}
+										{/* send button */}
+										<span onClick={handleCommentSendClick}>send</span>
 									</div>
 								</div>
 							</div>
-
-							{/* // TODO add comment with image or gif or  */}
-							{/* send button */}
 						</div>
 					</div>
 				</Comment_Displaying_Section>

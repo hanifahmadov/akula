@@ -257,7 +257,8 @@ export const Dislike_Container = styled.div(({ theme: {}, $dislike }) => ({
 export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
 	marginTop: "1rem",
 
-	background: "gray",
+	// background: "gray",
+
 	height: "20rem",
 	width: "100%",
 
@@ -269,7 +270,8 @@ export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
 	".comment_input_section_with_user_avatar": {
 		width: "100%",
 		padding: "5px 0px",
-		background: "red",
+
+		// background: "red",
 
 		/* must be at the bottom */
 		alignSelf: "flex-end",
@@ -287,7 +289,7 @@ export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
 
 		".textarea_sendbutton_wrapper": {
 			width: "100%",
-			padding: "0px 10px",
+			padding: "0px 5px 0px 8px",
 
 			".textarea_wrapper": {
 				width: "100%",
@@ -311,18 +313,55 @@ export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
 					MozBoxShadow: "none", // -moz-box-shadow
 					boxShadow: "none",
 					resize: "none",
-					padding: "5px 10px",
+					padding: "7px 5px 7px 10px",
 
 					fontSize: "1rem",
 					borderRadius: "10px",
 					background: "transparent",
 					color: "white",
 
+					maxHeight: '10rem',
+
+
 					"&::placeholder": {
-						color: "#ffffff80",
+						color: "#ffffff50",
 						paddingLeft: "5px",
 					},
 					// border: "1px solid #ffffff30",
+				},
+
+				".reply_with_images_smile_and_gifs_block": {
+					display: "flex",
+					justifyContent: "space-between",
+					// background: 'red',
+
+					width: "2.75rem",
+					marginLeft: "10px",
+				},
+
+				".comment_send_button_with_sticker_gifs_wrapper": {
+					display: "flex",
+					flexDirection: "row",
+					justifyContent: "space-between",
+					alignItems: "center",
+					width: "100%",
+
+					padding: "0px 5px",
+					borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+
+					".comment_send_button_block": {
+						margin: "5px 5px 5px 0px",
+
+						span: {
+							display: "inline-block",
+							background: "#0d6efd",
+							padding: "2px 5px",
+							borderRadius: "5px",
+							fontSize: ".8rem",
+							fontWeight: "600",
+							cursor: "pointer",
+						},
+					},
 				},
 			},
 		},
