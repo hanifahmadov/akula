@@ -31,15 +31,17 @@ import apiUrl from "../../apis/apiUrl";
 import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 
 /* STATES */
-import { userDefault, likeTypeDefault } from "../auth/shared/store/states";
+import { userDefault, likeTypeDefault, commentSubmittedDefault } from "../auth/shared/store/states";
 
 /* COMPS */
 import { Account } from "../auth/account/Account";
 import { Post } from "./supports/post/Post";
 
 export const Home = () => {
+	
 	const signedUser = useRecoilValue(userDefault);
 	const likeType = useRecoilValue(likeTypeDefault);
+	const commentSubmitted = useRecoilValue(commentSubmittedDefault)
 	const [image, setImage] = useState(undefined);
 	const [submit, setSubmit] = useState(false);
 	const [posts, setPosts] = useState([]);
@@ -107,7 +109,7 @@ export const Home = () => {
 				console.log("postsAPI ERROR =>");
 				console.log(err);
 			});
-	}, [submit, likeType]);
+	}, [submit, likeType, commentSubmitted]);
 
 	return (
 		<Home_Container className='home'>

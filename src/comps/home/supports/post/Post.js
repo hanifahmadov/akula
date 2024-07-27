@@ -71,15 +71,22 @@ import {
 } from "./post.styled";
 
 /* GLOBAL STATES */
-import { backdropDefault, likeTypeDefault, userDefault } from "../../../auth/shared/store/states";
+import {
+	backdropDefault,
+	commentSubmittedDefault,
+	likeTypeDefault,
+	userDefault,
+} from "../../../auth/shared/store/states";
 
 /* SUB COMPONENTS */
 import { Popover } from "../popover/Popover";
-import { Comment } from "../comment/Comment";
+
+import { addCommentToPostAPI, replyToCommentAPI } from "../../../../apis/apiCalls";
 
 /* POST COMPONENT */
 export const Post = ({
 	post: {
+		comments,
 		likes,
 		content,
 		media,
@@ -127,6 +134,9 @@ export const Post = ({
 
 	/** retrieving global state likeType */
 	const likeType = useRecoilValue(likeTypeDefault);
+
+	/** global state as a trigger role, notjing much */
+	const [commentSubmitted, setCommentSubmitted] = useRecoilState(commentSubmittedDefault);
 
 	/* retrieving global state signedUser */
 	const signedUser = useRecoilValue(userDefault);
@@ -219,6 +229,54 @@ export const Post = ({
 
 		console.log(heart, smile, dislike);
 	}, [likes]);
+
+	/** handling comment submit
+	 *
+	 *
+	 */
+	const handleCommentSendClick = (e) => {
+		const commentText = text.trim();
+
+		addCommentToPostAPI({ accessToken: signedUser.accessToken, postId: _id, commentText })
+			.then((res) => {
+				/** we need a global state to update it here and it will tigger the homejs useEffect get all posts.
+				 * the posts will get all field populated and we can display the comments here.
+				 *
+				 */
+
+				/* clear the comment textarea */
+				setText("");
+
+				/* update the global state to trigger the  homejs useEffect hook */
+				setCommentSubmitted((commentSubmitted) => !commentSubmitted);
+			})
+
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	/** @ Reply Comment
+	 *
+	 */
+
+	const [replyCommentText, setReplyCommentText] = useState("");
+
+	const handleCommentInputChange = (e) => {
+		setReplyCommentText(e.target.value);
+	};
+
+	const handleCommentReplySubmit = e =>{
+
+		console.log(replyCommentText)
+
+		/** called the replyComment API here. detailed explained the API in apiCalls.js file
+		 */
+
+		replyToCommentAPI({accessToken: signedUser.accessToken, })
+
+
+	}
 
 	return (
 		<Post_Container>
@@ -326,8 +384,43 @@ export const Post = ({
 				</section>
 				<Comment_Displaying_Section className='comment_section'>
 					{/* text comment will be here */}
-					<div>
+					<div className='comments_content_display_wrapper'>
 						{/* text area */}
+						{comments.map((comment, id) => (
+							/* this div is the content owner avatar, username, content */
+							<div key={id} className='signle_comment_content_block'>
+								{/* first row content owner avatart */}
+								<div className='comment_content_block_first_row'>
+									<div className='comment_owner_avatar'>
+										<img src={comment.owner.avatar} />
+									</div>
+								</div>
+
+								{/* second row - this row sections idea sucks here  */}
+								<div className='comment_content_block_second_row'>
+									<div>
+										<div className='comment_owner_username'>{comment.owner.username}</div>
+										<div className='comment_content'>{comment.content}</div>
+									</div>
+									<div className='comment_reaction_block'>
+										<span> {/* time ago */} 12h </span>
+										<span>Like</span>
+										<span>Reply</span>
+									</div>
+
+									<div className='reply_comment'>
+										<input
+											type='text'
+											value={replyCommentText}
+											onChange={handleCommentInputChange}
+										/>
+										<button style={{ marginLeft: "10px", padding: "2px 5px" }}
+											onClick={handleCommentReplySubmit}
+										>reply</button>
+									</div>
+								</div>
+							</div>
+						))}
 						{/* comment details and reaction */}
 					</div>
 
@@ -356,7 +449,6 @@ export const Post = ({
 									<div className='reply_with_images_smile_and_gifs_block'>
 										<div>
 											{/* image icon here */}
-
 											<span>
 												<FontAwesomeIcon icon={faImage} />
 											</span>

@@ -259,13 +259,78 @@ export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
 
 	// background: "gray",
 
-	height: "20rem",
 	width: "100%",
 
 	/* has 2 div inside and must be direction row, avatart and textArea */
 
 	display: "flex",
-	flexDirection: "row",
+	flexDirection: "column",
+
+	".comments_content_display_wrapper": {
+		width: "100%",
+		maxHeight: "15rem",
+		overflowX: "scroll",
+
+		padding: "0px 0px 10px 0px",
+
+		display: "flex",
+		flexDirection: "column",
+
+		/** every shit has to be 1st row and sencond row or first column, second column and so onn ..... make SURE */
+
+		".signle_comment_content_block": {
+			display: "flex",
+			flexDirection: "row",
+
+			".comment_content_block_first_row": {
+				".comment_owner_avatar": {
+					img: {
+						height: "2rem",
+						width: "2rem",
+						borderRadius: "50%",
+					},
+				},
+			},
+
+			".comment_content_block_second_row": {
+				display: "flex",
+				flexDirection: "column",
+				marginLeft: "5px",
+
+				width: "100%",
+				background: "rgba(255, 255, 255, .1)",
+				padding: "0px 10px 10px 10px",
+				borderRadius: "10px",
+
+				".comment_owner_username": {
+					fontWeight: "600",
+					padding: "5px 0px",
+				},
+
+				".comment_reaction_block": {
+					width: "100%",
+					display: "flex",
+					justifyContent: "space-between",
+					fontSize: "11px",
+					fontWeight: "800",
+					width: "7rem",
+					marginTop: "8px",
+
+					span: {
+						cursor: "pointer",
+					},
+
+					".reply_comment": {
+						width: "100%",
+
+						input: {
+							width: "100%",
+						},
+					},
+				},
+			},
+		},
+	},
 
 	".comment_input_section_with_user_avatar": {
 		width: "100%",
@@ -320,8 +385,7 @@ export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
 					background: "transparent",
 					color: "white",
 
-					maxHeight: '10rem',
-
+					maxHeight: "10rem",
 
 					"&::placeholder": {
 						color: "#ffffff50",
