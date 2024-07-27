@@ -32,9 +32,15 @@ export const Signin_Container = styled.div(({ theme: {} }) => ({
 		borderRadius: "8px",
 		overflow: "hidden",
 		boxShadow: "0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1)",
+
 		backgroundImage: `url(${mountain})`,
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",
+
+		/** mixBlendMode is applying whole element
+		 * blends the text color also, aplly it before or after elements, not the div itself
+		 */
+		// mixBlendMode:'multiply',
 
 		header: {
 			width: "100%",

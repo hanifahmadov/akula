@@ -266,17 +266,22 @@ export const Post = ({
 		setReplyCommentText(e.target.value);
 	};
 
-	const handleCommentReplySubmit = e =>{
-
-		console.log(replyCommentText)
+	const handleCommentReplySubmit = (commentId) => {
+		console.log(replyCommentText);
 
 		/** called the replyComment API here. detailed explained the API in apiCalls.js file
 		 */
 
-		replyToCommentAPI({accessToken: signedUser.accessToken, })
-
-
-	}
+		replyToCommentAPI({ accessToken: signedUser.accessToken, postId: _id, commentId, replyText: replyCommentText })
+			.then((res) => {
+				console.log(res.data);
+				setReplyCommentText("");
+			})
+			.catch((err) => {
+				console.log("error inside handleCommentReplySubmit catch block");
+				console.log(err);
+			});
+	};
 
 	return (
 		<Post_Container>
@@ -408,15 +413,26 @@ export const Post = ({
 										<span>Reply</span>
 									</div>
 
+									{comment.replies.map((reply, index) => (
+										<div key={index}>
+											{reply.content}
+										</div>
+									))}
+
+
+
 									<div className='reply_comment'>
 										<input
 											type='text'
 											value={replyCommentText}
 											onChange={handleCommentInputChange}
 										/>
-										<button style={{ marginLeft: "10px", padding: "2px 5px" }}
-											onClick={handleCommentReplySubmit}
-										>reply</button>
+										<button
+											style={{ marginLeft: "10px", padding: "2px 5px" }}
+											onClick={() => handleCommentReplySubmit(comment._id)}
+										>
+											reply
+										</button>
 									</div>
 								</div>
 							</div>

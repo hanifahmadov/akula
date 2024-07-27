@@ -1,6 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import mountain from "../auth/shared/image/mountain.jpg"
 
 // APP
 export const AppLayout_Container = styled.div(({ theme: {} }) => ({
@@ -16,7 +17,8 @@ export const AppLayout_Content = styled.div(({ theme: {} }) => ({
 	justifyContent: "center",
 	alignItems: "center",
 
-	background: "#bfd3e0",
+	/* this background didnt changed anything. comment it out for now*/
+	// background: "#bfd3e0",
 }));
 
 // PERSISTENT
@@ -39,7 +41,9 @@ export const Loading = styled.div(({ theme: {} }) => ({
 	letterSpacing: "3px",
 }));
 
-// REGISTER
+/** REGISTER LAYOUT CONTAINER
+ *
+ */
 export const RegisterLayout_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
 	height: "100%",
@@ -47,8 +51,16 @@ export const RegisterLayout_Container = styled.div(({ theme: {} }) => ({
 	display: "flex",
 	justifyContent: "center",
 	alignItems: "center",
+
+	/* DESIGN MODE LATER, NOT TODAY */
+	// backgroundImage: `url(${mountain})`,
+	// backgroundSize: "cover",
+	// backgroundRepeat: "no-repeat",
 }));
 
+/** HOME LAYOUT CONTAINER
+ *
+ */
 export const HomeLayout_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
 	maxWidth: "110rem",
@@ -87,7 +99,6 @@ export const Backdrop = styled.div(({ theme: { backdrop } }) => ({
 
 	background: "rgba(0, 0, 0, 0.75)",
 	pointerEvents: "auto", // Allow the backdrop to intercept clicks
-	
 }));
 
 export const Navbar_Container = styled.div(({ theme: {} }) => ({

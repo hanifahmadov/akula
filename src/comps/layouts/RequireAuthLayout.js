@@ -1,16 +1,13 @@
-/* eslint-disable */
-import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+/* NPM IMPORTS*/
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { Navigate, Outlet } from "react-router-dom";
 
-//: states
+/* GLOBAL STATE */
 import { userDefault } from "../auth/shared/store/states";
 
 export const RequireAuthLayout = () => {
-	const [user, setUser] = useRecoilState(userDefault);
-
-	// console.log(user)
-	const location = useLocation();
+	const user = useRecoilValue(userDefault);
 
 	return user?.accessToken ? <Outlet /> : <Navigate to='/signin' />;
 };
