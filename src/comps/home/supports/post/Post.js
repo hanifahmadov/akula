@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -63,6 +63,7 @@ import {
 	MediaCounts_Section,
 	Post_Container,
 	Smile_Container,
+	Comment_Displaying_Section,
 } from "./post.styled";
 
 /* GLOBAL STATES */
@@ -90,9 +91,27 @@ export const Post = ({
 	/* which means whole Home is rendering and posts are itereating every time, soo fix that shit */
 	// console.log("renders")
 
-
 	// Create an instance of TimeAgo
 	const timeAgo = new TimeAgo("en-US");
+
+	const [text, setText] = useState("");
+	const textareaRef = useRef(null);
+
+	const adjustTextareaHeight = () => {
+		if (textareaRef.current) {
+			textareaRef.current.style.height = "auto"; // Reset height to auto to shrink if necessary
+			textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height to scrollHeight
+		}
+	};
+
+	useEffect(() => {
+		adjustTextareaHeight(); // Adjust height on initial render
+	}, [text]); // Adjust height on every text change
+
+	const handleChange = (event) => {
+		setText(event.target.value);
+		adjustTextareaHeight();
+	};
 
 	/**
 	 * 	IMPORTANT WE DO NOT NEED
@@ -148,7 +167,6 @@ export const Post = ({
 	const handleCommentButtonClick = (e) => {
 		console.log("comment button clicked");
 		setCommentOpen((commentOpen) => !commentOpen);
-		setBackdrop((backdrop) => !backdrop);
 	};
 
 	const handleShareButtonClick = (e) => {};
@@ -283,7 +301,12 @@ export const Post = ({
 						<div className='comment_button button' onClick={handleCommentButtonClick}>
 							Comment
 						</div>
-						<Comment commentOpen={commentOpen} setCommentOpen={setCommentOpen} post={post} />
+						{/** this comment is for the next shit. for now we will provide a comment section in the below of the
+						 * post, when user click the content, the post section will be open and will show the posts, but in the furure
+						 * we will update it to take the all post comments to the modal, usign the below version.
+						 *
+						 * 	<Comment commentOpen={commentOpen} setCommentOpen={setCommentOpen} post={post} />
+						 */}
 					</div>
 					<div className='share_wrapper'>
 						<div className='share_button button' onClick={handleShareButtonClick}>
@@ -297,7 +320,50 @@ export const Post = ({
 						</div>
 					</div>
 				</section>
-				<section className=''></section>
+				<Comment_Displaying_Section className='comment_section'>
+					{/* text comment will be here */}
+					<div>
+						{/* text area */}
+						{/* comment details and reaction */}
+					</div>
+
+					<div className='comment_input_section_with_user_avatar'>
+						{/* user avatar here */}
+						<div className='avatar_wrapper'>
+							<img src={signedUser.avatar} />
+						</div>
+						<div className='textarea_sendbutton_wrapper'>
+							{/* input text area */}
+							<div className='textarea_wrapper'>
+								<textarea
+									className='textarea'
+									ref={textareaRef}
+									value={text}
+									onChange={handleChange}
+									placeholder='Whats going on...'
+									rows={1} // Start with one row
+								/>
+
+								{/* this is for send button and adding sctiker and image to the reply comments */}
+								<div className='comment_send_button_with_sticker_gifs_wrapper'>
+									{/* doing groping, left side is upload imaage and gif, right side is send button
+									  * like this wway its easy to array distance between like space-between justtify content
+									*/}
+									<div className="reply_with_images_and_gifs_block">
+										<div>{/* images here */}</div>
+										<div>{/* gifs here */}</div>
+									</div>
+									<div className="comment_send_button_block">
+										<span>send</span>
+									</div>
+								</div>
+							</div>
+
+							{/* // TODO add comment with image or gif or  */}
+							{/* send button */}
+						</div>
+					</div>
+				</Comment_Displaying_Section>
 			</section>
 		</Post_Container>
 	);

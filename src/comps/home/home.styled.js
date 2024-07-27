@@ -26,6 +26,8 @@ export const Center_Section = styled.div(({ theme: {} }) => ({
 	width: "100%",
 	height: "100%",
 
+
+
 	marginRight: "14px",
 
 	// background: "#1a2730",
@@ -335,7 +337,7 @@ export const Buttons_Section = styled.div(({ theme: {} }) => ({
 
 export const Display_Section = styled.div(({ theme: {} }) => ({
 	width: "100%",
-	height: "100%",
+	height:'50rem',
 	marginTop: '1rem',
 	overflow: "scroll",
 

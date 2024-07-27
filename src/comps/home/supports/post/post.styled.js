@@ -96,7 +96,7 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 			display: "flex",
 			justifyContent: "space-between",
 
-			/** 
+			/**
 			 * a like_button inside wrapper and that button is just in the center, which means when user
 			 * click the center, it triggers popover to opne but when user clicks away from the center, it doesnt.
 			 * in this case we have to make its height and width qoo% to make sure button keeps its parents full width and height.
@@ -132,7 +132,7 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 
 			/* bookmark_wrapper is just a small icon. no need to hold 7rem width in this case */
 			".bookmark_wrapper": {
-				width: '2.5rem'
+				width: "2.5rem",
 			},
 		},
 	},
@@ -251,5 +251,80 @@ export const Dislike_Container = styled.div(({ theme: {}, $dislike }) => ({
 	".dislike_number": {
 		marginLeft: "5px",
 		fontWeight: "700",
+	},
+}));
+
+export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
+	marginTop: "1rem",
+
+	background: "gray",
+	height: "20rem",
+	width: "100%",
+
+	/* has 2 div inside and must be direction row, avatart and textArea */
+
+	display: "flex",
+	flexDirection: "row",
+
+	".comment_input_section_with_user_avatar": {
+		width: "100%",
+		padding: "5px 0px",
+		background: "red",
+
+		/* must be at the bottom */
+		alignSelf: "flex-end",
+		alignItems: "flex-start",
+
+		display: "flex",
+
+		".avatar_wrapper": {
+			img: {
+				width: "2.25rem",
+				height: "2.25rem",
+				borderRadius: "50%",
+			},
+		},
+
+		".textarea_sendbutton_wrapper": {
+			width: "100%",
+			padding: "0px 10px",
+
+			".textarea_wrapper": {
+				width: "100%",
+				height: "100%",
+				height: "fit-content",
+
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "flex-start",
+				alignItems: "center",
+
+				borderRadius: "10px",
+				background: "#07161d",
+
+				".textarea": {
+					width: "100%",
+					border: "none",
+					overflow: "auto",
+					outline: "none",
+					WebkitBoxShadow: "none", // -webkit-box-shadow
+					MozBoxShadow: "none", // -moz-box-shadow
+					boxShadow: "none",
+					resize: "none",
+					padding: "5px 10px",
+
+					fontSize: "1rem",
+					borderRadius: "10px",
+					background: "transparent",
+					color: "white",
+
+					"&::placeholder": {
+						color: "#ffffff80",
+						paddingLeft: "5px",
+					},
+					// border: "1px solid #ffffff30",
+				},
+			},
+		},
 	},
 }));
