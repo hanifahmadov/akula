@@ -118,10 +118,26 @@ export const Top_Section = styled.div(({ theme: {} }) => ({
 	alignItems: "center",
 
 	".signedUser_avatar": {
-		height: "3rem",
-		width: "3rem",
+		height: "3.5rem",
+		width: "3.5rem",
 		borderRadius: "50%",
 		border: "3px solid rgba(0, 0, 0, 0.05)",
+		alignSelf: 'flex-start'
+	},
+
+	".textarea_wrapper": {
+		width: "100%",
+		height: "100%",
+		height: "fit-content",
+
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "flex-start",
+		alignItems: "center",
+
+		marginLeft: "0.5rem",
+		borderRadius: "10px",
+
 	},
 }));
 

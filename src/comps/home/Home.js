@@ -28,6 +28,7 @@ import { Home_Container, Top_Section } from "./home.styled";
 
 /* COMPONENTS */
 import { Account } from "../auth/account/Account";
+import { Textarea } from "./supports/form/Textarea";
 
 export const Home = () => {
 	/** GLOBAL STATES
@@ -51,23 +52,7 @@ export const Home = () => {
 	 *  textarea values and refs
 	 */
 	const [text, setText] = useState("");
-	const textareaRef = useRef(null);
-
-	/**
-	 *  text area input height adjustment
-	 * 	use Effect is part of this shit
-	 */
-	const handleChange = (event) => {
-		setText(event.target.value);
-		adjustTextareaHeight();
-	};
-
-	const adjustTextareaHeight = () => {
-		if (textareaRef.current) {
-			textareaRef.current.style.height = "auto"; // Reset height to auto to shrink if necessary
-			textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height to scrollHeight
-		}
-	};
+	// const textareaRef = useRef(null);
 
 	/**
 	 * handles whne post is clicked
@@ -89,11 +74,6 @@ export const Home = () => {
 				console.log("newpostAPI error", err);
 			});
 	};
-
-	/** when textarea value text changes, this arrange the height of textarea */
-	useEffect(() => {
-		adjustTextareaHeight(); // Adjust height on initial render
-	}, [text]); // Adjust height on every text change
 
 	/**
 	 * use hooks gets/retrieves all posts when new post posted,
@@ -137,14 +117,8 @@ export const Home = () => {
 							<img src={signedUser.avatar} className='signedUser_avatar' />
 							{/** because of the text and img goes in the same text area, we have to group them */}
 							<div className='textarea_wrapper'>
-								<textarea
-									className='textarea'
-									ref={textareaRef}
-									value={text}
-									onChange={handleChange}
-									placeholder='Whats going on...'
-									rows={1} // Start with one row
-								/>
+								<Textarea text={text} setText={setText} />
+
 								{image && (
 									<div className='image_preview'>
 										<img src={URL.createObjectURL(image)} className='selected_image' />
