@@ -1,9 +1,13 @@
+/**
+ * NPM PACKAGES IMPORTS
+ */
 import React, { useState, useRef, useEffect } from "react";
-import FormData from "form-data";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRecoilValue } from "recoil";
+import FormData from "form-data";
 
 /* FONTAWESOME */
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import {
 	faCircleXmark,
 	faImage,
@@ -13,35 +17,30 @@ import {
 	faUniversalAccess,
 	faEarthAmericas,
 } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faCircleXmark, faImage, faVideo, faMasksTheater, faCircleCheck, faUniversalAccess, faEarthAmericas);
 
-/* STYLED */
-import {
-	Home_Container,
-	Center_Section,
-	Right_Section,
-	Post_Section,
-	Buttons_Section,
-	Display_Section,
-} from "./home.styled";
+/* STYLED COMPONENTS */
+import { Home_Container } from "./home.styled";
 
-/* APIS */
+/* APIS & URLS */
 import apiUrl from "../../apis/apiUrl";
 import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 
-/* STATES */
+/* GLOBAL STATES */
 import { userDefault, likeTypeDefault, commentSubmittedDefault } from "../auth/shared/store/states";
 
-/* COMPS */
+/* HELPER COMPONENTS */
 import { Account } from "../auth/account/Account";
 import { Post } from "./supports/post/Post";
 
 export const Home = () => {
-	
+	/** GLOBAL STATES */
 	const signedUser = useRecoilValue(userDefault);
 	const likeType = useRecoilValue(likeTypeDefault);
-	const commentSubmitted = useRecoilValue(commentSubmittedDefault)
+	const commentSubmitted = useRecoilValue(commentSubmittedDefault);
+
+	/* LOCAL STATES */
+
 	const [image, setImage] = useState(undefined);
 	const [submit, setSubmit] = useState(false);
 	const [posts, setPosts] = useState([]);
@@ -92,10 +91,10 @@ export const Home = () => {
 	/**
 	 * use hooks gets/retrieves all posts when new post posted,
 	 * 201 code then works (line 75 above, this file) and
-	 * globaly likeType state changes, when user likes the post from popover it will change the likeType 
+	 * globaly likeType state changes, when user likes the post from popover it will change the likeType
 	 * on Popover.js inside likepostAPI, because of that this useEffect must re-call the all posts with updated posts
 	 * so, we have to get all fields, owners, like-owner with populated ones. //# ALL FIELD MUST BE POPULATED.
-	 * 
+	 *
 	 */
 	useEffect(() => {
 		postsAPI(signedUser)
@@ -103,7 +102,7 @@ export const Home = () => {
 				const { posts } = res.data;
 				setPosts(posts);
 
-				console.log("post insdie the useEffect hooks", posts)
+				console.log("post insdie the useEffect hooks", posts);
 			})
 			.catch((err) => {
 				console.log("postsAPI ERROR =>");
@@ -111,89 +110,7 @@ export const Home = () => {
 			});
 	}, [submit, likeType, commentSubmitted]);
 
-	return (
-		<Home_Container className='home'>
-			{console.log("likeType", likeType)}
-			<Center_Section className='center_section'>
-				<Post_Section className='post_section'>
-					<div className='top_section'>
-						<img src={signedUser.avatar} className='signedUser_avatar' />
-						<div className='textarea_wrapper'>
-							<textarea
-								className='textarea'
-								ref={textareaRef}
-								value={text}
-								onChange={handleChange}
-								placeholder='Whats going on...'
-								rows={1} // Start with one row
-							/>
-							{image && (
-								<div className='image_preview'>
-									<img src={URL.createObjectURL(image)} className='selected_image' />
-									<span className='faCircleXmark'>
-										<FontAwesomeIcon icon={faCircleXmark} onClick={() => setImage(undefined)} />
-									</span>
-								</div>
-							)}
-						</div>
-					</div>
-					<div className='bottom_section'>
-						<Buttons_Section className='group_buttons'>
-							<div className='select_image'>
-								<input
-									type='file'
-									id='image'
-									name='image'
-									className='d-none'
-									ref={imageRef}
-									accept='image/png, image/jpeg, image/jpg'
-									onChange={handleImageChange}
-								/>
-								<label htmlFor='image' className='label image'>
-									<FontAwesomeIcon icon={faImage} className='icon image' />
-								</label>
-							</div>
-
-							<div className='select_video'>
-								<label htmlFor='' className='label video'>
-									<FontAwesomeIcon icon={faVideo} className='icon video' />
-								</label>
-							</div>
-
-							<div className='select_poll'>
-								<label htmlFor='' className='label poll'>
-									<FontAwesomeIcon icon={faMasksTheater} className='icon poll' />
-								</label>
-							</div>
-						</Buttons_Section>
-
-						<div className='post_button_wrapper' onClick={handlePostClick}>
-							<button>POST</button>
-						</div>
-					</div>
-				</Post_Section>
-
-				{/* this section is displaying all posts from all users, so the section is devided into 2 columns 
-					for post owner avatar and post itself details */}
-
-				<Display_Section className='display_section'>
-					{posts.map((post, id) => (
-						<Post key={id} post={post} />
-					))}
-				</Display_Section>
-			</Center_Section>
-
-			<Right_Section className='center_section'>
-				{/* top account info  */}
-				<section className='account_section'>
-					<Account />
-				</section>
-
-				{/* other users top account info  */}
-				<section className='allusers_section'></section>
-			</Right_Section>
-		</Home_Container>
-	);
+	return <Home_Container className='home_container'></Home_Container>;
 };
 
 /* 

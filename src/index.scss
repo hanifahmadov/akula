@@ -42,27 +42,30 @@
 */
 
 html {
+	// min-height: 100dvh;
+
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
-
-	height: 100%;
 
 	padding: 0.01px;
 }
 
 body {
+	// min-height: 100dvh;
+
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
 
-	height: 100%;
+	overflow: hidden;
 
 	padding: 0.01px;
 }
 
 #root {
-	height: 100%;
+	/* if there is scroll problem, comment out this height. */
+	height: 100svh;
 
 	margin: 0px;
 	padding: 0px;
@@ -78,44 +81,3 @@ body {
 	padding: 0px;
 	box-sizing: border-box;
 }
-
-.Toastify__toast-body {
-	padding: 0 !important;
-}
-
-.Toastify__close-button {
-	svg {
-		filter: invert(17%) sepia(86%) saturate(7412%) hue-rotate(360deg) brightness(103%) contrast(117%);
-		width: 15px !important;
-		height: 15px !important;
-	}
-}
-
-// ::-webkit-scrollbar {
-// 	width: 7px;
-//   }
-
-//   /* Handle */
-//   /* set the color of the scrollbar and the radius of its corners */
-
-//   ::-webkit-scrollbar-thumb {
-// 	background: rgb(40, 40, 40);
-// 	border-bottom-left-radius: 5px;
-// 	border-top-left-radius: 5px;
-// 	border-bottom-right-radius: 5px;
-// 	border-top-right-radius: 5px;
-//   }
-
-//   /* Handle on hover */
-//   /* set the color of the scrollbar when hovered over */
-
-//   ::-webkit-scrollbar-thumb:hover {
-// 	background: rgb(60, 60, 60);
-//   }
-
-//   /* Handle on active */
-//   /* set the color of the scrollbar when clicked */
-
-//   ::-webkit-scrollbar-thumb:active {
-// 	background: rgb(80, 80, 80);
-//   }

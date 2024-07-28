@@ -1,28 +1,34 @@
 /* eslint-disable */
+/** 
+ * NPM IMPORTS
+ */
 import React, { Fragment, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useMediaQuery } from "react-responsive";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
-// STATES & STYLED
+/* REACT TOSTIFY */
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+/*  STATES & STYLED  */
 import { backdropDefault, darkmodeDefault, deviceDefault } from "./comps/auth/shared/store/states";
 import { GlobalStyled } from "./common.styled";
 
-// comps
-import { Signin } from "./comps/auth/elements/Signin";
-import { Signup } from "./comps/auth/elements/Signup";
 
-// LAYOUT
-import { AppLayout } from "./comps/layouts/AppLayout";
+/* LAYOUTS */
+import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
 import { PersistentLayout } from "./comps/layouts/PersistentLayout";
 import { RegisterLayout } from "./comps/layouts/RegisterLayout";
-import { HomeLayout } from "./comps/layouts/HomeLayout";
+import { MainLayout } from "./comps/layouts/MainLayout";
+
+/* HELPER COMPONENTS */
+import { Signin } from "./comps/auth/elements/Signin";
+import { Signup } from "./comps/auth/elements/Signup";
 import { Home } from "./comps/home/Home";
-import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
+
+
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -34,13 +40,11 @@ const router = createBrowserRouter(
 					<Route path='/signup' element={<Signup />} />
 				</Route>
 				<Route element={<RequireAuthLayout />}>
-					<Route path='/' element={<AppLayout />}>
-						<Route path='/' element={<HomeLayout />}>
-							<Route path='/' element={<Home />} />
-							<Route path='notifications' element={<div />} />
-							<Route path='messages' element={<div />} />
-							<Route path='bookmarks' element={<div />} />
-						</Route>
+					<Route path='/' element={<MainLayout />}>
+						<Route path='/' element={<Home />} />
+						<Route path='notifications' element={<div />} />
+						<Route path='messages' element={<div />} />
+						<Route path='bookmarks' element={<div />} />
 					</Route>
 				</Route>
 			</Route>
@@ -93,7 +97,7 @@ export const App = () => {
 	return (
 		<ThemeProvider theme={{ device, darkmode, backdrop }}>
 			<ToastContainer />
-			<GlobalStyled />
+			{/* <GlobalStyled /> */}
 			<RouterProvider router={router} />
 		</ThemeProvider>
 	);
