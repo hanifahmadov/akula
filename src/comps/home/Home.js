@@ -1,13 +1,17 @@
-/**
- * NPM PACKAGES IMPORTS
- */
 import React, { useState, useRef, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import FormData from "form-data";
-
-/* FONTAWESOME */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
+
+/* APIS */
+import apiUrl from "../../apis/apiUrl";
+import { newpostAPI, postsAPI } from "../../apis/apiCalls";
+
+/* GLOBAL STATES */
+import { userDefault, likeTypeDefault, commentSubmitDefault } from "../auth/shared/store/states";
+
+/* FONTAWESOME */
 import {
 	faCircleXmark,
 	faImage,
@@ -20,35 +24,39 @@ import {
 library.add(faCircleXmark, faImage, faVideo, faMasksTheater, faCircleCheck, faUniversalAccess, faEarthAmericas);
 
 /* STYLED COMPONENTS */
-import { Home_Container } from "./home.styled";
+import { Home_Container, Top_Section } from "./home.styled";
 
-/* APIS & URLS */
-import apiUrl from "../../apis/apiUrl";
-import { newpostAPI, postsAPI } from "../../apis/apiCalls";
-
-/* GLOBAL STATES */
-import { userDefault, likeTypeDefault, commentSubmittedDefault } from "../auth/shared/store/states";
-
-/* HELPER COMPONENTS */
+/* COMPONENTS */
 import { Account } from "../auth/account/Account";
-import { Post } from "./supports/post/Post";
 
 export const Home = () => {
-	/** GLOBAL STATES */
+	/** GLOBAL STATES
+	 * get all posts useEffect triggers
+	 * */
 	const signedUser = useRecoilValue(userDefault);
 	const likeType = useRecoilValue(likeTypeDefault);
-	const commentSubmitted = useRecoilValue(commentSubmittedDefault);
+	const commentSubmit = useRecoilValue(commentSubmitDefault);
+	const [postSubmit, setPostSubmit] = useState(false);
 
-	/* LOCAL STATES */
-
+	/**
+	 *  image grabs the post media
+	 */
 	const [image, setImage] = useState(undefined);
-	const [submit, setSubmit] = useState(false);
-	const [posts, setPosts] = useState([]);
-
-	const [text, setText] = useState("");
-	const textareaRef = useRef(null);
 	const imageRef = useRef();
 
+	/** Local state sets the all posts returns from the postsAPI, useEffect */
+	const [posts, setPosts] = useState([]);
+
+	/**
+	 *  textarea values and refs
+	 */
+	const [text, setText] = useState("");
+	const textareaRef = useRef(null);
+
+	/**
+	 *  text area input height adjustment
+	 * 	use Effect is part of this shit
+	 */
 	const handleChange = (event) => {
 		setText(event.target.value);
 		adjustTextareaHeight();
@@ -61,11 +69,9 @@ export const Home = () => {
 		}
 	};
 
-	const handleImageChange = () => {
-		const [file] = imageRef.current?.files;
-		setImage(file);
-	};
-
+	/**
+	 * handles whne post is clicked
+	 */
 	const handlePostClick = (e) => {
 		const data = new FormData();
 
@@ -77,13 +83,14 @@ export const Home = () => {
 			.then((res) => {
 				setImage(undefined);
 				setText("");
-				setSubmit((submit) => !submit);
+				setPostSubmit((postSubmit) => !postSubmit);
 			})
 			.catch((err) => {
 				console.log("newpostAPI error", err);
 			});
 	};
 
+	/** when textarea value text changes, this arrange the height of textarea */
 	useEffect(() => {
 		adjustTextareaHeight(); // Adjust height on initial render
 	}, [text]); // Adjust height on every text change
@@ -108,9 +115,63 @@ export const Home = () => {
 				console.log("postsAPI ERROR =>");
 				console.log(err);
 			});
-	}, [submit, likeType, commentSubmitted]);
+	}, [postSubmit, likeType, commentSubmit]);
 
-	return <Home_Container className='home_container'></Home_Container>;
+	return (
+		<Home_Container className='home_container'>
+			{/** home has 2 column left and right
+			 * left is for the posts
+			 * right is for the account, make the right sticky to top.
+			 */}
+
+			{/** LEFT COLUMN, flex grow 1
+			 * 	THIS IS FOR CONTENT OF POSTS, CENTER SECTION.
+			 * 	home_left_columns takes whole row and we need a normal middle column for posts and comments
+			 * 	so, fixed_width container is gonna be fixed and stays in the middle
+			 */}
+
+			<div className='home_left_column'>
+				<div className='fixed_with'>
+					<div className='post_input'>
+						<Top_Section>
+							<img src={signedUser.avatar} className='signedUser_avatar' />
+							{/** because of the text and img goes in the same text area, we have to group them */}
+							<div className='textarea_wrapper'>
+								<textarea
+									className='textarea'
+									ref={textareaRef}
+									value={text}
+									onChange={handleChange}
+									placeholder='Whats going on...'
+									rows={1} // Start with one row
+								/>
+								{image && (
+									<div className='image_preview'>
+										<img src={URL.createObjectURL(image)} className='selected_image' />
+										<span className='faCircleXmark'>
+											<FontAwesomeIcon icon={faCircleXmark} onClick={() => setImage(undefined)} />
+										</span>
+									</div>
+								)}
+							</div>
+						</Top_Section>
+					</div>
+					<div>{/* Comments */}</div>
+				</div>
+			</div>
+
+			{/** RIGHT COLUMN width 21rem
+			 *  THIS IS FOR CONTENT OF POSTS, CENTER SECTION
+			 */}
+			<div className='home_right_column'>
+				<div className='top_row_presents_account'>
+					<Account />
+				</div>
+
+				<div className='bottom_row_presents_allusers'></div>
+			</div>
+		</Home_Container>
+	);
 };
 
 /* 

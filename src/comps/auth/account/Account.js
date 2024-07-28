@@ -22,22 +22,22 @@ export const Account = () => {
 
 				<div className='subscribers'>
 					<span className='following'>
-						<span className='numbers'>1234</span>
+						<span className='numbers'>134</span>
 						<br />
 						<span>Following</span>
 					</span>
 
 					<span className='middle_line' />
 					<span className='followers'>
-						<span className='numbers'>9,4341</span>
+						<span className='numbers'>91</span>
 						<br />
 						<span>Followers</span>
 					</span>
 				</div>
 
-                <div className="myaccount">
+                <div className="settings_block">
                     
-                    <span className="myaccount_button">My Account</span>
+                    <div className="settings_button">Settings</div>
                 </div>
 			</Content_Section>
 		</Account_Container>

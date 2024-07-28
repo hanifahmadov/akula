@@ -63,6 +63,11 @@ export const MainLayout_Container = styled.div(({ theme: {} }) => ({
 	".main_left_column": {
 		/**
 		 * height is important!
+		 * left column which holds the width 21rem but when viewport squeeze it, it will shrink to down
+		 * but, the element inside it Navbar elements (top row and footer) minwith is minWidth: "148px",
+		 * which it can not go down under 148.
+		 * 
+		 * add later over here for the maxWidth or add the whole project root or body to not to grow to extra
 		 */
 		width: "21rem",
 		height: "100vh",
@@ -75,7 +80,13 @@ export const MainLayout_Container = styled.div(({ theme: {} }) => ({
 		// background: "red",
 	},
 
-	/** CENTER COLUMN */
+
+
+	/** MANIN RIGHT COLUM
+	 * 
+	 * THIS COLUM RENDERS OUTLETS
+	 * OUTLETS WRAPPER
+	 */
 	".main_right_column": {
 		/**
 		 * 	if center senction has a height then left and right section doesnt stick.
@@ -83,12 +94,22 @@ export const MainLayout_Container = styled.div(({ theme: {} }) => ({
 		// height:'100rem',
 
 		flexGrow: 1,
-
+		/**
+		 *  this is must be center center, when we add a text or in the middle section of the outlets,
+		 * 	it pushes the right column to the its minimum pxs
+		 * 	
+		 * 	i am gonna add a container to the middle section and will give it a fixed width so, all
+		 * 	content will be inside it and cants overflow that container, in that case that container needs to be
+		 * 	in the middle of middle section so that there is gonna be spaces aroun it. 
+		 * 
+		 * center center is a must.
+		 * 	
+		 */
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
 
-		background: "blue",
+		// background: "blue",
 	},
 }));
 

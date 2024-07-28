@@ -78,7 +78,7 @@ export const App = () => {
 
 	// desktop
 	const desktop = useMediaQuery({
-		query: "(max-device-width: 1200)",
+		query: "(max-device-width: 1440)",
 	});
 
 	useEffect(() => {

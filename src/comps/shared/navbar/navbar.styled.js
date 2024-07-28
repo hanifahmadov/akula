@@ -24,6 +24,7 @@ export const Navbar_Container = styled.div(({ theme: {} }) => ({
 	/* spacing */
 	padding: "20px 10px",
 
+
 	/* TOP ROW  */
 	".navbar_top_row": {
 		display: "flex",
@@ -47,11 +48,12 @@ export const Navbar_Container = styled.div(({ theme: {} }) => ({
 			color: "#fff",
 			background: "#052c6550",
 
-			fontSize: "1.2rem",
+			fontSize: "1.1rem",
 			fontWeight: "600",
 
 			marginTop: "30px",
-			padding: "1px",
+			padding: "2px",
+            letterSpacing: ".25px",
 
 			borderRadius: "2px",
             cursor: 'not-allowed',
@@ -68,11 +70,12 @@ export const Navbar_Container = styled.div(({ theme: {} }) => ({
 			background: "#052c65",
 
 			textAlign: "center",
-			fontSize: "1.2rem",
+			fontSize: "1.1rem",
 			fontWeight: "600",
 
-			padding: "1px",
+			padding: "2px",
 			borderRadius: "2px",
+            letterSpacing: ".25px",
 
             cursor: "pointer",
             transition: "all .1s ease-in-out",

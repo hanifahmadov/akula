@@ -8,31 +8,34 @@ import spc from "../shared/image/mountain.jpg";
 
 export const Account_Container = styled.div(({ theme: {} }) => ({
 	height: "100%",
-	width: "100%",
+	width: "200px",
 
 	display: "flex",
 	flexDirection: "column",
+
+	borderRadius: "3px",
+	overflow: "hidden",
+
+	// background: 'black'
 }));
 
 export const Logo_Section = styled.div(({ theme: {} }) => ({
-	height: "12rem",
+	height: "7rem",
 	width: "100%",
 
 	textAlign: "center",
 
-
 	backgroundImage: `url(${spc})`,
 	backgroundSize: "cover",
 	backgroundRepeat: "no-repeat",
-	// backgroundPosition: "center",
 
 	img: {
-		height: "7rem",
-		width: "7rem",
+		height: "6.5rem",
+		width: "6.5rem",
 		borderRadius: "50%",
-		position: 'relative',
-		top: '40px',
-		border: '10px solid #00000050'
+		position: "relative",
+		top: "45px",
+		border: "7px solid rgba(0, 0, 0, .25)",
 	},
 }));
 
@@ -40,31 +43,35 @@ export const Content_Section = styled.div(({ theme: {} }) => ({
 	width: "100%",
 
 	height: "100%",
-	paddingTop: "2.5rem",
+	paddingTop: "2.25rem",
 
 	display: "flex",
 	flexDirection: "column",
 	justifyContent: "space-around",
 	alignItems: "center",
 
+	background: "rgba(0, 0, 0, .05)",
+
 	".username": {
 		fontSize: "2.25rem",
+		fontWeight: "500",
 	},
 
 	".emailAddress": {
-		fontSize: "1.2rem",
-		color: "#ffffff60",
+		fontSize: "1rem",
+		color: "#00000090",
+		lineHeight: "10px",
 	},
 
 	".subscribers": {
 		marginTop: "1rem",
 		width: "100%",
-		height: "5rem",
+		height: "4rem",
 		display: "flex",
 		justifyContent: "space-around",
 		alignItems: "center",
 
-		border: "1px solid #ffffff50",
+		border: "0.1px solid #000",
 		borderLeft: "none",
 		borderRight: "none",
 
@@ -72,53 +79,56 @@ export const Content_Section = styled.div(({ theme: {} }) => ({
 
 		".numbers": {
 			textAlign: "center",
-			fontSize: "1.25rem",
-			color: "#ffffff",
+			fontSize: "1rem",
+			color: "#000",
 		},
 
 		".following": {
 			textAlign: "center",
 			fontWeight: "600",
-			fontSize: "1.1rem",
-			color: "#ffffff70",
-			letterSpacing: "1px",
+			fontSize: "1rem",
+			color: "#000",
+			letterSpacing: ".25px",
 		},
 
 		".followers": {
 			textAlign: "center",
 			fontWeight: "600",
-			fontSize: "1.1rem",
-			color: "#ffffff70",
-			letterSpacing: "1px",
+			fontSize: "1rem",
+			color: "#000",
+			letterSpacing: ".25px",
 		},
 
 		".middle_line": {
 			height: "3.5rem",
-			border: "0.1px solid #ffffff50",
+			border: "0.05px solid #000",
 		},
 	},
 
-	".myaccount": {
-		width: "100%",
+	".settings_block": {
+		width: "146px",
 
-        textAlign: 'center',
+		textAlign: "center",
+		margin: "20px 0px",
 
-        margin: "20px 0px",
-
-		".myaccount_button": {
-			
+		".settings_button": {
+		
 			color: "#fff",
-			fontSize: "1.25rem",
-			fontWeight: "600",
-			padding: "5px 17px",
-			border: "1px solid #ffffff30",
-			background: "#003787",
-			borderRadius: "20px",
+			background: "#052c65",
 
-			transition: "all .2s ease-in-out",
+			textAlign: "center",
+			fontSize: "1.1rem",
+			fontWeight: "600",
+
+			padding: "2px",
+			borderRadius: "2px",
+			letterSpacing: '.25px',
+
+			cursor: "pointer",
+			transition: "all .1s ease-in-out",
+
 			"&:hover": {
-				background: "#052c65",
-				borderColor: "#ffffff40",
+				background: "#000",
 			},
 		},
 	},
