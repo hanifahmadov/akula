@@ -7,7 +7,7 @@ import {
 	faThumbsDown as faRegularThumbsDown,
 	faBookmark as faRegularBookmark,
 	faThumbsUp as faRegularThumbsUp,
-	faFaceSmile,
+    faFaceSmile as faFaceSmileRegular
 } from "@fortawesome/free-regular-svg-icons";
 
 import {
@@ -22,6 +22,8 @@ import {
 	faComment,
 	faHeart,
 	faFaceLaughBeam,
+    faFaceSmile,
+    faThumbsDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -40,8 +42,11 @@ library.add(
 	faRegularThumbsUp,
 	faComment,
 	faHeart,
+    faFaceLaughBeam,
 	faImage,
-	faFaceSmile
+    faFaceSmile,
+    faFaceSmileRegular,
+    faThumbsDown
 );
 
 const defineType = (type) => {
@@ -50,7 +55,16 @@ const defineType = (type) => {
 			return faCircleCheck;
 		case "faEarthAmericas":
 			return faEarthAmericas;
-		// Add more cases for different icons as needed
+		case "faHeart":
+			return faHeart;
+		case "faRegularHeart":
+			return faRegularHeart;
+        case "faFaceSmile":
+            return faFaceSmile
+        case "faFaceSmileRegular":
+            return faFaceSmileRegular
+        case "faThumbsDown":
+            return faThumbsDown
 		default:
 			return null;
 	}
@@ -75,8 +89,7 @@ export const Fontawesome = ({
 	marginBottom,
 	marginLeft,
 	marginRight,
-    fontSize
-
+	fontSize,
 }) => {
 	const icon = defineType(type);
 	return icon ? (
@@ -100,7 +113,7 @@ export const Fontawesome = ({
 				marginBottom,
 				marginLeft,
 				marginRight,
-                fontSize
+				fontSize,
 			}}
 		/>
 	) : null;

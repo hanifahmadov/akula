@@ -89,8 +89,25 @@ export const Post_Content_Container = styled.div(({ theme: {} }) => ({
 /* REACTION COUNTS */
 export const ReactionCounts_Container = styled.div(({ theme: {} }) => ({
 	display: "flex",
-	justifyContent: "space-between",
+	justifyContent: "flex-start",
 	alignItems: "center",
+
+	marginTop: "10px",
+	padding: "5px 5px",
+
+	".number": {
+		marginLeft: "3px",
+		fontWeight: "700",
+		cursor: "pointer",
+
+		background: "rgba(255, 255, 255, .85)",
+
+		lineHeight: "15px",
+		textAlign: "center",
+		borderRadius: "2px",
+		fontSize: ".9rem",
+		padding: "0px 5px",
+	},
 }));
 
 /* this container is used inside .likes_counts_main_section */
@@ -104,17 +121,8 @@ export const Heart_Container = styled.div(({ theme: {}, $heart }) => ({
 
 	marginRight: "15px",
 
-	".heart_icon": {
-		fontSize: "1rem",
-	},
-
-	".heart_number": {
-		marginLeft: "5px",
-		fontWeight: "700",
-		cursor: "pointer",
-	},
-
-	position: "relative",
+	/* number common class styled in the above in parent section */
+	".heart_number": {},
 
 	/** this is the div that will hold the usernames and maybe user avatart
 	 * who like the post and this will pop up when a user click the number next to likes.
@@ -128,6 +136,7 @@ export const Heart_Container = styled.div(({ theme: {}, $heart }) => ({
 	 * // TODO
 	 * will do it later, after comment is done
 	 */
+	position: "relative",
 
 	".heart_list": {
 		height: "15rem",
@@ -156,14 +165,8 @@ export const Smile_Container = styled.div(({ theme: {}, $smile }) => ({
 
 	marginRight: "15px",
 
-	".smile_icon": {
-		fontSize: "1rem",
-	},
-
-	".smile_number": {
-		marginLeft: "5px",
-		fontWeight: "700",
-	},
+	/* number common class styled in the above in parent section */
+	".smile_number": {},
 }));
 
 /* this container is used inside .likes_counts_main_section */
@@ -177,14 +180,8 @@ export const Dislike_Container = styled.div(({ theme: {}, $dislike }) => ({
 
 	marginRight: "15px",
 
-	".dislike": {
-		fontSize: "1rem",
-	},
-
-	".dislike_number": {
-		marginLeft: "5px",
-		fontWeight: "700",
-	},
+	/* number common class styled in the above in parent section */
+	".dislike_number": {},
 }));
 
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
