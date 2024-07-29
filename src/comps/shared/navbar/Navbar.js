@@ -57,7 +57,7 @@ export const Navbar = () => {
 			</div>
 
 			<div className='navbar_footer_row'>
-				<div className='logout_button' onClick={handleLogoutClick}>Logout</div>
+				<button className='logout_button' onClick={handleLogoutClick}>Logout</button>
 			</div>
 		</Navbar_Container>
 	);

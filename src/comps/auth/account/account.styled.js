@@ -112,23 +112,24 @@ export const Content_Section = styled.div(({ theme: {} }) => ({
 		margin: "20px 0px",
 
 		".settings_button": {
-		
+			width: '100%',
+			
 			color: "#fff",
-			background: "#052c65",
-
+			// background: "#052c65",
+			background: "#000",
 			textAlign: "center",
 			fontSize: "1.1rem",
 			fontWeight: "600",
 
 			padding: "2px",
 			borderRadius: "2px",
-			letterSpacing: '.25px',
+			letterSpacing: ".25px",
 
 			cursor: "pointer",
 			transition: "all .1s ease-in-out",
 
 			"&:hover": {
-				background: "#000",
+				// background: "#000",
 			},
 		},
 	},

@@ -6,41 +6,34 @@ import styled from "styled-components";
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
 export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
-	height: "2.1rem",
+	height: "2.25rem",
 	width: "8rem",
 
 	display: $popoverOpen ? "flex" : "none",
 	justifyContent: "center",
 	alignItems: "center",
-	background: "white",
+	background: "black",
 
 	/** design background and opening animation, use different icons and add animation when like type clicked //TODO */
- 
-
-
-
-
 
 	/**
 	 * 	this code makes no click on itself which means there is no way to click its child elements.
 	 * 	but when we add its child element a porperty like ` pointerEvent: auto ` then only that child
-	 *  element will be clickable, only that child. 
+	 *  element will be clickable, only that child.
 	 * 	So this makes a lot of easer than to get a className of all clicked elements and check it their values are equal
 	 * 	to what we expect and bla bla bla.
-	 * 
+	 *
 	 * 	So, great invent on my side
-	 * 	
-	*/
+	 *
+	 */
 	pointerEvents: "none",
-
-
 
 	position: "absolute",
 	zIndex: "1",
-	top: "-40px",
-	left: "-10px",
+	top: "-45px",
+	left: "-13px",
 
-	borderRadius: "5px",
+	borderRadius: "3px",
 
 	"&::before": {
 		content: '""',
@@ -50,7 +43,7 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
 		transform: "translateX(-50%)",
 		borderLeft: "10px solid transparent",
 		borderRight: "10px solid transparent",
-		borderTop: "10px solid white", // Arrow pointing downwards
+		borderTop: "10px solid black", // Arrow pointing downwards
 	},
 
 	".icons": {
@@ -64,8 +57,25 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
 		fontSize: "1.25rem",
 
 		div: {
-			padding: "1px 2px",
+			display: "flex",
+			justifyContent: "center",
+			alignItems: "center",
+
+			padding: "3px 5px",
 			pointerEvents: "auto",
+
+			borderRadius: "2px",
+
+			"&:hover": {
+				background: "rgba(255, 255, 255, .25)",
+			},
+
+			/** de-activating the fontawesome comps click events 
+			 *  in this case, only, the div itself will be clickable and we can grab its classname
+			*/
+			"& > *": {
+				pointerEvents: "none",
+			},
 		},
 	},
 }));

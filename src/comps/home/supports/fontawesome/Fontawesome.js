@@ -6,8 +6,10 @@ import {
 	faHeart as faRegularHeart,
 	faThumbsDown as faRegularThumbsDown,
 	faBookmark as faRegularBookmark,
-	faThumbsUp as faRegularThumbsUp,
-    faFaceSmile as faFaceSmileRegular
+	faThumbsUp as faThumbsUpRegular,
+	faFaceSmile as faFaceSmileRegular,
+	faThumbsDown as faThumbsDownRegular,
+	faFaceLaughBeam as faFaceLaughBeamRegular,
 } from "@fortawesome/free-regular-svg-icons";
 
 import {
@@ -21,9 +23,9 @@ import {
 	faThumbsUp,
 	faComment,
 	faHeart,
+	faFaceSmile,
+	faThumbsDown,
 	faFaceLaughBeam,
-    faFaceSmile,
-    faThumbsDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -39,14 +41,16 @@ library.add(
 	faRegularThumbsDown,
 	faRegularBookmark,
 	faThumbsUp,
-	faRegularThumbsUp,
 	faComment,
 	faHeart,
-    faFaceLaughBeam,
 	faImage,
-    faFaceSmile,
-    faFaceSmileRegular,
-    faThumbsDown
+	faFaceSmile,
+	faThumbsDown,
+	faFaceLaughBeam,
+	faFaceLaughBeamRegular,
+	faThumbsDownRegular,
+	faFaceSmileRegular,
+	faThumbsUpRegular
 );
 
 const defineType = (type) => {
@@ -59,12 +63,20 @@ const defineType = (type) => {
 			return faHeart;
 		case "faRegularHeart":
 			return faRegularHeart;
-        case "faFaceSmile":
-            return faFaceSmile
-        case "faFaceSmileRegular":
-            return faFaceSmileRegular
-        case "faThumbsDown":
-            return faThumbsDown
+		case "faFaceSmile":
+			return faFaceSmile;
+		case "faFaceSmileRegular":
+			return faFaceSmileRegular;
+		case "faRegularBookmark":
+			return faRegularBookmark;
+		case "faFaceLaughBeam":
+			return faFaceLaughBeam;
+		case "faFaceLaughBeamRegular":
+			return faFaceLaughBeamRegular;
+		case "faThumbsDown":
+			return faThumbsDown;
+		case "faThumbsDownRegular":
+			return faThumbsDownRegular;
 		default:
 			return null;
 	}

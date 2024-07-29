@@ -65,7 +65,7 @@ export const ReactionCounts = ({ likes }) => {
 			</Heart_Container>
 
 			<Smile_Container className='smile_container' $smile={smile}>
-				<Fontawesome type={"faFaceSmileRegular"} />
+				<Fontawesome type={"faFaceLaughBeam"} />
 				<div className='smile_number number'>{smile.length}</div>
 			</Smile_Container>
 

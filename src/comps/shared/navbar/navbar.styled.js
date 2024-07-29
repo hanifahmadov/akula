@@ -66,9 +66,9 @@ export const Navbar_Container = styled.div(({ theme: {} }) => ({
 		minWidth: "148px",
 
 		".logout_button": {
+			width:'100%',
 			color: "#fff",
-			background: "#052c65",
-
+			background: "#000",
 			textAlign: "center",
 			fontSize: "1.1rem",
 			fontWeight: "600",
@@ -82,7 +82,7 @@ export const Navbar_Container = styled.div(({ theme: {} }) => ({
 		
 
 			"&:hover": {
-				background: "#000",
+				// background: "#052c65",
 			},
 		},
 	},

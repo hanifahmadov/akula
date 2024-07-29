@@ -37,7 +37,7 @@ export const Account = () => {
 
                 <div className="settings_block">
                     
-                    <div className="settings_button">Settings</div>
+                    <button className="settings_button">Settings</button>
                 </div>
 			</Content_Section>
 		</Account_Container>

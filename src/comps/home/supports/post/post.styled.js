@@ -19,6 +19,7 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 	padding: "15px",
 
 	".post_row_third": {},
+	".post_row_fourth": {},
 }));
 
 export const Post_Header_Container = styled.div(({ theme: {} }) => ({
@@ -184,6 +185,83 @@ export const Dislike_Container = styled.div(({ theme: {}, $dislike }) => ({
 	".dislike_number": {},
 }));
 
-// export const Project_Content = styled.div(({ theme: {} }) => ({}));
+export const Post_Reaction_Container = styled(motion.div)(({ theme: {}, $commentOpen }) => {
+	return {
+		width: "100%",
 
-// export const Project_Content = styled.div(({ theme: {} }) => ({}));
+
+		".comments_section": {
+			/* has 2 row inside */
+			width: "100%",
+			height: "10rem",
+
+			marginTop: "20px",
+			padding: "0px 5px",
+
+			transition: "all .2s ease-in-out",
+			background: "blue",
+
+
+
+			".all_comments_row": {
+				/* has 2 row  */
+				".first_comment": {
+					
+				},
+
+				".rest_of_comments": {
+
+				},
+
+			},
+
+			".comment_input_row": {
+				/* nothing for now */
+
+			},
+		},
+	};
+});
+
+export const Button_Groups_Container = styled.div(({ theme: {} }) => ({
+	display: "flex",
+	justifyContent: "space-between",
+	alignItems: "center",
+
+	marginTop: "1rem",
+	padding: "0px 5px",
+
+	".like_wrapper ": {
+		position: "relative",
+	},
+
+	".button": {
+		width: "6rem",
+
+		color: "#fff",
+		background: "#000",
+
+		textAlign: "center",
+		fontSize: ".9rem",
+		fontWeight: "600",
+
+		padding: "2px",
+		borderRadius: "0px",
+		letterSpacing: ".25px",
+
+		cursor: "pointer",
+		transition: "all .1s ease-in-out",
+	},
+
+	".bookmark_button": {
+		width: "2.5rem",
+	},
+
+	".share_button": {
+		background: "rgba(0, 0, 0, 0.6)",
+		color: "rgba(255, 255,255, .5)",
+		cursor: "not-allowed",
+	},
+}));
+
+export const Comment_Container = styled.div(({ theme: {}, $commentOpen }) => ({}));

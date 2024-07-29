@@ -22,9 +22,10 @@ import { Popover_Container } from "./popover.styled";
 
 /* APIs */
 import { likePostAPI } from "../../../../apis/apiCalls";
+import { Fontawesome } from "../fontawesome/Fontawesome";
 
 /** Popover  Component */
-export const Popover = ({ popoverOpen, setPopoverOpen, postId }) => {
+export const Popover = ({ popoverOpen, setPopoverOpen, postId, likes }) => {
 	/*  getting global state likeType */
 	const [likeType, setLikeType] = useRecoilState(likeTypeDefault);
 
@@ -74,21 +75,35 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId }) => {
 				/** catch the error here */
 				console.log("error inside popover click", err);
 			});
-
-		/* set the global state likeType to this classname */
-		/* ass I know useRecoilState values can not be changing like this but I will try */
-		// setLikeType((likeType) => {
-		// 	likeType = className;
-		// 	return likeType;
-		// });
 	};
+
+	const alreadyLiked = likes.find((like) => like.owner._id == signedUser._id);
+
 	return (
 		<Popover_Container $popoverOpen={popoverOpen} onClick={handlePopoverClick}>
 			<section className='icons'>
 				{/* <FontAwesomeIcon icon={faHeart} /> */}
-				<div className='heart'>❤️</div>
-				<div className='smile'>😂</div>
-				<div className='dislike'>👎</div>
+				<div className='heart'>
+					<Fontawesome
+						type={alreadyLiked.reaction == "heart" ? "faHeart" : "faRegularHeart"}
+						fontSize={"1.1rem"}
+						color={alreadyLiked.reaction == "heart" ? "red" : "white"}
+					/>
+				</div>
+				<div className='smile'>
+					<Fontawesome
+						type={alreadyLiked.reaction == "smile" ? "faFaceLaughBeam" : "faFaceLaughBeamRegular"}
+						fontSize={"1.1rem"}
+						color={alreadyLiked.reaction == "smile" ? "red" : "white"}
+					/>
+				</div>
+				<div className='dislike'>
+					<Fontawesome
+						type={alreadyLiked.reaction == "dislike" ? "faThumbsDown" : "faThumbsDownRegular"}
+						fontSize={"1.1rem"}
+						color={alreadyLiked.reaction == "dislike" ? "red" : "white"}
+					/>
+				</div>
 			</section>
 		</Popover_Container>
 	);
