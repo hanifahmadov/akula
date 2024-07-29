@@ -8,156 +8,89 @@ import { motion } from "framer-motion";
 export const Post_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
 
+	/* has 3 rows */
 	display: "flex",
-	flexDirection: "row",
+	flexDirection: "column",
 
-	background: "#1a2730",
+	background: "rgba(0, 0, 0, 0.1)",
+	borderRadius: "5px",
 
-	borderRadius: "10px",
+	marginTop: "1.5rem",
+	padding: "15px",
 
-	padding: "1rem 1rem 1rem 0rem",
-	marginTop: "1rem",
+	".post_row_third": {},
+}));
 
-	".postowner_avatar_section": {
-		width: "5.5rem",
-		height: "100%",
+export const Post_Header_Container = styled.div(({ theme: {} }) => ({
+	display: "flex",
+	flex: "row",
+	/* 2 columns */
 
-		// background: "blue",
-
-		display: "flex",
-		justifyContent: "center",
-
+	/* has img avatar */
+	".post_column_one": {
 		img: {
-			height: "3rem",
 			width: "3rem",
+			height: "3rem",
 			borderRadius: "50%",
 		},
 	},
 
-	".post_content_section": {
-		width: "100%",
-		height: "100%",
+	/**
+	 * 	has username and timeline of post
+	 *
+	 * 	this also has 2 rows,
+	 * 	tob - user avatar
+	 * 	bottom - timeline and fontawe
+	 */
+	".post_column_two": {
+		marginLeft: "8px",
 
-		// background: "green",
+		position: "relative",
+		top: "-3px",
 
-		display: "flex",
-		flexDirection: "column",
-
-		".header_section": {
-			".title_wrapper": {
-				display: "flex",
-				justifyContent: "flex-start",
-				alignItems: "center",
-
-				".title": {
-					fontSize: "1.5rem",
-					lineHeight: "1.5rem",
-				},
-
-				".faCircleCheck": {
-					marginLeft: "7px",
-					paddingTop: "4px",
-					color: "#005eff",
-				},
-			},
-
-			".timeline_wrapper": {
-				".timeline": {
-					fontSize: ".75rem",
-					color: "#ffffff80",
-				},
-
-				".faUniversalAccess": {
-					marginLeft: "5px",
-					cursor: "not-allowed",
-					fontSize: "12px",
-					color: "#ffffff90",
-				},
+		".header_top_row": {
+			".username": {
+				fontSize: "1.5rem",
+				fontWeight: "600",
+				letterSpacing: ".25px",
 			},
 		},
 
-		".text_section": {
-			marginTop: "10px",
-		},
+		".header_bottom_row": {
+			lineHeight: "10px",
 
-		".media_section": {
-			marginTop: "10px",
-			borderRadius: "10px",
-			img: {
-				height: "25rem",
-				width: "25rem",
-				borderRadius: "10px",
-			},
-		},
-
-		".media_related_section": {
-			marginTop: "1rem",
-			width: "100%",
-			display: "flex",
-			justifyContent: "space-between",
-
-			/**
-			 * a like_button inside wrapper and that button is just in the center, which means when user
-			 * click the center, it triggers popover to opne but when user clicks away from the center, it doesnt.
-			 * in this case we have to make its height and width qoo% to make sure button keeps its parents full width and height.
-			 * make sure to add the padding to the buttons after height and width already set up
-			 * height and width is 100%
-			 *
-			 * button classname is like_button and button, select the button for common classname
-			 */
-
-			".like_wrapper, .comment_wrapper, .share_wrapper, .bookmark_wrapper": {
-				fontSize: "1rem",
+			".timeline": {
+				fontSize: ".8rem",
 				fontWeight: "500",
-				width: "7rem",
-
-				border: "1px solid #ffffff80",
-				borderRadius: "5px",
-				textAlign: "center",
-				lineHeight: "20px",
-				cursor: "pointer",
-
-				".button": {
-					padding: "5px",
-					height: "100%",
-					width: "100%",
-				},
 			},
 
-			/** likes_wrapper is a mother of like_button and Popoverjs. Popoverjs is a absolute position
-			 * so that this mother wrapper must be relative. */
-			".like_wrapper": {
-				position: "relative",
-			},
-
-			/* bookmark_wrapper is just a small icon. no need to hold 7rem width in this case */
-			".bookmark_wrapper": {
-				width: "2.5rem",
+			".faEarthAmericas": {
+				cursor: "not-allowed",
 			},
 		},
 	},
 }));
 
-/* used in Post.js line 168 */
-/** this main section holds 2 container */
-export const MediaCounts_Section = styled.div(({ theme: {} }) => ({
-	margin: "10px 0px 0px 0px",
-	padding: "2px 0px",
+export const Post_Content_Container = styled.div(({ theme: {} }) => ({
+	marginTop: "15px",
 
-	width: "100%",
+	".content": {
+		background: "rgba(255, 255, 255, .5)",
+
+		fontSize: "1.1rem",
+		fontWeight: "400",
+		letterSpacing: ".1px",
+
+		padding: "5px 10px",
+		borderRadius: "3px",
+	},
+}));
+
+/* REACTION COUNTS */
+export const ReactionCounts_Container = styled.div(({ theme: {} }) => ({
 	display: "flex",
 	justifyContent: "space-between",
 	alignItems: "center",
-
-	// background: "gray",
-
-	".likesIcons_withTheirCounts_container": {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-
-		/** all 3 likes icons with their counts under the text or image are inside this container  */
-	},
 }));
 
 /* this container is used inside .likes_counts_main_section */
@@ -254,180 +187,6 @@ export const Dislike_Container = styled.div(({ theme: {}, $dislike }) => ({
 	},
 }));
 
-export const Comment_Displaying_Section = styled.div(({ theme: {} }) => ({
-	marginTop: "1rem",
+// export const Project_Content = styled.div(({ theme: {} }) => ({}));
 
-	// background: "gray",
-
-	width: "100%",
-
-	/* has 2 div inside and must be direction row, avatart and textArea */
-
-	display: "flex",
-	flexDirection: "column",
-
-	".comments_content_display_wrapper": {
-		width: "100%",
-		maxHeight: "15rem",
-		overflowX: "scroll",
-
-		padding: "0px 0px 10px 0px",
-
-		display: "flex",
-		flexDirection: "column",
-
-		/** every shit has to be 1st row and sencond row or first column, second column and so onn ..... make SURE */
-
-		".signle_comment_content_block": {
-			display: "flex",
-			flexDirection: "row",
-
-			".comment_content_block_first_row": {
-				".comment_owner_avatar": {
-					img: {
-						height: "2rem",
-						width: "2rem",
-						borderRadius: "50%",
-					},
-				},
-			},
-
-			".comment_content_block_second_row": {
-				display: "flex",
-				flexDirection: "column",
-				marginLeft: "5px",
-
-				width: "100%",
-				background: "rgba(255, 255, 255, .1)",
-				padding: "0px 10px 10px 10px",
-				borderRadius: "10px",
-
-				".comment_owner_username": {
-					fontWeight: "600",
-					padding: "5px 0px",
-				},
-
-				".comment_reaction_block": {
-					width: "100%",
-					display: "flex",
-					justifyContent: "space-between",
-					fontSize: "11px",
-					fontWeight: "800",
-					width: "7rem",
-					marginTop: "8px",
-
-					span: {
-						cursor: "pointer",
-					},
-
-					".reply_comment": {
-						width: "100%",
-
-						input: {
-							width: "100%",
-						},
-					},
-				},
-			},
-		},
-	},
-
-	".comment_input_section_with_user_avatar": {
-		width: "100%",
-		padding: "5px 0px",
-
-		// background: "red",
-
-		/* must be at the bottom */
-		alignSelf: "flex-end",
-		alignItems: "flex-start",
-
-		display: "flex",
-
-		".avatar_wrapper": {
-			img: {
-				width: "2.25rem",
-				height: "2.25rem",
-				borderRadius: "50%",
-			},
-		},
-
-		".textarea_sendbutton_wrapper": {
-			width: "100%",
-			padding: "0px 5px 0px 8px",
-
-			".textarea_wrapper": {
-				width: "100%",
-				height: "100%",
-				height: "fit-content",
-
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "flex-start",
-				alignItems: "center",
-
-				borderRadius: "10px",
-				background: "#07161d",
-
-				".textarea": {
-					width: "100%",
-					border: "none",
-					overflow: "auto",
-					outline: "none",
-					WebkitBoxShadow: "none", // -webkit-box-shadow
-					MozBoxShadow: "none", // -moz-box-shadow
-					boxShadow: "none",
-					resize: "none",
-					padding: "7px 5px 7px 10px",
-
-					fontSize: "1rem",
-					borderRadius: "10px",
-					background: "transparent",
-					color: "white",
-
-					maxHeight: "10rem",
-
-					"&::placeholder": {
-						color: "#ffffff50",
-						paddingLeft: "5px",
-					},
-					// border: "1px solid #ffffff30",
-				},
-
-				".reply_with_images_smile_and_gifs_block": {
-					display: "flex",
-					justifyContent: "space-between",
-					// background: 'red',
-
-					width: "2.75rem",
-					marginLeft: "10px",
-				},
-
-				".comment_send_button_with_sticker_gifs_wrapper": {
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "space-between",
-					alignItems: "center",
-					width: "100%",
-
-					padding: "0px 5px",
-					borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-
-					".comment_send_button_block": {
-						margin: "5px 5px 5px 0px",
-
-						span: {
-							display: "inline-block",
-							background: "#0d6efd",
-							padding: "2px 5px",
-							borderRadius: "5px",
-							fontSize: ".8rem",
-							fontWeight: "600",
-							cursor: "pointer",
-						},
-					},
-				},
-			},
-		},
-	},
-}));
+// export const Project_Content = styled.div(({ theme: {} }) => ({}));

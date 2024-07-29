@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-import { Textarea_Container } from "./form.styled";
+import { Textarea_Container } from "./store.styled";
 
 export const Textarea = ({ text, setText }) => {
 	const textareaRef = useRef(null);

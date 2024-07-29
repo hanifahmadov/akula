@@ -47,8 +47,9 @@ export const Home_Container = styled.div(({ theme: {} }) => ({
 		paddingBottom: "40px",
 
 		".fixed_with": {
-			width: "45rem",
+			width: "40rem",
 			height: "200rem",
+
 
 			// background: 'gray',
 
@@ -64,6 +65,10 @@ export const Home_Container = styled.div(({ theme: {} }) => ({
 
 				padding: "10px",
 				borderRadius: "10px",
+
+				/* trying keep the post on top */
+
+			
 			},
 		},
 	},
@@ -122,7 +127,7 @@ export const Top_Section = styled.div(({ theme: {} }) => ({
 		width: "3.5rem",
 		borderRadius: "50%",
 		border: "3px solid rgba(0, 0, 0, 0.05)",
-		alignSelf: 'flex-start'
+		alignSelf: "flex-start",
 	},
 
 	".textarea_wrapper": {
@@ -137,10 +142,43 @@ export const Top_Section = styled.div(({ theme: {} }) => ({
 
 		marginLeft: "0.5rem",
 		borderRadius: "10px",
-
 	},
 }));
 
-// export const Project_Content = styled.div(({ theme: {} }) => ({}));
+export const Bottom_Section = styled.div(({ theme: {} }) => ({
+	display: "flex",
+	justifyContent: "space-between",
+	alignItems: "center",
+
+	width: "100%",
+	paddingLeft: "4.2rem",
+	paddingRight:'5px',
+	marginTop: ".75rem",
+
+	".post_button_wrapper": {
+
+		button: {
+			color: "#fff",
+			background: "#052c65",
+
+			textAlign: "center",
+			fontSize: "1rem",
+			fontWeight: "600",
+
+			padding: "2px 5px",
+			borderRadius: "2px",
+            letterSpacing: ".25px",
+
+            cursor: "pointer",
+            transition: "all .1s ease-in-out",
+		
+
+			"&:hover": {
+				background: "#000",
+			},
+		},
+	},
+}));
+
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));

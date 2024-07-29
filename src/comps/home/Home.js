@@ -24,11 +24,14 @@ import {
 library.add(faCircleXmark, faImage, faVideo, faMasksTheater, faCircleCheck, faUniversalAccess, faEarthAmericas);
 
 /* STYLED COMPONENTS */
-import { Home_Container, Top_Section } from "./home.styled";
+import { Bottom_Section, Home_Container, Top_Section } from "./home.styled";
 
 /* COMPONENTS */
 import { Account } from "../auth/account/Account";
 import { Textarea } from "./supports/form/Textarea";
+import { ImagePreview } from "./supports/form/ImagePreview";
+import { Media } from "./supports/form/Media";
+import { Post } from "./supports/post/Post";
 
 export const Home = () => {
 	/** GLOBAL STATES
@@ -64,15 +67,15 @@ export const Home = () => {
 		data.append("image", image);
 		data.append("baseurl", apiUrl);
 
-		newpostAPI(signedUser, data)
-			.then((res) => {
-				setImage(undefined);
-				setText("");
-				setPostSubmit((postSubmit) => !postSubmit);
-			})
-			.catch((err) => {
-				console.log("newpostAPI error", err);
-			});
+		// newpostAPI(signedUser, data)
+		// 	.then((res) => {
+		// 		setImage(undefined);
+		// 		setText("");
+		// 		setPostSubmit((postSubmit) => !postSubmit);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log("newpostAPI error", err);
+		// 	});
 	};
 
 	/**
@@ -112,25 +115,31 @@ export const Home = () => {
 
 			<div className='home_left_column'>
 				<div className='fixed_with'>
+					{/* POST INPUT */}
 					<div className='post_input'>
 						<Top_Section>
 							<img src={signedUser.avatar} className='signedUser_avatar' />
 							{/** because of the text and img goes in the same text area, we have to group them */}
 							<div className='textarea_wrapper'>
 								<Textarea text={text} setText={setText} />
-
-								{image && (
-									<div className='image_preview'>
-										<img src={URL.createObjectURL(image)} className='selected_image' />
-										<span className='faCircleXmark'>
-											<FontAwesomeIcon icon={faCircleXmark} onClick={() => setImage(undefined)} />
-										</span>
-									</div>
-								)}
+								{image && <ImagePreview image={image} setImage={setImage} />}
 							</div>
 						</Top_Section>
+						<Bottom_Section>
+							<Media setImage={setImage} />
+
+							<div className='post_button_wrapper' onClick={handlePostClick}>
+								<button>POST</button>
+							</div>
+						</Bottom_Section>
 					</div>
-					<div>{/* Comments */}</div>
+
+					{/* ALL POSTS */}
+					<div className='posts'>
+						{posts.map((post, index) => {
+							return <Post key={index} post={post} />;
+						})}
+					</div>
 				</div>
 			</div>
 
