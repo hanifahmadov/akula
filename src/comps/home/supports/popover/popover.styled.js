@@ -5,7 +5,7 @@ import styled from "styled-components";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
-export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
+export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $comp }) => ({
 	height: "2.25rem",
 	width: "8rem",
 
@@ -31,7 +31,9 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
 	position: "absolute",
 	zIndex: "1",
 	top: "-45px",
-	left: "-13px",
+
+	
+	left: $comp == "comment" ? "-45px" : "-13px",
 
 	borderRadius: "3px",
 
@@ -70,9 +72,9 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen }) => ({
 				background: "rgba(255, 255, 255, .25)",
 			},
 
-			/** de-activating the fontawesome comps click events 
+			/** de-activating the fontawesome comps click events
 			 *  in this case, only, the div itself will be clickable and we can grab its classname
-			*/
+			 */
 			"& > *": {
 				pointerEvents: "none",
 			},

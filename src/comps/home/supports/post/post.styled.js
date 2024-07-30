@@ -189,35 +189,30 @@ export const Post_Reaction_Container = styled(motion.div)(({ theme: {}, $comment
 	return {
 		width: "100%",
 
-
 		".comments_section": {
 			/* has 2 row inside */
 			width: "100%",
 			height: "10rem",
 
-			marginTop: "20px",
+			marginTop: "15px",
 			padding: "0px 5px",
 
 			transition: "all .2s ease-in-out",
-			background: "blue",
 
+			paddingTop: "15px",
 
+			background: "rgba(255, 255, 255, .5)",
+			borderRadius: "5px",
 
 			".all_comments_row": {
 				/* has 2 row  */
-				".first_comment": {
-					
-				},
+				".first_comment": {},
 
-				".rest_of_comments": {
-
-				},
-
+				".rest_of_comments": {},
 			},
 
 			".comment_input_row": {
 				/* nothing for now */
-
 			},
 		},
 	};
@@ -264,4 +259,59 @@ export const Button_Groups_Container = styled.div(({ theme: {} }) => ({
 	},
 }));
 
-export const Comment_Container = styled.div(({ theme: {}, $commentOpen }) => ({}));
+export const Comment_Container = styled.div(({ theme: {}, $commentOpen }) => ({
+	display: "flex",
+	justifyContent: "flex-start",
+
+	/* has 2 colums, image and texts */
+	".comment_column_avatar": {
+		img: {
+			width: "2.5rem",
+			height: "2.5rem",
+			borderRadius: "50%",
+			border: "2px solid white",
+		},
+	},
+
+	".comment_column_body": {
+		width: "100%",
+		display: "flex",
+		justifyContent: "flex-start",
+		flexDirection: "column",
+
+		padding: "0px 5px",
+
+		".comment_body_row_top": {
+			width: "100%",
+			background: "white",
+			padding: "2px 12px 4px 12px",
+
+			borderRadius: "10px",
+
+			".username": {
+				fontWeight: "500",
+				fontSize: "1rem",
+			},
+			".content": {
+				fontSize: ".95rem",
+			},
+		},
+
+		".comment_body_row_bottom": {
+			".timeline_like_reply": {
+				fontSize: ".85rem",
+				fontWeight: "600",
+				display: "flex",
+				gap: "15px",
+
+				marginTop: "3px",
+				marginLeft: "8px",
+
+				".like_button, .reply_button": {
+					cursor: "pointer",
+					position: "relative",
+				},
+			},
+		},
+	},
+}));

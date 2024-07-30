@@ -21,11 +21,11 @@ import { likeTypeDefault, userDefault } from "../../../auth/shared/store/states"
 import { Popover_Container } from "./popover.styled";
 
 /* APIs */
-import { likePostAPI } from "../../../../apis/apiCalls";
+import { likeCommentAPI, likePostAPI } from "../../../../apis/apiCalls";
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 /** Popover  Component */
-export const Popover = ({ popoverOpen, setPopoverOpen, postId, likes }) => {
+export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, likes, comp }) => {
 	/*  getting global state likeType */
 	const [likeType, setLikeType] = useRecoilState(likeTypeDefault);
 
@@ -45,63 +45,80 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, likes }) => {
 		/** Getting className of clicked likeType here */
 		const classname = e.target.className;
 
-		/**
-		 * 	now we know the like type and we can update the post on server/database here.
-		 * 	like post API takes 3 args that userToken, the postId and likeType.
-		 * */
-		likePostAPI({ accessToken: signedUser.accessToken, postId, likeType: classname })
-			.then((res) => {
-				/** when success,then will work and will get the result of success, just a text not the updated object.
-				 * 	again, for now i am getting just a success text here but //# in the nearest future
-				 * 	we have to find a way how to get the current post updated only here, so after that
-				 * 	we dont need to re-render all posts again by changig global state likeType to trigger useEffect on Homejs.
-				 * 	extra work and useless recalls no needed!
-				 * */
+		if (comp == "comment") {
+			likeCommentAPI({ accessToken: signedUser.accessToken, postId, commentId, likeType: classname })
+				.then((res) => {
+					console.log("yeyy comments");
 
-				/** in positive resolve here, i am updating the global state to run the get allpost hooks in the Homejs */
-				//# important
-				/**
-				 * likeType global state only getting updated when Likepost apis success so when user click the funny or dislike
-				 * this will not get changed and it will not get trigger the useEffect.
-				 * so, we have to find the way to use $en to modifiy specific field of the Like object so this can re-run
-				 * means to.
-				 */
-				setLikeType((likeType) => !likeType);
+					console.log(res)
+				})
+				.catch((err) => {
+					console.log("err comment like", err);
+				});
+		} else {
+			/**
+			 * 	now we know the like type and we can update the post on server/database here.
+			 * 	like post API takes 3 args that userToken, the postId and likeType.
+			 * */
+			likePostAPI({ accessToken: signedUser.accessToken, postId, likeType: classname })
+				.then((res) => {
+					/** when success,then will work and will get the result of success, just a text not the updated object.
+					 * 	again, for now i am getting just a success text here but //# in the nearest future
+					 * 	we have to find a way how to get the current post updated only here, so after that
+					 * 	we dont need to re-render all posts again by changig global state likeType to trigger useEffect on Homejs.
+					 * 	extra work and useless recalls no needed!
+					 * */
 
-				/** also we have to close the popover right after the response */
-				setPopoverOpen((popoverOpen) => !popoverOpen);
-			})
-			.catch((err) => {
-				/** catch the error here */
-				console.log("error inside popover click", err);
-			});
+					/** in positive resolve here, i am updating the global state to run the get allpost hooks in the Homejs */
+					//# important
+					/**
+					 * likeType global state only getting updated when Likepost apis success so when user click the funny or dislike
+					 * this will not get changed and it will not get trigger the useEffect.
+					 * so, we have to find the way to use $en to modifiy specific field of the Like object so this can re-run
+					 * means to.
+					 */
+
+			
+
+					setLikeType((likeType) => !likeType);
+
+					/** also we have to close the popover right after the response */
+					setPopoverOpen((popoverOpen) => !popoverOpen);
+				})
+				.catch((err) => {
+					/** catch the error here */
+					console.log("error inside popover click", err);
+				});
+		}
 	};
 
-	const alreadyLiked = likes.find((like) => like.owner._id == signedUser._id);
+	const alreadyLiked = { reaction: "apple" };
+
+	// likes.length ? likes.find((like) => like.owner._id == signedUser._id) : {};
 
 	return (
-		<Popover_Container $popoverOpen={popoverOpen} onClick={handlePopoverClick}>
+		<Popover_Container $popoverOpen={popoverOpen} $comp={comp} onClick={handlePopoverClick}>
 			<section className='icons'>
 				{/* <FontAwesomeIcon icon={faHeart} /> */}
 				<div className='heart'>
 					<Fontawesome
-						type={alreadyLiked.reaction == "heart" ? "faHeart" : "faRegularHeart"}
+						type={alreadyLiked?.reaction == "heart" ? "faHeart" : "faRegularHeart"}
 						fontSize={"1.1rem"}
-						color={alreadyLiked.reaction == "heart" ? "red" : "white"}
+						color={alreadyLiked?.reaction == "heart" ? "red" : "white"}
 					/>
 				</div>
 				<div className='smile'>
 					<Fontawesome
-						type={alreadyLiked.reaction == "smile" ? "faFaceLaughBeam" : "faFaceLaughBeamRegular"}
+						type={alreadyLiked?.reaction == "smile" ? "faFaceLaughBeam" : "faFaceLaughBeamRegular"}
 						fontSize={"1.1rem"}
 						color={alreadyLiked.reaction == "smile" ? "red" : "white"}
 					/>
 				</div>
 				<div className='dislike'>
 					<Fontawesome
-						type={alreadyLiked.reaction == "dislike" ? "faThumbsDown" : "faThumbsDownRegular"}
+						type={alreadyLiked?.reaction == "dislike" ? "faThumbsDown" : "faThumbsDownRegular"}
 						fontSize={"1.1rem"}
-						color={alreadyLiked.reaction == "dislike" ? "red" : "white"}
+						color={alreadyLiked?.reaction == "dislike" ? "red" : "white"}
 					/>
 				</div>
 			</section>

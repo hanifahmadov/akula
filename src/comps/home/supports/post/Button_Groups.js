@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import OutsideClickHandler from "react-outside-click-handler";
 
 /* STYLED */
 import { Button_Groups_Container } from "./post.styled";
@@ -10,8 +11,7 @@ import { Fontawesome } from "../fontawesome/Fontawesome";
 import { Popover } from "../popover/Popover";
 
 export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) => {
-
-    /** defining local state popoverOpen. which makes popover to be open and closed.
+	/** defining local state popoverOpen. which makes popover to be open and closed.
 	 * 	used in this file and sending as a prop to this comp's child, <Popover />, line 146, this file.
 	 *
 	 * this technique is applying also to comment section only
@@ -30,22 +30,36 @@ export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) =>
 		setCommentOpen((commentOpen) => !commentOpen);
 	};
 
-
 	return (
 		<Button_Groups_Container className='button_groups_container'>
-			{/* LIKE */}
-			<button className='like_wrapper'>
-				{/** Post id passing down for a likepostAPI argument, please read the Popover notes
-				 * 	also popoverOpen and Setter will be update the open after the like type is clicked.
-				 * 	popoverOpen will be false right after the post like getting updated in the backed server
-				 * 	and getting 200 code back in the Popover child component
-				 */}
-				<Popover popoverOpen={popoverOpen} setPopoverOpen={setPopoverOpen} postId={postId} likes={likes} />
+			{/* LIKE */ console.log(popoverOpen)}
 
-				<div className='like_button button' onClick={handleLikeButtonClick}>
-					Like
-				</div>
-			</button>
+			<OutsideClickHandler
+				onOutsideClick={() => {
+					setPopoverOpen(false);
+					console.log("clicked outside");
+				}}
+				disabled={!popoverOpen}
+			>
+				<button className='like_wrapper'>
+					{/** Post id passing down for a likepostAPI argument, please read the Popover notes
+					 * 	also popoverOpen and Setter will be update the open after the like type is clicked.
+					 * 	popoverOpen will be false right after the post like getting updated in the backed server
+					 * 	and getting 200 code back in the Popover child component
+					 */}
+					<Popover
+						popoverOpen={popoverOpen}
+						setPopoverOpen={setPopoverOpen}
+						postId={postId}
+						likes={likes}
+						comp={"post"}
+					/>
+
+					<div className='like_button button' onClick={handleLikeButtonClick}>
+						Like
+					</div>
+				</button>
+			</OutsideClickHandler>
 
 			{/* COMMENT */}
 			<div className='comment_wrapper'>

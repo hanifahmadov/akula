@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import FormData from "form-data";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
+
 
 /* APIS */
 import apiUrl from "../../apis/apiUrl";
@@ -11,17 +10,6 @@ import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 /* GLOBAL STATES */
 import { userDefault, likeTypeDefault, commentSubmitDefault } from "../auth/shared/store/states";
 
-/* FONTAWESOME */
-import {
-	faCircleXmark,
-	faImage,
-	faVideo,
-	faMasksTheater,
-	faCircleCheck,
-	faUniversalAccess,
-	faEarthAmericas,
-} from "@fortawesome/free-solid-svg-icons";
-library.add(faCircleXmark, faImage, faVideo, faMasksTheater, faCircleCheck, faUniversalAccess, faEarthAmericas);
 
 /* STYLED COMPONENTS */
 import { Bottom_Section, Home_Container, Top_Section } from "./home.styled";
@@ -46,7 +34,6 @@ export const Home = () => {
 	 *  image grabs the post media
 	 */
 	const [image, setImage] = useState(undefined);
-	const imageRef = useRef();
 
 	/** Local state sets the all posts returns from the postsAPI, useEffect */
 	const [posts, setPosts] = useState([]);
