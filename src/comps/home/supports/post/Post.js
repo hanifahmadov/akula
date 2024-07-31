@@ -11,7 +11,7 @@ import { Post_Reaction } from "./Post_Reaction";
 import { Post_Header } from "./Post_Header";
 import { Post_Content } from "./Post_Content";
 import { ReactionCounts } from "./ReactionCounts";
-import { AddCommentToPost } from "./AddCommentToPost";
+import { AddComment } from "./AddComment";
 
 export const Post = ({ post: { _id, owner, createdAt, content, media, likes, comments } }) => {
 	/* TODO */
@@ -45,7 +45,7 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 			</div>
 
 			<div className="post_comment_wrapper">
-				<AddCommentToPost/>
+				<AddComment/>
 			</div>
 
 

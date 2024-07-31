@@ -83,13 +83,15 @@ export const Post_Content_Container = styled.div(({ theme: {} }) => ({
 		letterSpacing: ".1px",
 
 		padding: "5px 10px",
-		borderRadius: "3px",
+		marginBottom: "10px",
+		borderRadius: "5px",
 	},
 
 	".post_content_image_wrapper": {
 		img: {
 			width: "100%",
 			height: "25rem",
+			borderRadius: "0px",
 		},
 	},
 }));
@@ -267,16 +269,67 @@ export const Button_Groups_Container = styled.div(({ theme: {} }) => ({
 	},
 }));
 
-export const AddCommentToPost_Container = styled.div(({ theme: {} }) => {
-
-     /** */
+export const AddComment_Container = styled.div(({ theme: {} }) => {
+	/** */
 	return {
+		display: "flex",
+		flexDirection: "row",
+		// justifyContent: 'flex-start',
+		// alignItems: 'center',
 
-		
+		width: "100%",
 
+		padding: "12px 0px 0px 0px",
 
+		".addComment_avatar_column": {
+			img: {
+				height: "2.75rem",
+				width: "2.75rem",
+				borderRadius: "50%",
+				border: "3px solid rgba(0, 0, 0, 0.1)",
+				alignSelf: "flex-start",
+			},
+		},
 
+		".addComment_post_column": {
+			width: "100%",
+			".addComment_post_column_top_row": {
+				width: "100%",
+			},
 
+			".addComment_post_column_bottom_row": {
+				width: "100%",
+				marginTop:'5px',
 
+				display: "flex",
+				justifyContent: "space-between",
+
+				".addComment_image_icon": {
+					marginLeft: "15px",
+				},
+
+				".addCommentSendButton": {
+					marginRight:'12px',
+
+					button: {
+						width: "2.5rem",
+						lineHeight: '15px',
+
+						color: "#fff",
+						background: "#000",
+
+						textAlign: "center",
+						fontSize: ".8rem",
+						fontWeight: "600",
+
+						padding: "1px",
+						borderRadius: "0px",
+
+						cursor: "pointer",
+						transition: "all .1s ease-in-out",
+					},
+				},
+			},
+		},
 	};
 });

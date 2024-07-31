@@ -1,8 +1,23 @@
 import React, { useRef, useEffect } from "react";
 
+/* STYLED */
 import { Textarea_Container } from "./store.styled";
 
-export const Textarea = ({ text, setText }) => {
+/* HELPER */
+import { Fontawesome } from "../fontawesome/Fontawesome";
+
+export const Textarea = ({
+	text,
+	setText,
+	fontSize,
+	padding,
+	maxHeight,
+	borderRadius,
+	height,
+	owner,
+	displayButton,
+	setDisplayButton,
+}) => {
 	const textareaRef = useRef(null);
 
 	/**
@@ -27,14 +42,17 @@ export const Textarea = ({ text, setText }) => {
 	}, [text]); // Adjust height on every text change
 
 	return (
-		<Textarea_Container>
+		<Textarea_Container $fontSize={fontSize} $padding={padding} $maxHeight={maxHeight} $borderRadius={borderRadius}>
 			<textarea
 				className='textarea'
 				ref={textareaRef}
 				value={text}
 				onChange={handleChange}
 				placeholder='Whats going on...'
-				rows={1} // Start with one row
+				rows={height ? height : 2}
+				onFocus={() => {
+					owner === "addComment" && setDisplayButton(true);
+				}}
 			/>
 		</Textarea_Container>
 	);

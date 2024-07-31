@@ -2,18 +2,22 @@
 import styled from "styled-components";
 // import { motion } from "framer-motion";
 
-export const Textarea_Container = styled.div(({ theme: {} }) => ({
+export const Textarea_Container = styled.div(({ theme: {}, $fontSize, $padding, $maxHeight, $borderRadius}) => ({
 	width: "100%",
-
-	height: "fit-content",
+	height: 'fit-content',
 	background: "white",
-	color: "black",
-	borderRadius: "10px",
+	
+	display: "flex",
+	flexDirection:'column',
+
+	overflow: "hidden",
+
+	borderRadius: $borderRadius ? $borderRadius : "10px",
+
 
 	".textarea": {
-		width: "100%",
-		height: "100%",
-		maxHeight: "10rem",
+		width: "100%",		
+		maxHeight: $maxHeight ? $maxHeight : "8rem",
 		border: "none",
 		overflow: "auto",
 		outline: "none",
@@ -21,12 +25,14 @@ export const Textarea_Container = styled.div(({ theme: {} }) => ({
 		MozBoxShadow: "none", // -moz-box-shadow
 		boxShadow: "none",
 		resize: "none",
-		padding: "13px 10px 8px 15px",
+		padding: $padding ? $padding : "10px 15px",
 
-		fontSize: "1.1rem",
-		borderRadius: "10px",
+		fontSize: $fontSize ? $fontSize : "1.1rem",
+		borderRadius: $borderRadius ? $borderRadius : "10px",
 		background: "transparent",
 		color: "black",
+
+
 
 		"&::placeholder": {
 			color: "rgba(0, 0, 0, .25)",
@@ -34,6 +40,18 @@ export const Textarea_Container = styled.div(({ theme: {} }) => ({
 		},
 		// border: "1px solid #ffffff30",
 	},
+
+	".addComment_icons": {
+
+		
+
+		".addComment_image_icon": {
+			display: "inline-block",
+			marginLeft: '15px',
+			margin: '2px 15px',
+		}
+		
+	}
 }));
 
 export const Image_Preview_Container = styled.div(({ theme: {} }) => ({
@@ -67,21 +85,18 @@ export const Image_Preview_Container = styled.div(({ theme: {} }) => ({
 	},
 }));
 
-
-
 export const Media_Container = styled.div(({ theme: {} }) => ({
 	display: "flex",
-	justifyContent: 'space-between',
+	justifyContent: "space-between",
 
-	width: '120px',
+	width: "120px",
 
 	".select_image, .select_video, .select_poll ": {
 		background: "rgba(0, 0, 0, 0.1)",
 		height: "28px",
 		width: "28px",
 
-		borderRadius: '3px',
-		
+		borderRadius: "3px",
 
 		label: {
 			height: "100%",
@@ -92,22 +107,21 @@ export const Media_Container = styled.div(({ theme: {} }) => ({
 			justifyContent: "center",
 
 			fontSize: "13px",
-			cursor: 'pointer',
-			
+			cursor: "pointer",
 		},
 	},
 
 	".select_video": {
 		"& > *": {
 			pointerEvents: "none",
-			color: 'rgba(0, 0, 0, 0.2)'
+			color: "rgba(0, 0, 0, 0.2)",
 		},
 	},
 
 	".select_poll": {
 		"& > *": {
 			pointerEvents: "none",
-			color: 'rgba(0, 0, 0, 0.2)'
+			color: "rgba(0, 0, 0, 0.2)",
 		},
 	},
 }));

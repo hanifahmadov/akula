@@ -77,6 +77,8 @@ const defineType = (type) => {
 			return faThumbsDown;
 		case "faThumbsDownRegular":
 			return faThumbsDownRegular;
+		case "faImage":
+			return faImage;
 		default:
 			return null;
 	}
