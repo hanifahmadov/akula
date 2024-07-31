@@ -20,7 +20,6 @@ export const Comment_Container = styled.div(({ theme: {}, $commentOpen, $isFor }
 		},
 
 		".comment_column_body": {
-			width: "100%",
 			display: "flex",
 			justifyContent: "flex-start",
 			flexDirection: "column",
@@ -29,13 +28,14 @@ export const Comment_Container = styled.div(({ theme: {}, $commentOpen, $isFor }
 
 			".comment_body_row_top": {
 				width: "100%",
-				background: "white",
-				padding: "2px 12px 4px 12px",
+				background: "rgba(0, 0, 0, .05)",
+				padding: "2px 15px 4px 12px",
 
 				borderRadius: "10px",
 
 				".username": {
 					fontWeight: "500",
+					lineHeight: '16px',
 					fontSize: ".9rem",
 				},
 				".content": {

@@ -59,15 +59,6 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyI
 					 * 	extra work and useless recalls no needed!
 					 * */
 
-					/** in positive resolve here, i am updating the global state to run the get allpost hooks in the Homejs */
-					//# important
-					/**
-					 * likeType global state only getting updated when Likepost apis success so when user click the funny or dislike
-					 * this will not get changed and it will not get trigger the useEffect.
-					 * so, we have to find the way to use $en to modifiy specific field of the Like object so this can re-run
-					 * means to.
-					 */
-
 					setLikeType((likeType) => !likeType);
 
 					/** also we have to close the popover right after the response */
@@ -80,7 +71,7 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyI
 		}
 
 		if (reactElement == "comment") {
-			likeCommentAPI({ accessToken: signedUser.accessToken, postId, commentId, likeType: classname })
+			likeCommentAPI({ accessToken: signedUser.accessToken, commentId, likeType: classname })
 				.then((res) => {
 					console.log("likeCommentAPI has run: ");
 					setLikeType((likeType) => !likeType);

@@ -1,19 +1,25 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { motion } from "framer-motion";
 import OutsideClickHandler from "react-outside-click-handler";
 
+/* API */
+import { addCommentAPI } from "../../../../apis/apiCalls";
+
 /* GLOBAL */
-import { userDefault } from "../../../auth/shared/store/states";
+import { commentSubmitDefault, userDefault } from "../../../auth/shared/store/states";
 
 /*  STYLED */
 import { AddComment_Container } from "./post.styled";
+
+/* HELPERS */
 import { Textarea } from "../form/Textarea";
 import { ImagePreview } from "../form/ImagePreview";
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
-export const AddComment = () => {
+export const AddComment = ({ postId }) => {
 	const singedUser = useRecoilValue(userDefault);
+	const [commentSubmit, setCommentSubmit] = useRecoilState(commentSubmitDefault);
 
 	/**
 	 *  textarea values and refs
@@ -28,7 +34,27 @@ export const AddComment = () => {
 	/**
 	 *
 	 */
+
 	const [displayButton, setDisplayButton] = useState(false);
+
+	const handleAddCommentSendButtonClick = (e) => {
+		/** Add new comment Api
+		 *
+		 */
+		addCommentAPI({ accessToken: singedUser.accessToken, postId, commentText: text })
+			.then((res) => {
+				console.log(" add comment api success");
+
+				/* trigger getAllPosts inside Home.js */
+				setCommentSubmit((commentSubmit) => !commentSubmit);
+
+				/* reset textArea text */
+				setText('')
+			})
+			.catch((err) => {
+				console.log(" add comment api err");
+			});
+	};
 
 	return (
 		<OutsideClickHandler
@@ -52,7 +78,6 @@ export const AddComment = () => {
 							borderRadius={"20px"}
 							height={1}
 							maxHeight={"5rem"}
-							padding={"10px 65px 10px 15px "}
 							owner={"addComment"}
 							setDisplayButton={setDisplayButton}
 						/>
@@ -70,7 +95,7 @@ export const AddComment = () => {
 								<Fontawesome type={"faImage"} fontSize={"1.1rem"} />
 							</div>
 
-							<div className='addCommentSendButton'>
+							<div className='addCommentSendButton' onClick={handleAddCommentSendButtonClick}>
 								<button>send</button>
 							</div>
 						</motion.div>

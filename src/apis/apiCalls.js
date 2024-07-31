@@ -189,11 +189,11 @@ If any problem on the apis, check out this additions   */
 
 /** //# COMMENT THE POST APIs
  */
-export const addCommentToPostAPI = ({ accessToken, postId, commentText }) => {
+export const addCommentAPI = ({ accessToken, postId, commentText }) => {
 	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
 	return axios({
 		/* apiUrl explained in the above how it gets defined  // # explain inthe import field */
-		url: `${apiUrl}/posts/${postId}/comments`,
+		url: `${apiUrl}/posts/${postId}/addcomment`,
 		/* PUT request is for the existing file gets updated */
 		method: "POST",
 		/* credetials true and includes enables the cookies are attached to the send request */
@@ -250,11 +250,11 @@ export const replyToCommentAPI = ({ accessToken, postId, commentId, replyText })
 
 /** //# LIKE COMMENT APIs
  */
-export const likeCommentAPI = ({ accessToken, postId, commentId, likeType }) => {
+export const likeCommentAPI = ({ accessToken, commentId, likeType }) => {
 	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
 	return axios({
 		/* apiUrl explained in the above how it gets defined  // # explain inthe import field */
-		url: `${apiUrl}/posts/${postId}/comments/${commentId}/reaction`,
+		url: `${apiUrl}/comments/${commentId}/reaction`,
 		/* PUT request is for the existing file gets updated */
 		method: "PUT",
 		/* credetials true and includes enables the cookies are attached to the send request */

@@ -27,13 +27,27 @@ export const Post_Reaction = ({ postId, likes, comments }) => {
 
 			<div className='comments_section'>
 				<div className='all_comments_row'>
-					<div className='first_comment'>
-						{/* <Comment comment={comments[0]} postId={postId} signedUser={signedUser} isFor={"comment"}/> */}
+					{comments.length > 0 &&
+						comments.map((comment, index) => {
+							return (
+								<Comment
+									comment={comment}
+									postId={postId}
+									signedUser={signedUser}
+									isFor={"comment"}
+									key={index}
+								/>
+							);
+						})}
+					{/* <div className='first_comment'>
+						{comments.length > 0 && (
+							<Comment comment={comments[0]} postId={postId} signedUser={signedUser} isFor={"comment"} />
+						)}
 					</div>
 
 					<div className='rest_of_comments'>
 
-					</div>
+					</div> */}
 				</div>
 
 				<div className='comment_input_row'></div>

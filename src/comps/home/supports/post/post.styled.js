@@ -76,7 +76,7 @@ export const Post_Content_Container = styled.div(({ theme: {} }) => ({
 	marginTop: "15px",
 
 	".content": {
-		background: "rgba(255, 255, 255, .5)",
+		background: "rgba(255, 255, 255, 1)",
 
 		fontSize: "1.1rem",
 		fontWeight: "400",
@@ -90,7 +90,7 @@ export const Post_Content_Container = styled.div(({ theme: {} }) => ({
 	".post_content_image_wrapper": {
 		img: {
 			width: "100%",
-			height: "25rem",
+			height: "25.25rem",
 			borderRadius: "0px",
 		},
 	},
@@ -213,8 +213,14 @@ export const Post_Reaction_Container = styled(motion.div)(({ theme: {}, $comment
 			borderRadius: "5px",
 
 			".all_comments_row": {
-				maxHeight: "25rem",
+				display: "flex",
+				flexDirection: 'column',
+				gap:'12px',
+
+				maxHeight: "35rem",
 				overflow: "scroll",
+				
+
 				/* has 2 row  */
 				".first_comment": {},
 
@@ -295,25 +301,29 @@ export const AddComment_Container = styled.div(({ theme: {} }) => {
 			width: "100%",
 			".addComment_post_column_top_row": {
 				width: "100%",
+				padding: "0px 5px 0px 10px",
 			},
 
 			".addComment_post_column_bottom_row": {
 				width: "100%",
-				marginTop:'5px',
+				marginTop: "5px",
 
 				display: "flex",
 				justifyContent: "space-between",
+
+				padding: "0px 5px 0px 10px",
 
 				".addComment_image_icon": {
 					marginLeft: "15px",
 				},
 
 				".addCommentSendButton": {
-					marginRight:'12px',
+					marginRight: "12px",
+
 
 					button: {
 						width: "2.5rem",
-						lineHeight: '15px',
+						lineHeight: "15px",
 
 						color: "#fff",
 						background: "#000",

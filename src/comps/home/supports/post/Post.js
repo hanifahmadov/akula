@@ -35,20 +35,16 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 					{/** Reactions
 					 * 	likes will be passed to Popover.js
 					 */}
-					 
-					<Post_Reaction postId={_id} likes={likes} comments={comments}/>
+
+					<Post_Reaction postId={_id} likes={likes} comments={comments} />
 				</div>
 
-				<div className='reaction_row_two'>
-					
-				</div>
+				<div className='reaction_row_two'></div>
 			</div>
 
-			<div className="post_comment_wrapper">
-				<AddComment/>
+			<div className='post_comment_wrapper'>
+				<AddComment postId={_id} />
 			</div>
-
-
 		</Post_Container>
 	);
 };

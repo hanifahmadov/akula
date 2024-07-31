@@ -2,21 +2,22 @@
 import styled from "styled-components";
 // import { motion } from "framer-motion";
 
-export const Textarea_Container = styled.div(({ theme: {}, $fontSize, $padding, $maxHeight, $borderRadius}) => ({
+export const Textarea_Container = styled.div(({ theme: {}, $fontSize, $padding, $maxHeight, $borderRadius }) => ({
 	width: "100%",
-	height: 'fit-content',
+	height: "fit-content",
 	background: "white",
-	
+
 	display: "flex",
-	flexDirection:'column',
+	flexDirection: "column",
 
 	overflow: "hidden",
 
+	padding: "10px 2px",
+
 	borderRadius: $borderRadius ? $borderRadius : "10px",
 
-
 	".textarea": {
-		width: "100%",		
+		width: "100%",
 		maxHeight: $maxHeight ? $maxHeight : "8rem",
 		border: "none",
 		overflow: "auto",
@@ -25,14 +26,11 @@ export const Textarea_Container = styled.div(({ theme: {}, $fontSize, $padding, 
 		MozBoxShadow: "none", // -moz-box-shadow
 		boxShadow: "none",
 		resize: "none",
-		padding: $padding ? $padding : "10px 15px",
-
+		padding: $padding ? $padding : "0px 15px",
 		fontSize: $fontSize ? $fontSize : "1.1rem",
 		borderRadius: $borderRadius ? $borderRadius : "10px",
 		background: "transparent",
 		color: "black",
-
-
 
 		"&::placeholder": {
 			color: "rgba(0, 0, 0, .25)",
@@ -42,16 +40,12 @@ export const Textarea_Container = styled.div(({ theme: {}, $fontSize, $padding, 
 	},
 
 	".addComment_icons": {
-
-		
-
 		".addComment_image_icon": {
 			display: "inline-block",
-			marginLeft: '15px',
-			margin: '2px 15px',
-		}
-		
-	}
+			marginLeft: "15px",
+			margin: "2px 15px",
+		},
+	},
 }));
 
 export const Image_Preview_Container = styled.div(({ theme: {} }) => ({

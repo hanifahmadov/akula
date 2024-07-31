@@ -146,6 +146,12 @@ export const Comment = ({
 							</div>
 						)}
 					</div>
+
+					<div className="addReply_container">
+
+						
+						
+					</div>
 				</div>
 
 				<div className='comment_replies'>
