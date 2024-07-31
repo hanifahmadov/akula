@@ -5,7 +5,7 @@ import styled from "styled-components";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
-export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $comp }) => ({
+export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $reactElement }) => ({
 	height: "2.25rem",
 	width: "8rem",
 
@@ -33,7 +33,7 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $comp })
 	top: "-45px",
 
 	
-	left: $comp == "comment" ? "-45px" : "-13px",
+	left: $reactElement == "comment" ? "-45px" : "-13px",
 
 	borderRadius: "3px",
 

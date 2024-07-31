@@ -107,11 +107,9 @@ export const createNewRoomApi = (user, data) => {
 	});
 };
 
-/////////////////////////////////
-
+//////////////////////////////////
 /* POST ROUTES APIS */
-
-////////////////////////////////
+/////////////////////////////////
 
 export const newpostAPI = ({ accessToken }, data) => {
 	return axios({
@@ -257,6 +255,30 @@ export const likeCommentAPI = ({ accessToken, postId, commentId, likeType }) => 
 	return axios({
 		/* apiUrl explained in the above how it gets defined  // # explain inthe import field */
 		url: `${apiUrl}/posts/${postId}/comments/${commentId}/reaction`,
+		/* PUT request is for the existing file gets updated */
+		method: "PUT",
+		/* credetials true and includes enables the cookies are attached to the send request */
+		/* expalin cookie checks here or above // # later */
+		withCredentials: true,
+		credentials: "include",
+
+		headers: {
+			Authorization: `Bearer ${accessToken}` /* passing user token  */,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
+		},
+		/* data is sending the only like type that we have to get it from the req.body */
+		data: { likeType },
+	});
+};
+
+/** //# LIKE REPLY APIs
+ */
+export const likeReplyAPI = ({ accessToken, replyId, likeType }) => {
+	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
+	return axios({
+		/* Server Route */
+		/* /replies/:replyId/reaction" */
+		url: `${apiUrl}/replies/${replyId}/reaction`,
 		/* PUT request is for the existing file gets updated */
 		method: "PUT",
 		/* credetials true and includes enables the cookies are attached to the send request */

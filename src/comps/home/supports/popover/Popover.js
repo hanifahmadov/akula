@@ -1,7 +1,6 @@
 /* NPM PACKAGES IMPORTS */
 import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
@@ -21,11 +20,11 @@ import { likeTypeDefault, userDefault } from "../../../auth/shared/store/states"
 import { Popover_Container } from "./popover.styled";
 
 /* APIs */
-import { likeCommentAPI, likePostAPI } from "../../../../apis/apiCalls";
+import { likeCommentAPI, likePostAPI, likeReplyAPI } from "../../../../apis/apiCalls";
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 /** Popover  Component */
-export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, likes, comp }) => {
+export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyId, likes, reactElement }) => {
 	/*  getting global state likeType */
 	const [likeType, setLikeType] = useRecoilState(likeTypeDefault);
 
@@ -41,25 +40,16 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, likes,
 	// setPopoverOpen((popoverOpen) => !popoverOpen);
 
 	/* click handler - when like type select or click  */
+
+	/* we are handling 3 types of click, liking a Post, liking a Comment, and liking a reply */
 	const handlePopoverClick = (e) => {
 		/** Getting className of clicked likeType here */
 		const classname = e.target.className;
 
-		if (comp == "comment") {
-			likeCommentAPI({ accessToken: signedUser.accessToken, postId, commentId, likeType: classname })
-				.then((res) => {
-					console.log("yeyy comments");
+		/* if reactElement is post */
+		if (reactElement == "post") {
+			/* react for the post */
 
-					console.log(res)
-				})
-				.catch((err) => {
-					console.log("err comment like", err);
-				});
-		} else {
-			/**
-			 * 	now we know the like type and we can update the post on server/database here.
-			 * 	like post API takes 3 args that userToken, the postId and likeType.
-			 * */
 			likePostAPI({ accessToken: signedUser.accessToken, postId, likeType: classname })
 				.then((res) => {
 					/** when success,then will work and will get the result of success, just a text not the updated object.
@@ -78,8 +68,6 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, likes,
 					 * means to.
 					 */
 
-			
-
 					setLikeType((likeType) => !likeType);
 
 					/** also we have to close the popover right after the response */
@@ -87,17 +75,41 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, likes,
 				})
 				.catch((err) => {
 					/** catch the error here */
-					console.log("error inside popover click", err);
+					console.log("error likePostAPI likePostAPI", err);
+				});
+		}
+
+		if (reactElement == "comment") {
+			likeCommentAPI({ accessToken: signedUser.accessToken, postId, commentId, likeType: classname })
+				.then((res) => {
+					console.log("likeCommentAPI has run: ");
+					setLikeType((likeType) => !likeType);
+				})
+				.catch((err) => {
+					console.log("err comment like", err);
+				});
+		}
+
+		if (reactElement == "reply") {
+			likeReplyAPI({ accessToken: signedUser.accessToken, postId, commentId, replyId, likeType: classname })
+				.then((res) => {
+
+					console.log(res.data)
+					console.log("likeReplyAPI has run: ");
+					setLikeType((likeType) => !likeType);
+				})
+				.catch((err) => {
+					console.log("err likeReplyAPI", err);
 				});
 		}
 	};
 
+	// const alreadyLiked = likes.length ? likes.find((like) => like.owner._id == signedUser._id) : { reaction: "apple" };
+
 	const alreadyLiked = { reaction: "apple" };
 
-	// likes.length ? likes.find((like) => like.owner._id == signedUser._id) : {};
-
 	return (
-		<Popover_Container $popoverOpen={popoverOpen} $comp={comp} onClick={handlePopoverClick}>
+		<Popover_Container $popoverOpen={popoverOpen} $reactElement={reactElement} onClick={handlePopoverClick}>
 			<section className='icons'>
 				{/* <FontAwesomeIcon icon={faHeart} /> */}
 				<div className='heart'>

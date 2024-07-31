@@ -8,7 +8,7 @@ export const Post_Content = ({media, content}) => {
 		<Post_Content_Container>
 			<section className='content'>{content}</section>
 			{media && (
-				<section className='media_section'>
+				<section className='post_content_image_wrapper'>
 					<img src={media} alt='upload-media' />
 				</section>
 			)}

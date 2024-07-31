@@ -32,7 +32,7 @@ export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) =>
 
 	return (
 		<Button_Groups_Container className='button_groups_container'>
-			{/* LIKE */ console.log(popoverOpen)}
+
 
 			<OutsideClickHandler
 				onOutsideClick={() => {
@@ -52,7 +52,7 @@ export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) =>
 						setPopoverOpen={setPopoverOpen}
 						postId={postId}
 						likes={likes}
-						comp={"post"}
+						reactElement={"post"}
 					/>
 
 					<div className='like_button button' onClick={handleLikeButtonClick}>

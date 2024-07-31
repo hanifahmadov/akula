@@ -2,14 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import FormData from "form-data";
 
-
 /* APIS */
 import apiUrl from "../../apis/apiUrl";
 import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 
 /* GLOBAL STATES */
 import { userDefault, likeTypeDefault, commentSubmitDefault } from "../auth/shared/store/states";
-
 
 /* STYLED COMPONENTS */
 import { Bottom_Section, Home_Container, Top_Section } from "./home.styled";
@@ -54,15 +52,15 @@ export const Home = () => {
 		data.append("image", image);
 		data.append("baseurl", apiUrl);
 
-		// newpostAPI(signedUser, data)
-		// 	.then((res) => {
-		// 		setImage(undefined);
-		// 		setText("");
-		// 		setPostSubmit((postSubmit) => !postSubmit);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log("newpostAPI error", err);
-		// 	});
+		newpostAPI(signedUser, data)
+			.then((res) => {
+				setImage(undefined);
+				setText("");
+				setPostSubmit((postSubmit) => !postSubmit);
+			})
+			.catch((err) => {
+				console.log("newpostAPI error", err);
+			});
 	};
 
 	/**

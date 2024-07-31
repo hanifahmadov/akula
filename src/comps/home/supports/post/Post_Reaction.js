@@ -9,7 +9,7 @@ import { Post_Reaction_Container } from "./post.styled";
 
 /* COMPONENTS */
 import { Button_Groups } from "./Button_Groups";
-import { Comment } from "./Comment";
+import { Comment } from "../comment/Comment";
 
 export const Post_Reaction = ({ postId, likes, comments }) => {
 	const signedUser = useRecoilValue(userDefault);
@@ -21,8 +21,6 @@ export const Post_Reaction = ({ postId, likes, comments }) => {
 	 * */
 	const [commentOpen, setCommentOpen] = useState(false);
 
-	console.log(comments, "asdedeasde ded");
-
 	return (
 		<Post_Reaction_Container $commentOpen={commentOpen}>
 			<Button_Groups postId={postId} likes={likes} commentOpen={commentOpen} setCommentOpen={setCommentOpen} />
@@ -30,10 +28,12 @@ export const Post_Reaction = ({ postId, likes, comments }) => {
 			<div className='comments_section'>
 				<div className='all_comments_row'>
 					<div className='first_comment'>
-						<Comment comment={comments[0]} postId={postId} signedUser={signedUser} />
+						{/* <Comment comment={comments[0]} postId={postId} signedUser={signedUser} isFor={"comment"}/> */}
 					</div>
 
-					<div className='rest_of_comments'></div>
+					<div className='rest_of_comments'>
+
+					</div>
 				</div>
 
 				<div className='comment_input_row'></div>
