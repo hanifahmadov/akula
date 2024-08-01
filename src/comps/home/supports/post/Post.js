@@ -7,11 +7,12 @@ import { Post_Container } from "./post.styled";
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 /* SUB COMPONENTS */
-import { Post_Reaction } from "./Post_Reaction";
 import { Post_Header } from "./Post_Header";
 import { Post_Content } from "./Post_Content";
-import { ReactionCounts } from "./ReactionCounts";
+import { ReactionCounts } from "../helpers/ReactionCounts";
 import { AddComment } from "./AddComment";
+import { Button_Groups } from "./Button_Groups";
+import { Comment } from "../comment/Comment";
 
 export const Post = ({ post: { _id, owner, createdAt, content, media, likes, comments } }) => {
 	/* TODO */
@@ -27,22 +28,23 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 			{/* post row second */}
 			<Post_Content media={media} content={content} />
 
-			<div className='post_row_third'>
-				<div className='reaction_row_one'>
-					{/* REACTION COUNTS */}
-					<ReactionCounts likes={likes} />
+			<div className='reaction_counts_and_button_groups_row_third'>
+				{/* REACTION COUNTS */}
+				<ReactionCounts likes={likes} />
 
-					{/** Reactions
-					 * 	likes will be passed to Popover.js
-					 */}
-
-					<Post_Reaction postId={_id} likes={likes} comments={comments} />
-				</div>
-
-				<div className='reaction_row_two'></div>
+				{/* Like-Comment-Share-Bookmark */}
+				<Button_Groups postId={_id} postLikes={likes} />
 			</div>
 
-			<div className='post_comment_wrapper'>
+			<div className='all_comments_row_four'>
+				{comments &&
+					comments.length &&
+					comments.map((comment, index) => {
+						return <Comment key={index}  comment={comment} parentId={_id} />;
+					})}
+			</div>
+
+			<div className='add_comment_wrapper_row_five'>
 				<AddComment postId={_id} />
 			</div>
 		</Post_Container>

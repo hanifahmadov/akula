@@ -1,24 +1,12 @@
 import React, { useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-
-/* FONTAWESOME */
-import {
-	faCircleXmark,
-	faImage,
-	faVideo,
-	faMasksTheater,
-	faCircleCheck,
-	faUniversalAccess,
-	faEarthAmericas,
-} from "@fortawesome/free-solid-svg-icons";
-
-library.add(faCircleXmark, faImage, faVideo, faMasksTheater, faCircleCheck, faUniversalAccess, faEarthAmericas);
 
 /* STYLED */
 import { Uploads_Container } from "./store.styled";
 
-export const Uploads = ({ setImage }) => {
+/* HELPER */
+import { Fontawesome } from "../fontawesome/Fontawesome";
+
+export const Uploads = ({ setImage, labelHeight, labelWidth, gap, iconSize }) => {
 	const imageRef = useRef();
 
 	const handleImageChange = () => {
@@ -27,7 +15,7 @@ export const Uploads = ({ setImage }) => {
 	};
 
 	return (
-		<Uploads_Container>
+		<Uploads_Container $labelHeight={labelHeight} $labelWidth={labelWidth} $gap={gap}>
 			<div className='select_image'>
 				<input
 					type='file'
@@ -39,19 +27,19 @@ export const Uploads = ({ setImage }) => {
 					onChange={handleImageChange}
 				/>
 				<label htmlFor='image' className='label image'>
-					<FontAwesomeIcon icon={faImage} className='icon image' />
+					<Fontawesome type={"faImage"} className='icon image' fontSize={iconSize} />
 				</label>
 			</div>
 
 			<div className='select_video'>
 				<label htmlFor='' className='label video'>
-					<FontAwesomeIcon icon={faVideo} className='icon video' />
+					<Fontawesome type={"faVideo"} className='icon video' fontSize={iconSize} />
 				</label>
 			</div>
 
 			<div className='select_poll'>
 				<label htmlFor='' className='label poll'>
-					<FontAwesomeIcon icon={faMasksTheater} className='icon poll' />
+					<Fontawesome type={"faMasksTheater"} className='icon poll' fontSize={iconSize} />
 				</label>
 			</div>
 		</Uploads_Container>

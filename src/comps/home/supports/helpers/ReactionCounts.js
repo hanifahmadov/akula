@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
 
 /* STYLED */
-import { ReactionCounts_Container, Heart_Container, Smile_Container, Dislike_Container } from "./post.styled";
+
+import { ReactionCounts_Container, Heart_Container, Smile_Container, Dislike_Container } from "./helpers.styled";
 
 /* HELPER */
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
-export const ReactionCounts = ({ likes }) => {
+export const ReactionCounts = ({
+	likes,
+	padding,
+	margin,
+	width,
+	gap,
+	numberFontSize,
+	numberLineHeight,
+	numberFontWeight,
+	numberPadding,
+	numberMargin,
+	iconSize,
+}) => {
 	/** process the likes
 	 * we can set the counts directly, like likes.length.
 	 * so, the post can have 1 or 100 likes how to control and get these data
@@ -32,19 +45,21 @@ export const ReactionCounts = ({ likes }) => {
 		let newDislike = [];
 
 		/* loops the new likes array and group them based on their reaction */
-		likes.map((like) => {
-			if (like.reaction == "heart") {
-				newHeart.push(like);
-			}
+		likes &&
+			likes.length > 0 &&
+			likes.map((like) => {
+				if (like.reaction == "heart") {
+					newHeart.push(like);
+				}
 
-			if (like.reaction == "smile") {
-				newSmile.push(like);
-			}
+				if (like.reaction == "smile") {
+					newSmile.push(like);
+				}
 
-			if (like.reaction == "dislike") {
-				newDislike.push(like);
-			}
-		});
+				if (like.reaction == "dislike") {
+					newDislike.push(like);
+				}
+			});
 
 		/* set the final values as a result */
 		setHeart(newHeart);
@@ -55,9 +70,19 @@ export const ReactionCounts = ({ likes }) => {
 	}, [likes]);
 
 	return (
-		<ReactionCounts_Container>
+		<ReactionCounts_Container
+			$padding={padding}
+			$margin={margin}
+			$width={width}
+			$gap={gap}
+			$numberFontSize={numberFontSize}
+			$numberLineHeight={numberLineHeight}
+			$numberFontWeight={numberFontWeight}
+			$numberPadding={numberPadding}
+			$numberMargin={numberMargin}
+		>
 			<Heart_Container className='heart_container' $heart={heart}>
-				<Fontawesome type={"faHeart"} />
+				<Fontawesome type={"faHeart"} fontSize={iconSize} />
 
 				<div className='heart_number number'>{heart.length}</div>
 				{/** this is a list that will show the users who liked the post, add functionality // TODO  */}
@@ -65,12 +90,12 @@ export const ReactionCounts = ({ likes }) => {
 			</Heart_Container>
 
 			<Smile_Container className='smile_container' $smile={smile}>
-				<Fontawesome type={"faFaceLaughBeam"} />
+				<Fontawesome type={"faFaceLaughBeam"} fontSize={iconSize} />
 				<div className='smile_number number'>{smile.length}</div>
 			</Smile_Container>
 
 			<Dislike_Container className='dislike_container' $dislike={dislike}>
-				<Fontawesome type={"faThumbsDown"} />
+				<Fontawesome type={"faThumbsDown"} fontSize={iconSize} />
 				<div className='dislike_number number'>{dislike.length}</div>
 			</Dislike_Container>
 		</ReactionCounts_Container>

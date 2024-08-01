@@ -43,7 +43,6 @@ library.add(
 	faThumbsUp,
 	faComment,
 	faHeart,
-	faImage,
 	faFaceSmile,
 	faThumbsDown,
 	faFaceLaughBeam,
@@ -79,6 +78,10 @@ const defineType = (type) => {
 			return faThumbsDownRegular;
 		case "faImage":
 			return faImage;
+		case "faVideo":
+			return faVideo;
+		case "faMasksTheater":
+			return faMasksTheater;
 		default:
 			return null;
 	}

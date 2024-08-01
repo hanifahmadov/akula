@@ -5,6 +5,23 @@ import { motion } from "framer-motion";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
+export const AddPost_Container = styled.div(({ theme: {} }) => {
+	return {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "flex-start",
+
+		width: "100%",
+		background: "rgba(0, 0, 0, .1)",
+
+		marginTop:'5px',
+		padding: "4px 0px",
+		borderRadius: "10px",
+	};
+});
+
+
 export const Post_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
 
@@ -18,8 +35,27 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 	marginTop: "1.5rem",
 	padding: "15px",
 
-	".post_row_third": {},
-	".post_row_fourth": {},
+	".reaction_counts_and_button_groups_row_third": {},
+
+	".all_comments_row_four": {
+
+		display: 'flex',
+		flexDirection: 'column',
+		gap:"10px",
+
+		width: '100%',
+		minHeight:'30rem',
+		overflow:'scroll',
+		
+		marginTop: '1rem',
+		padding: '10px 3px',
+
+		background:'white'
+
+		
+	},
+
+	".add_comment_wrapper_row_five": {},
 }));
 
 export const Post_Header_Container = styled.div(({ theme: {} }) => ({
@@ -107,104 +143,6 @@ export const Post_Content_Container = styled.div(({ theme: {} }) => ({
 	},
 }));
 
-/* REACTION COUNTS */
-export const ReactionCounts_Container = styled.div(({ theme: {} }) => ({
-	display: "flex",
-	justifyContent: "flex-start",
-	alignItems: "center",
-
-	marginTop: "10px",
-	padding: "5px 5px",
-
-	".number": {
-		marginLeft: "3px",
-		fontWeight: "700",
-		cursor: "pointer",
-
-		background: "rgba(255, 255, 255, .85)",
-
-		lineHeight: "15px",
-		textAlign: "center",
-		borderRadius: "2px",
-		fontSize: ".9rem",
-		padding: "0px 5px",
-	},
-}));
-
-/* this container is used inside .likes_counts_main_section */
-export const Heart_Container = styled.div(({ theme: {}, $heart }) => ({
-	/*  create animation for these elements.fyi transition animation doesnt work on display none.
-		for now, use opacity 0 and then dipslay none use framer motion, //TODO
-	 */
-	display: $heart.length ? "flex" : "none",
-	justifyContent: "center",
-	alignItems: "center",
-
-	marginRight: "15px",
-
-	/* number common class styled in the above in parent section */
-	".heart_number": {},
-
-	/** this is the div that will hold the usernames and maybe user avatart
-	 * who like the post and this will pop up when a user click the number next to likes.
-	 *
-	 * lets say 2 people smiled the post and in the media section, there will be a smile icon and number 2 next to it.
-	 * when user clicks the number 2, then this div will be pop-up and will show those 2 users username and avatar maybe.
-	 *
-	 * in this case, this div position must be absolute, and its parents position must be relative. just mentioned it in the
-	 * above of this comment.
-	 *
-	 * // TODO
-	 * will do it later, after comment is done
-	 */
-	position: "relative",
-
-	".heart_list": {
-		height: "15rem",
-		width: "10rem",
-		background: "gray",
-
-		borderRadius: "10px",
-
-		position: "absolute",
-		zIndex: "10",
-		top: "2px",
-		left: "30px",
-
-		overflow: "auto", // or scroll
-	},
-}));
-
-/* this container is used inside .likes_counts_main_section */
-export const Smile_Container = styled.div(({ theme: {}, $smile }) => ({
-	/*  create animation for these elements.fyi transition animation doesnt work on display none.
-		for now, use opacity 0 and then dipslay none use framer motion, //TODO
-	 */
-	display: $smile.length ? "flex" : "none",
-	justifyContent: "center",
-	alignItems: "center",
-
-	marginRight: "15px",
-
-	/* number common class styled in the above in parent section */
-	".smile_number": {},
-}));
-
-/* this container is used inside .likes_counts_main_section */
-export const Dislike_Container = styled.div(({ theme: {}, $dislike }) => ({
-	/*  create animation for these elements.fyi transition animation doesnt work on display none.
-		for now, use opacity 0 and then dipslay none use framer motion, //TODO
-	 */
-	display: $dislike.length ? "flex" : "none",
-	justifyContent: "center",
-	alignItems: "center",
-
-	marginRight: "15px",
-
-	/* number common class styled in the above in parent section */
-	".dislike_number": {},
-}));
-
 export const Post_Reaction_Container = styled(motion.div)(({ theme: {}, $commentOpen }) => {
 	return {
 		width: "100%",
@@ -250,7 +188,7 @@ export const Button_Groups_Container = styled.div(({ theme: {} }) => ({
 	alignItems: "center",
 
 	marginTop: ".75rem",
-	padding: "0px 5px",
+	padding: "0px",
 
 	".like_wrapper ": {
 		position: "relative",

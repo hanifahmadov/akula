@@ -24,7 +24,18 @@ import { likeCommentAPI, likePostAPI, likeReplyAPI } from "../../../../apis/apiC
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 /** Popover  Component */
-export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyId, likes, reactElement }) => {
+export const Popover = ({
+	popoverOpen,
+	setPopoverOpen,
+	postId,
+	commentId,
+	likes,
+	replyId,
+	left,
+	right,
+	top,
+	bottom,
+}) => {
 	/*  getting global state likeType */
 	const [likeType, setLikeType] = useRecoilState(likeTypeDefault);
 
@@ -47,7 +58,7 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyI
 		const classname = e.target.className;
 
 		/* if reactElement is post */
-		if (reactElement == "post") {
+		if (postId) {
 			/* react for the post */
 
 			likePostAPI({ accessToken: signedUser.accessToken, postId, likeType: classname })
@@ -70,7 +81,7 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyI
 				});
 		}
 
-		if (reactElement == "comment") {
+		if (commentId) {
 			likeCommentAPI({ accessToken: signedUser.accessToken, commentId, likeType: classname })
 				.then((res) => {
 					console.log("likeCommentAPI has run: ");
@@ -81,11 +92,10 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyI
 				});
 		}
 
-		if (reactElement == "reply") {
+		if (replyId) {
 			likeReplyAPI({ accessToken: signedUser.accessToken, postId, commentId, replyId, likeType: classname })
 				.then((res) => {
-
-					console.log(res.data)
+					console.log(res.data);
 					console.log("likeReplyAPI has run: ");
 					setLikeType((likeType) => !likeType);
 				})
@@ -95,14 +105,21 @@ export const Popover = ({ popoverOpen, setPopoverOpen, postId, commentId, replyI
 		}
 	};
 
-	// const alreadyLiked = likes.length ? likes.find((like) => like.owner._id == signedUser._id) : { reaction: "apple" };
+	let alreadyLiked = likes && likes.length && likes.find((like) => like.owner._id == signedUser._id);
+	if (!alreadyLiked) alreadyLiked = { reaction: "banana" };
 
-	const alreadyLiked = { reaction: "apple" };
+	// console.log(alreadyLiked);
 
 	return (
-		<Popover_Container $popoverOpen={popoverOpen} $reactElement={reactElement} onClick={handlePopoverClick}>
+		<Popover_Container
+			$popoverOpen={popoverOpen}
+			$left={left}
+			$right={right}
+			$top={top}
+			$bottom={bottom}
+			onClick={handlePopoverClick}
+		>
 			<section className='icons'>
-				{/* <FontAwesomeIcon icon={faHeart} /> */}
 				<div className='heart'>
 					<Fontawesome
 						type={alreadyLiked?.reaction == "heart" ? "faHeart" : "faRegularHeart"}

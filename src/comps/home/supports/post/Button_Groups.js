@@ -10,7 +10,7 @@ import { Fontawesome } from "../fontawesome/Fontawesome";
 /* COMPONENTS */
 import { Popover } from "../popover/Popover";
 
-export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) => {
+export const Button_Groups = ({ postId, postLikes }) => {
 	/** defining local state popoverOpen. which makes popover to be open and closed.
 	 * 	used in this file and sending as a prop to this comp's child, <Popover />, line 146, this file.
 	 *
@@ -27,7 +27,8 @@ export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) =>
 	/** Comment Button clicked */
 	const handleCommentButtonClick = (e) => {
 		console.log("comment button clicked");
-		setCommentOpen((commentOpen) => !commentOpen);
+		// setCommentOpen((commentOpen) => !commentOpen);
+		/* this will open the comment section and activete the comment textarea */
 	};
 
 	return (
@@ -39,6 +40,7 @@ export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) =>
 					setPopoverOpen(false);
 					console.log("clicked outside");
 				}}
+				/** this will disabled the ourside click calls if popover is closed, this is a must */
 				disabled={!popoverOpen}
 			>
 				<button className='like_wrapper'>
@@ -51,8 +53,9 @@ export const Button_Groups = ({ postId, likes, commentOpen, setCommentOpen }) =>
 						popoverOpen={popoverOpen}
 						setPopoverOpen={setPopoverOpen}
 						postId={postId}
-						likes={likes}
-						reactElement={"post"}
+						/* likes are passing because of red icon on popover */
+						likes={postLikes}
+						left={"-13px"}
 					/>
 
 					<div className='like_button button' onClick={handleLikeButtonClick}>

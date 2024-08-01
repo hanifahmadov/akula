@@ -20,6 +20,7 @@ import { ImagePreview } from "./supports/form/ImagePreview";
 import { Uploads } from "./supports/form/Uploads";
 import { Post } from "./supports/post/Post";
 import { User_Avatar } from "./supports/form/User_Avatar";
+import AddPost from "./supports/post/AddPost";
 
 export const Home = () => {
 	/** GLOBAL STATES
@@ -47,9 +48,8 @@ export const Home = () => {
 	const handlePostClick = (e) => {
 		/** check - validate the text or content is added
 		 * handle react-toaster-notify
+		 * // TODO
 		 */
-
-		console.log("image image", image)
 
 		if (!text.trim().length && !image) {
 			console.log("Please add a text or image file");
@@ -100,24 +100,14 @@ export const Home = () => {
 			<div className='home_left_column'>
 				{/** fixed_width has a fixed min width  */}
 				<div className='fixed_width'>
-					{/** POST FORM */}
-					<Form_Container className='form_container'>
-						<Form_Left_Column className='left_column'>
-							<User_Avatar avatar={signedUser.avatar} width={"3.5rem"} height={"3.5rem"} />
-						</Form_Left_Column>
-
-						<Form_Right_Column className='right_column'>
-							<div className='textarea_and_image_preview_wrapper'>
-								<Textarea text={text} setText={setText} />
-								{image && <ImagePreview image={image} setImage={setImage} />}
-							</div>
-
-							<div className='media__and_submit_button_wrapper'>
-								<Uploads setImage={setImage} />
-								<button onClick={handlePostClick}>POST</button>
-							</div>
-						</Form_Right_Column>
-					</Form_Container>
+					<AddPost
+						signedUser={signedUser}
+						text={text}
+						setText={setText}
+						image={image}
+						setImage={setImage}
+						handlePostClick={handlePostClick}
+					/>
 
 					{/** ALL POSTS RENDERS */}
 					<div className='all_posts_container'>

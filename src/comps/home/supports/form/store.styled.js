@@ -84,16 +84,14 @@ export const Image_Preview_Container = styled.div(({ theme: {}, $imgHeight, $img
 	},
 }));
 
-export const Uploads_Container = styled.div(({ theme: {} }) => ({
+export const Uploads_Container = styled.div(({ theme: {}, $labelHeight, $labelWidth, $gap }) => ({
 	display: "flex",
-	justifyContent: "space-between",
-
-	width: "120px",
+	gap: $gap ? $gap : "10px",
 
 	".select_image, .select_video, .select_poll ": {
 		background: "rgba(0, 0, 0, 0.1)",
-		height: "28px",
-		width: "28px",
+		height: $labelHeight ? $labelHeight : "28px",
+		width: $labelWidth ? $labelWidth : "28px",
 
 		borderRadius: "3px",
 
@@ -125,21 +123,6 @@ export const Uploads_Container = styled.div(({ theme: {} }) => ({
 	},
 }));
 
-export const Form_Container = styled.div(({ theme: {} }) => {
-	return {
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "flex-start",
-
-		width: "100%",
-		background: "rgba(0, 0, 0, .1)",
-
-		padding: "10px",
-		borderRadius: "10px",
-	};
-});
-
 export const Form_Left_Column = styled.div(({ theme: {} }) => {
 	return {};
 });
@@ -159,26 +142,6 @@ export const Form_Right_Column = styled.div(({ theme: {}, $padding }) => {
 
 			marginTop: ".5rem",
 			padding: "0px 5px",
-
-			button: {
-				color: "#fff",
-				background: "#052c65",
-
-				textAlign: "center",
-				fontSize: "1rem",
-				fontWeight: "600",
-
-				padding: "2px 5px",
-				borderRadius: "2px",
-				letterSpacing: ".25px",
-
-				cursor: "pointer",
-				transition: "all .1s ease-in-out",
-
-				"&:hover": {
-					background: "#000",
-				},
-			},
 		},
 	};
 });
@@ -194,6 +157,40 @@ export const User_Avatar_Container = styled.div(({ theme: {}, $width, $height, $
 		},
 	};
 });
+
+export const Button = styled.div(
+	({
+		theme: {},
+		$fontSize,
+		$color,
+		$background,
+		$fontWeight,
+		$padding,
+		$letterSpacing,
+		$hoverBackground,
+		$boredrRadius,
+	}) => {
+		return {
+			color: $color ? $color : "#fff",
+			background: $background ? $background : "#052c65",
+
+			fontSize: $fontSize ? $fontSize : "1rem",
+			fontWeight: $fontWeight ? $fontWeight : "600",
+			textAlign: "center",
+
+			padding: $padding ? $padding : "2px 5px",
+			borderRadius: $boredrRadius ? $boredrRadius : "2px",
+			letterSpacing: $letterSpacing ? $letterSpacing : ".25px",
+
+			cursor: "pointer",
+			transition: "all .1s ease-in-out",
+
+			"&:hover": {
+				background: $hoverBackground ? $hoverBackground : "#000",
+			},
+		};
+	}
+);
 
 // export const Form_Left_Column = styled.div(({ theme: {} }) => {
 

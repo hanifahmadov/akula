@@ -14,7 +14,6 @@ import { AddComment_Container } from "./post.styled";
 
 /* HELPERS */
 import { Textarea } from "../form/Textarea";
-import { ImagePreview } from "../form/ImagePreview";
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 export const AddComment = ({ postId }) => {
@@ -81,7 +80,6 @@ export const AddComment = ({ postId }) => {
 							owner={"addComment"}
 							setDisplay={setCommentButton}
 						/>
-						{image && <ImagePreview image={image} setImage={setImage} />}
 					</div>
 
 					{commentButton && (
