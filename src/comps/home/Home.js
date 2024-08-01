@@ -7,17 +7,19 @@ import apiUrl from "../../apis/apiUrl";
 import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 
 /* GLOBAL STATES */
-import { userDefault, likeTypeDefault, commentSubmitDefault } from "../auth/shared/store/states";
+import { userDefault, likeTypeDefault, commentSubmitDefault, replySubmitDefault } from "../auth/shared/store/states";
 
 /* STYLED COMPONENTS */
-import { Bottom_Section, Home_Container, Top_Section } from "./home.styled";
+import { Home_Container } from "./home.styled";
+import { Form_Container, Form_Left_Column, Form_Right_Column } from "./supports/form/store.styled";
 
 /* COMPONENTS */
 import { Account } from "../auth/account/Account";
 import { Textarea } from "./supports/form/Textarea";
 import { ImagePreview } from "./supports/form/ImagePreview";
-import { Media } from "./supports/form/Media";
+import { Uploads } from "./supports/form/Uploads";
 import { Post } from "./supports/post/Post";
+import { User_Avatar } from "./supports/form/User_Avatar";
 
 export const Home = () => {
 	/** GLOBAL STATES
@@ -26,29 +28,37 @@ export const Home = () => {
 	const signedUser = useRecoilValue(userDefault);
 	const likeType = useRecoilValue(likeTypeDefault);
 	const commentSubmit = useRecoilValue(commentSubmitDefault);
-	const [postSubmit, setPostSubmit] = useState(false);
-
-	/**
-	 *  image grabs the post media
-	 */
-	const [image, setImage] = useState(undefined);
+	const replySubmit = useRecoilValue(replySubmitDefault);
 
 	/** Local state sets the all posts returns from the postsAPI, useEffect */
 	const [posts, setPosts] = useState([]);
+	const [postSubmit, setPostSubmit] = useState(false);
 
 	/**
 	 *  textarea values and refs
+	 * 	uploads values
 	 */
 	const [text, setText] = useState("");
-	// const textareaRef = useRef(null);
+	const [image, setImage] = useState(undefined);
 
 	/**
 	 * handles whne post is clicked
 	 */
 	const handlePostClick = (e) => {
+		/** check - validate the text or content is added
+		 * handle react-toaster-notify
+		 */
+
+		console.log("image image", image)
+
+		if (!text.trim().length && !image) {
+			console.log("Please add a text or image file");
+			return;
+		}
+
 		const data = new FormData();
 
-		data.append("text", text);
+		data.append("text", text.trim());
 		data.append("image", image);
 		data.append("baseurl", apiUrl);
 
@@ -83,44 +93,34 @@ export const Home = () => {
 				console.log("postsAPI ERROR =>");
 				console.log(err);
 			});
-	}, [postSubmit, likeType, commentSubmit]);
+	}, [postSubmit, likeType, commentSubmit, replySubmit]);
 
 	return (
 		<Home_Container className='home_container'>
-			{/** home has 2 column left and right
-			 * left is for the posts
-			 * right is for the account, make the right sticky to top.
-			 */}
-
-			{/** LEFT COLUMN, flex grow 1
-			 * 	THIS IS FOR CONTENT OF POSTS, CENTER SECTION.
-			 * 	home_left_columns takes whole row and we need a normal middle column for posts and comments
-			 * 	so, fixed_width container is gonna be fixed and stays in the middle
-			 */}
-
 			<div className='home_left_column'>
-				<div className='fixed_with'>
-					{/* POST INPUT */}
-					<div className='post_input'>
-						<Top_Section>
-							<img src={signedUser.avatar} className='signedUser_avatar' />
-							{/** because of the text and img goes in the same text area, we have to group them */}
-							<div className='textarea_wrapper'>
+				{/** fixed_width has a fixed min width  */}
+				<div className='fixed_width'>
+					{/** POST FORM */}
+					<Form_Container className='form_container'>
+						<Form_Left_Column className='left_column'>
+							<User_Avatar avatar={signedUser.avatar} width={"3.5rem"} height={"3.5rem"} />
+						</Form_Left_Column>
+
+						<Form_Right_Column className='right_column'>
+							<div className='textarea_and_image_preview_wrapper'>
 								<Textarea text={text} setText={setText} />
 								{image && <ImagePreview image={image} setImage={setImage} />}
 							</div>
-						</Top_Section>
-						<Bottom_Section>
-							<Media setImage={setImage} />
 
-							<div className='post_button_wrapper' onClick={handlePostClick}>
-								<button>POST</button>
+							<div className='media__and_submit_button_wrapper'>
+								<Uploads setImage={setImage} />
+								<button onClick={handlePostClick}>POST</button>
 							</div>
-						</Bottom_Section>
-					</div>
+						</Form_Right_Column>
+					</Form_Container>
 
-					{/* ALL POSTS */}
-					<div className='posts'>
+					{/** ALL POSTS RENDERS */}
+					<div className='all_posts_container'>
 						{posts.map((post, index) => {
 							return <Post key={index} post={post} />;
 						})}

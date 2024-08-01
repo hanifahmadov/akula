@@ -29,6 +29,7 @@ export const Post_Reaction = ({ postId, likes, comments }) => {
 				<div className='all_comments_row'>
 					{comments.length > 0 &&
 						comments.map((comment, index) => {
+							console.log(comment)
 							return (
 								<Comment
 									comment={comment}
@@ -36,6 +37,7 @@ export const Post_Reaction = ({ postId, likes, comments }) => {
 									signedUser={signedUser}
 									isFor={"comment"}
 									key={index}
+									metionedInReply={{ username: undefined, _id: undefined }}
 								/>
 							);
 						})}

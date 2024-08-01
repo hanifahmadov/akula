@@ -16,9 +16,9 @@ import {
 library.add(faCircleXmark, faImage, faVideo, faMasksTheater, faCircleCheck, faUniversalAccess, faEarthAmericas);
 
 /* STYLED */
-import { Media_Container } from "./store.styled";
+import { Uploads_Container } from "./store.styled";
 
-export const Media = ({ setImage }) => {
+export const Uploads = ({ setImage }) => {
 	const imageRef = useRef();
 
 	const handleImageChange = () => {
@@ -27,7 +27,7 @@ export const Media = ({ setImage }) => {
 	};
 
 	return (
-		<Media_Container>
+		<Uploads_Container>
 			<div className='select_image'>
 				<input
 					type='file'
@@ -54,6 +54,6 @@ export const Media = ({ setImage }) => {
 					<FontAwesomeIcon icon={faMasksTheater} className='icon poll' />
 				</label>
 			</div>
-		</Media_Container>
+		</Uploads_Container>
 	);
 };

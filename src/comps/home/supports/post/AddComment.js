@@ -35,7 +35,7 @@ export const AddComment = ({ postId }) => {
 	 *
 	 */
 
-	const [displayButton, setDisplayButton] = useState(false);
+	const [commentButton, setCommentButton] = useState(false);
 
 	const handleAddCommentSendButtonClick = (e) => {
 		/** Add new comment Api
@@ -49,7 +49,7 @@ export const AddComment = ({ postId }) => {
 				setCommentSubmit((commentSubmit) => !commentSubmit);
 
 				/* reset textArea text */
-				setText('')
+				setText("");
 			})
 			.catch((err) => {
 				console.log(" add comment api err");
@@ -59,10 +59,10 @@ export const AddComment = ({ postId }) => {
 	return (
 		<OutsideClickHandler
 			onOutsideClick={() => {
-				setDisplayButton(false);
+				setCommentButton(false);
 				console.log("clicked outside");
 			}}
-			disabled={!displayButton}
+			disabled={!commentButton}
 		>
 			<AddComment_Container>
 				<div className='addComment_avatar_column'>
@@ -79,12 +79,12 @@ export const AddComment = ({ postId }) => {
 							height={1}
 							maxHeight={"5rem"}
 							owner={"addComment"}
-							setDisplayButton={setDisplayButton}
+							setDisplay={setCommentButton}
 						/>
 						{image && <ImagePreview image={image} setImage={setImage} />}
 					</div>
 
-					{displayButton && (
+					{commentButton && (
 						<motion.div
 							className='addComment_post_column_bottom_row'
 							initial={{ opacity: 0, y: -5 }}
@@ -92,7 +92,7 @@ export const AddComment = ({ postId }) => {
 							transition={{ type: "spring", stiffness: 100 }}
 						>
 							<div className='addComment_image_icon'>
-								<Fontawesome type={"faImage"} fontSize={"1.1rem"} />
+								<Fontawesome type={"faImage"} fontSize={"1.1rem"}  />
 							</div>
 
 							<div className='addCommentSendButton' onClick={handleAddCommentSendButtonClick}>

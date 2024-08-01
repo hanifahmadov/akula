@@ -27,7 +27,7 @@ export const Post_Header = ({ createdAt, username, avatar }) => {
 
 				{/* ROW BOTTOM */}
 				<div className='header_bottom_row'>
-					<span className='timeline'>{timeAgo.format(new Date(createdAt))}</span>
+					<span className='timeline'>{timeAgo.format(new Date(createdAt), "")}</span>
 					<span className='faEarthAmericas'>
 						<Fontawesome
 							type='faEarthAmericas'

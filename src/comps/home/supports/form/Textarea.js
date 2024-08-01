@@ -11,12 +11,12 @@ export const Textarea = ({
 	setText,
 	fontSize,
 	padding,
+	parentPadding,
 	maxHeight,
 	borderRadius,
 	height,
 	owner,
-	displayButton,
-	setDisplayButton,
+	setDisplay,
 }) => {
 	const textareaRef = useRef(null);
 
@@ -42,7 +42,13 @@ export const Textarea = ({
 	}, [text]); // Adjust height on every text change
 
 	return (
-		<Textarea_Container $fontSize={fontSize} $padding={padding} $maxHeight={maxHeight} $borderRadius={borderRadius}>
+		<Textarea_Container
+			$fontSize={fontSize}
+			$padding={padding}
+			$maxHeight={maxHeight}
+			$borderRadius={borderRadius}
+			$parentPadding={parentPadding}
+		>
 			<textarea
 				className='textarea'
 				ref={textareaRef}
@@ -51,10 +57,9 @@ export const Textarea = ({
 				placeholder='Whats going on...'
 				rows={height ? height : 2}
 				onFocus={() => {
-					owner === "addComment" && setDisplayButton(true);
+					owner === "addComment" && setDisplay(true);
 				}}
 			/>
-
 		</Textarea_Container>
 	);
 };

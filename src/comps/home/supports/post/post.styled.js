@@ -51,7 +51,7 @@ export const Post_Header_Container = styled.div(({ theme: {} }) => ({
 
 		".header_top_row": {
 			".username": {
-				fontSize: "1.5rem",
+				fontSize: "1.35rem",
 				fontWeight: "600",
 				letterSpacing: ".25px",
 			},
@@ -88,9 +88,20 @@ export const Post_Content_Container = styled.div(({ theme: {} }) => ({
 	},
 
 	".post_content_image_wrapper": {
+		width: "100%",
+		height: "auto",
+		maxHeight: "100%",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		overflow: "hidden",
+
+		background: "black",
+
 		img: {
-			width: "100%",
-			height: "25.25rem",
+			maxWidth: "100%",
+			maxHeight: "100%",
+			objectFit: "contain",
 			borderRadius: "0px",
 		},
 	},
@@ -214,12 +225,11 @@ export const Post_Reaction_Container = styled(motion.div)(({ theme: {}, $comment
 
 			".all_comments_row": {
 				display: "flex",
-				flexDirection: 'column',
-				gap:'12px',
+				flexDirection: "column",
+				gap: "12px",
 
 				maxHeight: "35rem",
 				overflow: "scroll",
-				
 
 				/* has 2 row  */
 				".first_comment": {},
@@ -315,11 +325,13 @@ export const AddComment_Container = styled.div(({ theme: {} }) => {
 
 				".addComment_image_icon": {
 					marginLeft: "15px",
+
+					color: "rgba(0, 0, 0, .25)",
+					cursor: "not-allowed",
 				},
 
 				".addCommentSendButton": {
 					marginRight: "12px",
-
 
 					button: {
 						width: "2.5rem",

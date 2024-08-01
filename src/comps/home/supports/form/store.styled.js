@@ -2,64 +2,69 @@
 import styled from "styled-components";
 // import { motion } from "framer-motion";
 
-export const Textarea_Container = styled.div(({ theme: {}, $fontSize, $padding, $maxHeight, $borderRadius }) => ({
-	width: "100%",
-	height: "fit-content",
-	background: "white",
+export const Textarea_Container = styled.div(
+	({ theme: {}, $fontSize, $padding, $maxHeight, $borderRadius, $parentPadding }) => {
+		return {
+			display: "flex",
+			flexDirection: "column",
 
-	display: "flex",
-	flexDirection: "column",
+			width: "100%",
+			height: "fit-content",
+			background: "white",
 
-	overflow: "hidden",
+			overflow: "hidden",
 
-	padding: "10px 2px",
+			padding: $parentPadding ? $parentPadding : "10px 2px",
+			borderRadius: $borderRadius ? $borderRadius : "10px",
 
-	borderRadius: $borderRadius ? $borderRadius : "10px",
+			".textarea": {
+				width: "100%",
+				maxHeight: $maxHeight ? $maxHeight : "8rem",
+				border: "none",
+				overflow: "auto",
+				outline: "none",
+				WebkitBoxShadow: "none", // -webkit-box-shadow
+				MozBoxShadow: "none", // -moz-box-shadow
+				boxShadow: "none",
+				resize: "none",
+				padding: $padding ? $padding : "0px 15px",
+				fontSize: $fontSize ? $fontSize : "1.1rem",
+				borderRadius: $borderRadius ? $borderRadius : "10px",
+				background: "transparent",
+				color: "black",
 
-	".textarea": {
-		width: "100%",
-		maxHeight: $maxHeight ? $maxHeight : "8rem",
-		border: "none",
-		overflow: "auto",
-		outline: "none",
-		WebkitBoxShadow: "none", // -webkit-box-shadow
-		MozBoxShadow: "none", // -moz-box-shadow
-		boxShadow: "none",
-		resize: "none",
-		padding: $padding ? $padding : "0px 15px",
-		fontSize: $fontSize ? $fontSize : "1.1rem",
-		borderRadius: $borderRadius ? $borderRadius : "10px",
-		background: "transparent",
-		color: "black",
+				"&::placeholder": {
+					color: "rgba(0, 0, 0, .25)",
+					paddingLeft: "5px",
+				},
+				// border: "1px solid #ffffff30",
+			},
 
-		"&::placeholder": {
-			color: "rgba(0, 0, 0, .25)",
-			paddingLeft: "5px",
-		},
-		// border: "1px solid #ffffff30",
-	},
+			".addComment_icons": {
+				".addComment_image_icon": {
+					display: "inline-block",
+					marginLeft: "15px",
+					margin: "2px 15px",
+				},
+			},
+		};
+	}
+);
 
-	".addComment_icons": {
-		".addComment_image_icon": {
-			display: "inline-block",
-			marginLeft: "15px",
-			margin: "2px 15px",
-		},
-	},
-}));
-
-export const Image_Preview_Container = styled.div(({ theme: {} }) => ({
-	margin: "2rem .5rem .5rem .5rem",
+export const Image_Preview_Container = styled.div(({ theme: {}, $imgHeight, $imgWidth }) => ({
 	alignSelf: "flex-start",
-	border: "1px solid #ffffff30",
+	width: "fit-content",
+
+	margin: "1rem 0rem",
+	border: "1.5px solid white",
 	borderRadius: "10px",
 
 	position: "relative",
 
 	".selected_image": {
-		height: "15rem",
-		width: "15rem",
-		borderRadius: "10px",
+		height: $imgHeight ? $imgHeight : "15rem",
+		width: $imgWidth ? $imgWidth : "15rem",
+		borderRadius: "9px",
 	},
 
 	".faCircleXmark": {
@@ -79,7 +84,7 @@ export const Image_Preview_Container = styled.div(({ theme: {} }) => ({
 	},
 }));
 
-export const Media_Container = styled.div(({ theme: {} }) => ({
+export const Uploads_Container = styled.div(({ theme: {} }) => ({
 	display: "flex",
 	justifyContent: "space-between",
 
@@ -119,3 +124,80 @@ export const Media_Container = styled.div(({ theme: {} }) => ({
 		},
 	},
 }));
+
+export const Form_Container = styled.div(({ theme: {} }) => {
+	return {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "flex-start",
+
+		width: "100%",
+		background: "rgba(0, 0, 0, .1)",
+
+		padding: "10px",
+		borderRadius: "10px",
+	};
+});
+
+export const Form_Left_Column = styled.div(({ theme: {} }) => {
+	return {};
+});
+
+export const Form_Right_Column = styled.div(({ theme: {}, $padding }) => {
+	return {
+		width: "100%",
+		padding: $padding ? $padding : "0px 5px",
+
+		".textarea_and_image_preview_wrapper": {},
+
+		".media__and_submit_button_wrapper": {
+			display: "flex",
+			justifyContent: "space-between",
+
+			width: "100%",
+
+			marginTop: ".5rem",
+			padding: "0px 5px",
+
+			button: {
+				color: "#fff",
+				background: "#052c65",
+
+				textAlign: "center",
+				fontSize: "1rem",
+				fontWeight: "600",
+
+				padding: "2px 5px",
+				borderRadius: "2px",
+				letterSpacing: ".25px",
+
+				cursor: "pointer",
+				transition: "all .1s ease-in-out",
+
+				"&:hover": {
+					background: "#000",
+				},
+			},
+		},
+	};
+});
+
+export const User_Avatar_Container = styled.div(({ theme: {}, $width, $height, $border }) => {
+	return {
+		img: {
+			width: $width ? $width : "3.5rem",
+			height: $height ? $height : "3.5rem",
+			borderRadius: "50%",
+			border: $border ? $border : "3px solid rgba(0, 0, 0, 0.05)",
+			alignSelf: "flex-start",
+		},
+	};
+});
+
+// export const Form_Left_Column = styled.div(({ theme: {} }) => {
+
+// 	return {
+
+// 	};
+// });

@@ -39,7 +39,7 @@ export const Avatar = ({ avatar, setAvatar }) => {
 						name='avatar'
 						className='d-none'
 						ref={avatarRef}
-						accept='image/png, image/jpeg, image/jpg'
+						accept='image/png, image/jpeg, image/jpg, image/avif, image/webp'
 						onChange={handleAvatarChange}
 					/>
 					<label htmlFor='avatar' className='label_avatar'>
