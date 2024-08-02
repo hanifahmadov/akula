@@ -38,7 +38,7 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 
 			<div className='all_comments_row_four'>
 				{comments &&
-					comments.length &&
+					comments.length > 0 &&
 					comments.map((comment, index) => {
 						return <Comment key={index}  comment={comment} parentId={_id} />;
 					})}

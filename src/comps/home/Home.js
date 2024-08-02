@@ -7,7 +7,13 @@ import apiUrl from "../../apis/apiUrl";
 import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 
 /* GLOBAL STATES */
-import { userDefault, likeTypeDefault, commentSubmitDefault, replySubmitDefault } from "../auth/shared/store/states";
+import {
+	userDefault,
+	likeTypeDefault,
+	commentSubmitDefault,
+	replySubmitDefault,
+	reReplySubmitDefault,
+} from "../auth/shared/store/states";
 
 /* STYLED COMPONENTS */
 import { Home_Container } from "./home.styled";
@@ -30,6 +36,7 @@ export const Home = () => {
 	const likeType = useRecoilValue(likeTypeDefault);
 	const commentSubmit = useRecoilValue(commentSubmitDefault);
 	const replySubmit = useRecoilValue(replySubmitDefault);
+	const reReplySubmit = useRecoilValue(reReplySubmitDefault);
 
 	/** Local state sets the all posts returns from the postsAPI, useEffect */
 	const [posts, setPosts] = useState([]);
@@ -93,7 +100,7 @@ export const Home = () => {
 				console.log("postsAPI ERROR =>");
 				console.log(err);
 			});
-	}, [postSubmit, likeType, commentSubmit, replySubmit]);
+	}, [postSubmit, likeType, commentSubmit, replySubmit, reReplySubmit]);
 
 	return (
 		<Home_Container className='home_container'>
@@ -101,6 +108,7 @@ export const Home = () => {
 				{/** fixed_width has a fixed min width  */}
 				<div className='fixed_width'>
 					<AddPost
+						uuid={"1"}
 						signedUser={signedUser}
 						text={text}
 						setText={setText}
@@ -112,7 +120,7 @@ export const Home = () => {
 					{/** ALL POSTS RENDERS */}
 					<div className='all_posts_container'>
 						{posts.map((post, index) => {
-							return <Post key={index} post={post} />;
+							return <Post key={index} post={post} index={index} />;
 						})}
 					</div>
 				</div>

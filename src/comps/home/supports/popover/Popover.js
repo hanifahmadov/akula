@@ -93,7 +93,7 @@ export const Popover = ({
 		}
 
 		if (replyId) {
-			likeReplyAPI({ accessToken: signedUser.accessToken, postId, commentId, replyId, likeType: classname })
+			likeReplyAPI({ accessToken: signedUser.accessToken, replyId, likeType: classname })
 				.then((res) => {
 					console.log(res.data);
 					console.log("likeReplyAPI has run: ");

@@ -1,75 +1,68 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import OutsideClickHandler from "react-outside-click-handler";
-import { motion } from "framer-motion";
 
-/* APIS */
-import { addReplyAPI } from "../../../../apis/apiCalls";
+/* API */
+import { addReReplyAPI } from "../../../../apis/apiCalls";
 
 /* GLOBALS */
-import { replySubmitDefault, userDefault } from "../../../auth/shared/store/states";
+import { reReplySubmitDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED */
+import { Reply_Container } from "./reply.styled";
 import { Bottom_Row, Content_Section, Display_User_Avatar, Timeline_Section, Top_Row } from "../helpers/helpers.styled";
-import { Comment_Container } from "./comment.styled";
 
 /* HELPER */
 import { Popover } from "../popover/Popover";
 import { Timeline } from "../helpers/Timeline";
 import { ReactionCounts } from "../helpers/ReactionCounts";
-import { AddReply } from "./AddReply";
-import { Reply } from "../reply/Reply";
+import { AddReReply } from "./AddReReply";
+import { SubReply } from "../subreply/SubReply";
 
-export const Comment = ({ comment: { _id, owner, content, createdAt, likes, replies }, parentId }) => {
+export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies } }) => {
+	console.log(replies);
+
 	const signedUser = useRecoilValue(userDefault);
-	const [replySubmit, setReplySubmit] = useRecoilState(replySubmitDefault);
+	const [reReplySubmit, setReReplySubmit] = useRecoilState(reReplySubmitDefault);
 	const [popoverOpen, setPopoverOpen] = useState(false);
-
-	const [replyButton, setReplyButton] = useState(false);
-	const [addReply, setAddReply] = useState(false);
+	const [addReReply, setAddReReply] = useState(false);
 
 	const [text, setText] = useState("");
 	const [image, setImage] = useState(undefined);
 	const [replyingTo, setReplyingTo] = useState(undefined);
 
-
-	const handleCommenLikeButtonClick = (e) => {
-		console.log("handle-Comment-LikeButtonClick");
+	const handleReplyLikeButtonClick = (e) => {
+		console.log("handle-Reply-LikeButtonClick");
 		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
 
-	const handleReplyButtonClick = (e) => {
-		let referral = owner._id == signedUser._id ? "yourself" : owner.username;
+	const handleReReplyButtonClick = (e) => {
+		let referral_username = owner._id == signedUser._id ? "yourself" : owner.username;
 
-		setReplyingTo(referral);
-		setAddReply((addReply) => !addReply);
+		setReplyingTo(referral_username);
+		setAddReReply((addReReply) => !addReReply);
 	};
 
-	const handleAddReplySubmit = (e) => {
-		addReplyAPI({ accessToken: signedUser.accessToken, commentId: _id, replyText: text.trim() })
+	const handleAddReReplySubmit = (e) => {
+		addReReplyAPI({ accessToken: signedUser.accessToken, reReplyId: _id, reReplyText: text, referralId: owner._id })
 			.then((res) => {
-				console.log("addReplyAPI sucess");
+				console.log("reReply api success");
 
-				setText("");
-				setReplySubmit((replySubmit) => !replySubmit);
+				setReReplySubmit((reReplySubmit) => !reReplySubmit);
 			})
 			.catch((err) => {
-				console.log("addReplyAPI error");
+				console.log("reReply api error");
 			});
 	};
-	
+
 	return (
-		<Comment_Container>
+		<Reply_Container>
 			<Display_User_Avatar className='display_user_avatar_column_left'>
 				<img src={owner.avatar} />
 			</Display_User_Avatar>
 
-			<div className='comment_content_and_timeline_column_right'>
-				{/** comment_main_controller_container
-				 * 	 helps mkeep the the content and timeline stay in one section
-				 * 	 in that case, its easy to hold the reaction at the end of the comment or reply
-				 */}
-				<div className='comment_main_controller_container'>
+			<div className='reply_content_and_timeline_column_right'>
+				<div className='reply_main_controller_container'>
 					<Content_Section className='content_section'>
 						<div className='username'>{owner.username}</div>
 						<div className='content'>{content}</div>
@@ -78,7 +71,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 					<Timeline_Section className='timeline_section'>
 						<Top_Row className='top_row'>
 							<Timeline createdAt={createdAt} size={"mini"} fontSize={".7rem"} fontWeight={500} />
-							<span className='like_button button' onClick={handleCommenLikeButtonClick}>
+							<span className='like_button button' onClick={handleReplyLikeButtonClick}>
 								<OutsideClickHandler
 									onOutsideClick={() => {
 										setPopoverOpen(false);
@@ -88,7 +81,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 									<Popover
 										popoverOpen={popoverOpen}
 										setPopoverOpen={setPopoverOpen}
-										commentId={_id}
+										replyId={_id}
 										likes={likes}
 										top={"-40px"}
 									/>
@@ -97,9 +90,9 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 							</span>
 
 							<span
-								style={{ color: addReply ? "red" : "black" }}
+								style={{ color: addReReply ? "red" : "black" }}
 								className='reply_button button'
-								onClick={handleReplyButtonClick}
+								onClick={handleReReplyButtonClick}
 							>
 								Reply
 							</span>
@@ -113,8 +106,8 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 								iconSize={"9px"}
 								numberFontSize={".75rem"}
 								numberPadding={"0px"}
-								gap={"9px"}
-								iconNumberGap={'1px'}
+								gap={"7px"}
+								iconNumberGap={"1px"}
 							/>
 						</Bottom_Row>
 					</Timeline_Section>
@@ -123,11 +116,11 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 				<div>
 					{replies &&
 						replies.length > 0 &&
-						replies.map((reply, index) => <Reply reply={reply} key={index} />)}
+						replies.map((reply, index) => <SubReply reply={reply} key={index} />)}
 				</div>
 
-				{addReply && (
-					<AddReply
+				{addReReply && (
+					<AddReReply
 						uuid={_id}
 						replyingTo={replyingTo}
 						signedUser={signedUser}
@@ -135,10 +128,10 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 						setText={setText}
 						image={image}
 						setImage={setImage}
-						handlePostClick={handleAddReplySubmit}
+						handlePostClick={handleAddReReplySubmit}
 					/>
 				)}
 			</div>
-		</Comment_Container>
+		</Reply_Container>
 	);
 };

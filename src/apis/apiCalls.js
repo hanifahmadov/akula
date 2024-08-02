@@ -210,7 +210,6 @@ export const addCommentAPI = ({ accessToken, postId, commentText }) => {
 	});
 };
 
-
 /** //# COMMENT THE POST APIs
  */
 export const addReplyAPI = ({ accessToken, commentId, replyText, referralId }) => {
@@ -231,6 +230,29 @@ export const addReplyAPI = ({ accessToken, commentId, replyText, referralId }) =
 		},
 		/* data is sending the only like type that we have to get it from the req.body */
 		data: { replyText, referralId },
+	});
+};
+
+/** //# AD REPLY TO REPLY THE POST APIs
+ */
+export const addReReplyAPI = ({ accessToken, reReplyId, reReplyText, referralId }) => {
+	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
+	return axios({
+		/* apiUrl explained in the above how it gets defined  // # explain inthe import field */
+		url: `${apiUrl}/replies/${reReplyId}/addrereply`,
+		/* PUT request is for the existing file gets updated */
+		method: "POST",
+		/* credetials true and includes enables the cookies are attached to the send request */
+		/* expalin cookie checks here or above // # later */
+		withCredentials: true,
+		credentials: "include",
+
+		headers: {
+			Authorization: `Bearer ${accessToken}` /* passing user token  */,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
+		},
+		/* data is sending the only like type that we have to get it from the req.body */
+		data: { reReplyText, referralId },
 	});
 };
 

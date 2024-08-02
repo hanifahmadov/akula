@@ -62,6 +62,15 @@ export const replySubmitDefault= atom({
 });
 
 
+/** the same idea with likeType, just  need a global state trigger the homejs useEffect hook
+ * to recall alll the post and to get populated comments fields also.
+ */
+export const reReplySubmitDefault= atom({
+	key: "reReplySubmitDefault",
+	default: true,
+});
+
+
 
 /** backdrop is a global state and makes the Backdrop div element displays block or non
  * depending on this state true or false value

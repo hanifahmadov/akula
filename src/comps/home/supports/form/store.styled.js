@@ -51,38 +51,40 @@ export const Textarea_Container = styled.div(
 	}
 );
 
-export const Image_Preview_Container = styled.div(({ theme: {}, $imgHeight, $imgWidth }) => ({
-	alignSelf: "flex-start",
-	width: "fit-content",
+export const Image_Preview_Container = styled.div(
+	({ theme: {}, $imgHeight, $imgWidth, $closeButtonFontSize, $parentMargin }) => ({
+		alignSelf: "flex-start",
+		width: "fit-content",
 
-	margin: "1rem 0rem",
-	border: "1.5px solid white",
-	borderRadius: "10px",
+		margin: $parentMargin ? $parentMargin : "1rem 0rem",
+		border: "1.5px solid white",
+		borderRadius: "10px",
 
-	position: "relative",
+		position: "relative",
 
-	".selected_image": {
-		height: $imgHeight ? $imgHeight : "15rem",
-		width: $imgWidth ? $imgWidth : "15rem",
-		borderRadius: "9px",
-	},
+		".selected_image": {
+			height: $imgHeight ? $imgHeight : "15rem",
+			width: $imgWidth ? $imgWidth : "15rem",
+			borderRadius: "9px",
+		},
 
-	".faCircleXmark": {
-		display: "block",
-		lineHeight: "0px",
-		textAlign: "center",
-		overflow: "hidden",
-		position: "absolute",
-		top: "-7px",
-		right: "-7px",
-		fontSize: "1.4rem",
-		cursor: "pointer",
-		background: "white",
-		color: "red",
-		borderRadius: "50%",
-		border: "1px solid white",
-	},
-}));
+		".faCircleXmark": {
+			display: "block",
+			lineHeight: "0px",
+			textAlign: "center",
+			overflow: "hidden",
+			position: "absolute",
+			top: "-7px",
+			right: "-7px",
+			fontSize: $closeButtonFontSize ? $closeButtonFontSize : "1.4rem",
+			cursor: "pointer",
+			background: "white",
+			color: "red",
+			borderRadius: "50%",
+			border: "1px solid white",
+		},
+	})
+);
 
 export const Uploads_Container = styled.div(({ theme: {}, $labelHeight, $labelWidth, $gap }) => ({
 	display: "flex",
@@ -154,6 +156,26 @@ export const User_Avatar_Container = styled.div(({ theme: {}, $width, $height, $
 			borderRadius: "50%",
 			border: $border ? $border : "3px solid rgba(0, 0, 0, 0.05)",
 			alignSelf: "flex-start",
+		},
+	};
+});
+
+export const Replaying = styled.div(({ theme: {}, $width, $height, $border }) => {
+	return {
+		lineHeight: "10px",
+		".replying_to": {
+			fontSize: "9px",
+			fontStyle:'italic',
+			fontWeight:'400',
+		},
+
+		".username": {
+			fontSize: "10px",
+			background: "#cfe1fd",
+			padding:'2px 4px',
+			margin:'0px 3px',
+			borderRadius:'5px',
+			fontWeight:'600',
 		},
 	};
 });

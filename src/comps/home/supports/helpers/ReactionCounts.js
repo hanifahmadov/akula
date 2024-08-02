@@ -19,6 +19,7 @@ export const ReactionCounts = ({
 	numberPadding,
 	numberMargin,
 	iconSize,
+	iconNumberGap,
 }) => {
 	/** process the likes
 	 * we can set the counts directly, like likes.length.
@@ -81,7 +82,7 @@ export const ReactionCounts = ({
 			$numberPadding={numberPadding}
 			$numberMargin={numberMargin}
 		>
-			<Heart_Container className='heart_container' $heart={heart}>
+			<Heart_Container className='heart_container' $heart={heart} $iconNumberGap={iconNumberGap}>
 				<Fontawesome type={"faHeart"} fontSize={iconSize} />
 
 				<div className='heart_number number'>{heart.length}</div>
@@ -89,12 +90,12 @@ export const ReactionCounts = ({
 				{/* {heartList && <div className='heart_list users_list'></div>} */}
 			</Heart_Container>
 
-			<Smile_Container className='smile_container' $smile={smile}>
+			<Smile_Container className='smile_container' $smile={smile} $iconNumberGap={iconNumberGap}>
 				<Fontawesome type={"faFaceLaughBeam"} fontSize={iconSize} />
 				<div className='smile_number number'>{smile.length}</div>
 			</Smile_Container>
 
-			<Dislike_Container className='dislike_container' $dislike={dislike}>
+			<Dislike_Container className='dislike_container' $dislike={dislike} $iconNumberGap={iconNumberGap}>
 				<Fontawesome type={"faThumbsDown"} fontSize={iconSize} />
 				<div className='dislike_number number'>{dislike.length}</div>
 			</Dislike_Container>

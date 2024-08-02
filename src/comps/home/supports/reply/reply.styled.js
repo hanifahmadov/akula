@@ -1,14 +1,13 @@
-/* eslint-disable */
 import styled from "styled-components";
-import { motion } from "framer-motion";
 
-export const Comment_Container = styled.div(({ theme: {}, $commentOpen, $isFor }) => {
+export const Reply_Container = styled.div(({ theme: {} }) => {
 	return {
 		display: "flex",
 		justifyContent: "flex-start",
+        marginTop:'8px',
 
 
-		".comment_content_and_timeline_column_right": {
+		".reply_content_and_timeline_column_right": {
 			display: "flex",
 			justifyContent: "flex-start",
 			flexDirection: "column",
@@ -16,11 +15,10 @@ export const Comment_Container = styled.div(({ theme: {}, $commentOpen, $isFor }
 			width: "100%",
 			padding: "0px 5px",
 
-			".comment_main_controller_container": {
-
+			".reply_main_controller_container": {
 				/* important */
 				width: "fit-content",
-			}
+			},
 		},
 	};
 });

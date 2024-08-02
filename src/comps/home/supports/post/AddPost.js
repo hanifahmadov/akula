@@ -11,7 +11,7 @@ import { Textarea } from "../form/Textarea";
 import { ImagePreview } from "../form/ImagePreview";
 
 
-const AddPost = ({ signedUser, text, setText, image, setImage, handlePostClick }) => {
+const AddPost = ({ uuid, signedUser, text, setText, image, setImage, handlePostClick }) => {
 	return (
 		<AddPost_Container>
 			<Form_Left_Column className='left_column'>
@@ -25,7 +25,7 @@ const AddPost = ({ signedUser, text, setText, image, setImage, handlePostClick }
 				</div>
 
 				<div className='media__and_submit_button_wrapper'>
-					<Uploads setImage={setImage} />
+					<Uploads uuid={uuid} setImage={setImage} />
 					<Button onClick={handlePostClick}>POST</Button>
 				</div>
 			</Form_Right_Column>

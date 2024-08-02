@@ -46,7 +46,7 @@ export const ReactionCounts_Container = styled.div(
 );
 
 /* this container is used inside .likes_counts_main_section */
-export const Heart_Container = styled.div(({ theme: {}, $heart, $gap }) => ({
+export const Heart_Container = styled.div(({ theme: {}, $heart, $iconNumberGap }) => ({
 	/*  create animation for these elements.fyi transition animation doesnt work on display none.
 		for now, use opacity 0 and then dipslay none use framer motion, //TODO
 	 */
@@ -54,7 +54,7 @@ export const Heart_Container = styled.div(({ theme: {}, $heart, $gap }) => ({
 	justifyContent: "center",
 	alignItems: "center",
 
-	gap: $gap ? $gap : "3px",
+	gap: $iconNumberGap ? $iconNumberGap : "3px",
 
 	/* number common class styled in the above in parent section */
 	".heart_number": {},
@@ -89,27 +89,27 @@ export const Heart_Container = styled.div(({ theme: {}, $heart, $gap }) => ({
 	},
 }));
 
-export const Smile_Container = styled.div(({ theme: {}, $smile, $gap }) => ({
+export const Smile_Container = styled.div(({ theme: {}, $smile, $iconNumberGap }) => ({
 	/*  create animation for these elements.fyi transition animation doesnt work on display none.
 		for now, use opacity 0 and then dipslay none use framer motion, //TODO
 	 */
 	display: $smile.length ? "flex" : "none",
 	justifyContent: "center",
 	alignItems: "center",
-	gap: $gap ? $gap : "3px",
+	gap: $iconNumberGap ? $iconNumberGap : "3px",
 
 	/* number common class styled in the above in parent section */
 	".smile_number": {},
 }));
 
-export const Dislike_Container = styled.div(({ theme: {}, $dislike, $gap }) => ({
+export const Dislike_Container = styled.div(({ theme: {}, $dislike, $iconNumberGap }) => ({
 	/*  create animation for these elements.fyi transition animation doesnt work on display none.
 		for now, use opacity 0 and then dipslay none use framer motion, //TODO
 	 */
 	display: $dislike.length ? "flex" : "none",
 	justifyContent: "center",
 	alignItems: "center",
-	gap: $gap ? $gap : "3px",
+	gap: $iconNumberGap ? $iconNumberGap : "3px",
 
 	/* number common class styled in the above in parent section */
 	".dislike_number": {},
@@ -127,7 +127,8 @@ export const Display_User_Avatar = styled.div(({ theme: {}, $imgWidth, $imgHeigh
 });
 export const Content_Section = styled.div(({ theme: {}, $background, $padding }) => {
 	return {
-		width: "100%",
+		width: "fit-content",
+		minWidth: "15rem",
 		background: $background ? $background : "rgba(0, 0, 0, .05)",
 		padding: $padding ? $padding : "5px 10px",
 		borderRadius: "10px",
@@ -152,7 +153,7 @@ export const Timeline_Section = styled.div(({ theme: {}, $imgWidth, $imgHeight, 
 		display: "flex",
 		justifyContent: "space-between",
 
-		padding:'0px 10px'
+		padding: "0px 10px",
 	};
 });
 
@@ -160,8 +161,6 @@ export const Top_Row = styled.div(({ theme: {}, $gap }) => {
 	return {
 		display: "flex",
 		gap: $gap ? $gap : "10px",
-
-		
 
 		".button": {
 			fontSize: ".75rem",

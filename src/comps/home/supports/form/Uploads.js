@@ -6,7 +6,7 @@ import { Uploads_Container } from "./store.styled";
 /* HELPER */
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
-export const Uploads = ({ setImage, labelHeight, labelWidth, gap, iconSize }) => {
+export const Uploads = ({ uuid, setImage, labelHeight, labelWidth, gap, iconSize }) => {
 	const imageRef = useRef();
 
 	const handleImageChange = () => {
@@ -19,14 +19,14 @@ export const Uploads = ({ setImage, labelHeight, labelWidth, gap, iconSize }) =>
 			<div className='select_image'>
 				<input
 					type='file'
-					id='image'
+					id={uuid}
 					name='image'
 					className='d-none'
 					ref={imageRef}
 					accept='image/png, image/jpeg, image/jpg, image/webp, image/avif'
 					onChange={handleImageChange}
 				/>
-				<label htmlFor='image' className='label image'>
+				<label htmlFor={uuid} className='label image'>
 					<Fontawesome type={"faImage"} className='icon image' fontSize={iconSize} />
 				</label>
 			</div>
