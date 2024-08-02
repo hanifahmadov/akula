@@ -7,7 +7,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { addSubReplyAPI } from "../../../../apis/apiCalls";
 
 /* GLOBALS */
-import { subReplySubmitDefault, userDefault } from "../../../auth/shared/store/states";
+import { postSubmittedDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED */
 import { SubReply_Container } from "./subreply.styled";
@@ -21,8 +21,9 @@ import { AddReply } from "../helpers/AddReply";
 
 export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, replies }, storageId }) => {
 	const signedUser = useRecoilValue(userDefault);
+	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
 	/* get rid off all these additional submit shit, create one and make it global */
-	const [subReplySubmit, setReReplySubmit] = useRecoilState(subReplySubmitDefault);
+
 	const [popoverOpen, setPopoverOpen] = useState(false);
 
 	const [addReply, setAddReply] = useState(false);
@@ -66,7 +67,11 @@ export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, re
 			storageId,
 		})
 			.then((res) => {
-				console.log("addSubReplyAPI  success");
+				setText("");
+				setImage(undefined);
+				setReplyingTo(null);
+				setPostSubmitted((postSubmitted) => !postSubmitted);
+			
 			})
 			.catch((err) => {
 				console.log("addSubReplyAPI error");

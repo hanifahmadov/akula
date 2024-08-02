@@ -10,27 +10,82 @@ import { Uploads } from "../form/Uploads";
 import { Textarea } from "../form/Textarea";
 import { ImagePreview } from "../form/ImagePreview";
 
-
-const AddPost = ({ uuid, signedUser, text, setText, image, setImage, handlePostClick }) => {
+export const AddPost = ({
+	uuid,
+	signedUser,
+	text,
+	setText,
+	image,
+	setImage,
+	handlePostClick,
+	avatarWidth,
+	avatarHeight,
+	avatarBorder,
+	TAheight,
+	TApadding,
+	TAfontSize,
+	TAparentPadding,
+	uploadsIconSize,
+	labelHeight,
+	labelWidth,
+	uploadsGap,
+	buttonFontSize,
+	buttonPadding,
+	addPostPadding,
+}) => {
 	return (
-		<AddPost_Container>
+		<AddPost_Container className='addcomment_container' $addPostPadding={addPostPadding}>
 			<Form_Left_Column className='left_column'>
-				<User_Avatar avatar={signedUser.avatar} width={"3.5rem"} height={"3.5rem"} />
+				<User_Avatar
+					avatar={signedUser.avatar}
+					width={avatarWidth ? avatarWidth : "3.5rem"}
+					height={avatarHeight ? avatarHeight : "3.5rem"}
+					border={avatarBorder}
+				/>
 			</Form_Left_Column>
 
-			<Form_Right_Column className='right_column'>
+			<Form_Right_Column className='right_column' >
 				<div className='textarea_and_image_preview_wrapper'>
-					<Textarea text={text} setText={setText} />
-					{image && <ImagePreview image={image} setImage={setImage} />}
+					<Textarea
+						text={text}
+						setText={setText}
+						height={TAheight}
+						padding={TApadding}
+						parentPadding={TAparentPadding ? TAparentPadding : "0px"}
+						fontSize={TAfontSize}
+					/>
+					{image && (
+						<ImagePreview
+							image={image}
+							setImage={setImage}
+							imgHeight={"100%"}
+							imgWidth={"8rem"}
+							parentMargin={".5rem 0rem"}
+							closeButtonFontSize={"1.1rem"}
+						/>
+					)}
 				</div>
 
 				<div className='media__and_submit_button_wrapper'>
-					<Uploads uuid={uuid} setImage={setImage} />
-					<Button onClick={handlePostClick}>POST</Button>
+					<Uploads
+						uuid={uuid}
+						setImage={setImage}
+						iconSize={uploadsIconSize}
+						labelHeight={labelHeight}
+						labelWidth={labelWidth}
+						gap={uploadsGap}
+					/>
+
+					<Button
+						$fontSize={buttonFontSize}
+						$padding={buttonPadding}
+						$letterSpacing={"0px"}
+						onClick={handlePostClick}
+					>
+						send
+					</Button>
 				</div>
 			</Form_Right_Column>
 		</AddPost_Container>
 	);
 };
-
-export default AddPost;

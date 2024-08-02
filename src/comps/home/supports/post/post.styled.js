@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
-export const AddPost_Container = styled(motion.div)(({ theme: {} }) => {
+export const AddPost_Container = styled(motion.div)(({ theme: {}, $addPostPadding }) => {
 	return {
 		display: "flex",
 		flexDirection: "row",
@@ -15,12 +15,11 @@ export const AddPost_Container = styled(motion.div)(({ theme: {} }) => {
 		width: "100%",
 		background: "rgba(0, 0, 0, .1)",
 
-		marginTop:'5px',
-		padding: "4px 0px",
+		marginTop: "5px",
+		padding: $addPostPadding ? $addPostPadding : "4px 0px 2px 3px",
 		borderRadius: "10px",
 	};
 });
-
 
 export const Post_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
@@ -38,21 +37,18 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 	".reaction_counts_and_button_groups_row_third": {},
 
 	".all_comments_row_four": {
+		display: "flex",
+		flexDirection: "column",
+		gap: "10px",
 
-		display: 'flex',
-		flexDirection: 'column',
-		gap:"10px",
+		width: "100%",
+		minHeight: "30rem",
+		overflow: "scroll",
 
-		width: '100%',
-		minHeight:'30rem',
-		overflow:'scroll',
-		
-		marginTop: '1rem',
-		padding: '10px 3px',
+		marginTop: "1rem",
+		padding: "10px 3px",
 
-		background:'white'
-
-		
+		background: "white",
 	},
 
 	".add_comment_wrapper_row_five": {},

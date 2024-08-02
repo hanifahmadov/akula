@@ -141,6 +141,61 @@ export const postsAPI = ({ accessToken }) => {
 	});
 };
 
+/** add comment api 
+ * 	this looks for Post modelled Objects 
+ * 	in the backend server
+ * 	handle the when new comment applied.
+ * 	arguments are token, the post ID which has been gotten commented 
+ * 	comment text-content
+ */
+export const addCommentAPI = ({ accessToken, postId, text }) => {
+	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
+	return axios({
+		/* apiUrl explained in the above how it gets defined */
+		url: `${apiUrl}/posts/${postId}/addcomment`,
+		/* PUT request is for the existing file gets updated */
+		method: "POST",
+		/* credetials true and includes enables the cookies are attached to the send request */
+		/* expalin cookie checks here or above // # later */
+		withCredentials: true,
+		credentials: "include",
+
+		headers: {
+			Authorization: `Bearer ${accessToken}` /* passing user token  */,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
+		},
+		/* data is sending the only like type that we have to get it from the req.body */
+		data: { text },
+	});
+};
+
+/** add reply apis
+ * 	this is different than add comment apis in the above
+ *  because this looks for Comment modelled Objects 
+ * 	in the backend server 
+ */
+
+export const addReplyAPI = ({ accessToken, commentId, replyText, referralId }) => {
+	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
+	return axios({
+		/* apiUrl explained in the above how it gets defined  // # explain inthe import field */
+		url: `${apiUrl}/comments/${commentId}/addreply`,
+		/* PUT request is for the existing file gets updated */
+		method: "POST",
+		/* credetials true and includes enables the cookies are attached to the send request */
+		/* expalin cookie checks here or above // # later */
+		withCredentials: true,
+		credentials: "include",
+
+		headers: {
+			Authorization: `Bearer ${accessToken}` /* passing user token  */,
+			"Content-Type": "application/json", // Ensure proper content type if sending a body
+		},
+		/* data is sending the only like type that we have to get it from the req.body */
+		data: { replyText, referralId },
+	});
+};
+
 /** imported in the Popover.js file to handle the like functionality
  *
  * 	- user accessToken
@@ -181,57 +236,7 @@ export const likePostAPI = ({ accessToken, postId, likeType }) => {
 If any problem on the apis, check out this additions   */
 // # 'Content-Type': 'application/json'
 
-/* 
 
-###### write whole documentation about these APIs that what api is handling evreyone of them
-
-*/
-
-/** //# COMMENT THE POST APIs
- */
-export const addCommentAPI = ({ accessToken, postId, commentText }) => {
-	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
-	return axios({
-		/* apiUrl explained in the above how it gets defined */
-		url: `${apiUrl}/posts/${postId}/addcomment`,
-		/* PUT request is for the existing file gets updated */
-		method: "POST",
-		/* credetials true and includes enables the cookies are attached to the send request */
-		/* expalin cookie checks here or above // # later */
-		withCredentials: true,
-		credentials: "include",
-
-		headers: {
-			Authorization: `Bearer ${accessToken}` /* passing user token  */,
-			"Content-Type": "application/json", // Ensure proper content type if sending a body
-		},
-		/* data is sending the only like type that we have to get it from the req.body */
-		data: { commentText },
-	});
-};
-
-/** //# COMMENT THE POST APIs
- */
-export const addReplyAPI = ({ accessToken, commentId, replyText, referralId }) => {
-	/* axios is returning a promise that we have to use await keyword to wait it get resolved */
-	return axios({
-		/* apiUrl explained in the above how it gets defined  // # explain inthe import field */
-		url: `${apiUrl}/comments/${commentId}/addreply`,
-		/* PUT request is for the existing file gets updated */
-		method: "POST",
-		/* credetials true and includes enables the cookies are attached to the send request */
-		/* expalin cookie checks here or above // # later */
-		withCredentials: true,
-		credentials: "include",
-
-		headers: {
-			Authorization: `Bearer ${accessToken}` /* passing user token  */,
-			"Content-Type": "application/json", // Ensure proper content type if sending a body
-		},
-		/* data is sending the only like type that we have to get it from the req.body */
-		data: { replyText, referralId },
-	});
-};
 
 /** //# AD REPLY TO REPLY THE POST APIs
  */

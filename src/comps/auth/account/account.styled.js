@@ -35,7 +35,7 @@ export const Logo_Section = styled.div(({ theme: {} }) => ({
 		borderRadius: "50%",
 		position: "relative",
 		top: "45px",
-		border: "7px solid rgba(0, 0, 0, .25)",
+		border: "5px solid rgba(0, 0, 0, .1)",
 	},
 }));
 

@@ -111,6 +111,8 @@ export const Uploads_Container = styled.div(({ theme: {}, $labelHeight, $labelWi
 	},
 
 	".select_video": {
+		cursor: "not-allowed",
+
 		"& > *": {
 			pointerEvents: "none",
 			color: "rgba(0, 0, 0, 0.2)",
@@ -118,6 +120,8 @@ export const Uploads_Container = styled.div(({ theme: {}, $labelHeight, $labelWi
 	},
 
 	".select_poll": {
+		cursor: "not-allowed",
+
 		"& > *": {
 			pointerEvents: "none",
 			color: "rgba(0, 0, 0, 0.2)",
@@ -129,7 +133,7 @@ export const Form_Left_Column = styled.div(({ theme: {} }) => {
 	return {};
 });
 
-export const Form_Right_Column = styled.div(({ theme: {}, $padding }) => {
+export const Form_Right_Column = styled.div(({ theme: {}, $padding, $buttonWrapperPadding }) => {
 	return {
 		width: "100%",
 		padding: $padding ? $padding : "0px 5px",
@@ -142,8 +146,8 @@ export const Form_Right_Column = styled.div(({ theme: {}, $padding }) => {
 
 			width: "100%",
 
-			marginTop: ".5rem",
-			padding: "0px 5px",
+			marginTop: "0.3rem",
+			padding: $buttonWrapperPadding ? $buttonWrapperPadding : "0px 5px",
 		},
 	};
 });
@@ -154,7 +158,7 @@ export const User_Avatar_Container = styled.div(({ theme: {}, $width, $height, $
 			width: $width ? $width : "3.5rem",
 			height: $height ? $height : "3.5rem",
 			borderRadius: "50%",
-			border: $border ? $border : "3px solid rgba(0, 0, 0, 0.05)",
+			border: $border ? $border : "2px solid rgba(255, 255, 255, 1)",
 			alignSelf: "flex-start",
 		},
 	};
@@ -165,17 +169,17 @@ export const Replaying = styled.div(({ theme: {}, $width, $height, $border }) =>
 		lineHeight: "10px",
 		".replying_to": {
 			fontSize: "9px",
-			fontStyle:'italic',
-			fontWeight:'400',
+			fontStyle: "italic",
+			fontWeight: "400",
 		},
 
 		".username": {
 			fontSize: "10px",
 			background: "#cfe1fd",
-			padding:'2px 4px',
-			margin:'0px 3px',
-			borderRadius:'5px',
-			fontWeight:'600',
+			padding: "2px 4px",
+			margin: "0px 3px",
+			borderRadius: "5px",
+			fontWeight: "600",
 		},
 	};
 });

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import FormData from "form-data";
 
@@ -7,36 +7,27 @@ import apiUrl from "../../apis/apiUrl";
 import { newpostAPI, postsAPI } from "../../apis/apiCalls";
 
 /* GLOBAL STATES */
-import {
-	userDefault,
-	likeTypeDefault,
-	commentSubmitDefault,
-	replySubmitDefault,
-	reReplySubmitDefault,
-} from "../auth/shared/store/states";
+import { userDefault, postSubmittedDefault, likeTypeDefault } from "../auth/shared/store/states";
 
 /* STYLED COMPONENTS */
 import { Home_Container } from "./home.styled";
-import { Form_Container, Form_Left_Column, Form_Right_Column } from "./supports/form/store.styled";
 
 /* COMPONENTS */
 import { Account } from "../auth/account/Account";
-import { Textarea } from "./supports/form/Textarea";
-import { ImagePreview } from "./supports/form/ImagePreview";
-import { Uploads } from "./supports/form/Uploads";
 import { Post } from "./supports/post/Post";
-import { User_Avatar } from "./supports/form/User_Avatar";
-import AddPost from "./supports/post/AddPost";
+import { AddPost } from "./supports/post/AddPost";
 
 export const Home = () => {
 	/** GLOBAL STATES
 	 * get all posts useEffect triggers
 	 * */
 	const signedUser = useRecoilValue(userDefault);
+	const postSubmitted = useRecoilValue(postSubmittedDefault);
 	const likeType = useRecoilValue(likeTypeDefault);
-	const commentSubmit = useRecoilValue(commentSubmitDefault);
-	const replySubmit = useRecoilValue(replySubmitDefault);
-	const reReplySubmit = useRecoilValue(reReplySubmitDefault);
+
+	// const commentSubmit = useRecoilValue(commentSubmitDefault);
+	// const replySubmit = useRecoilValue(replySubmitDefault);
+	// const reReplySubmit = useRecoilValue(reReplySubmitDefault);
 
 	/** Local state sets the all posts returns from the postsAPI, useEffect */
 	const [posts, setPosts] = useState([]);
@@ -100,7 +91,7 @@ export const Home = () => {
 				console.log("postsAPI ERROR =>");
 				console.log(err);
 			});
-	}, [postSubmit, likeType, commentSubmit, replySubmit, reReplySubmit]);
+	}, [postSubmit, postSubmitted, likeType]);
 
 	return (
 		<Home_Container className='home_container'>
@@ -115,6 +106,16 @@ export const Home = () => {
 						image={image}
 						setImage={setImage}
 						handlePostClick={handlePostClick}
+						TAparentPadding={"7px 0px 0px 0px"}
+						TAfontSize={"1rem"}
+						avatarWidth={"3rem"}
+						avatarHeight={"3rem"}
+						uploadsIconSize={"1rem"}
+						labelHeight={"22px"}
+						labelWidth={"22px"}
+						buttonFontSize={"1rem"}
+						buttonPadding={"0px 5px"}
+						addPostPadding={"5px"}
 					/>
 
 					{/** ALL POSTS RENDERS */}

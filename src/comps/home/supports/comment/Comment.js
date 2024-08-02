@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { addReplyAPI } from "../../../../apis/apiCalls";
 
 /* GLOBALS */
-import { replySubmitDefault, userDefault } from "../../../auth/shared/store/states";
+import { postSubmittedDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED */
 import { Bottom_Row, Content_Section, Display_User_Avatar, Timeline_Section, Top_Row } from "../helpers/helpers.styled";
@@ -24,10 +24,9 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 
 
 	const signedUser = useRecoilValue(userDefault);
-	const [replySubmit, setReplySubmit] = useRecoilState(replySubmitDefault);
-	const [popoverOpen, setPopoverOpen] = useState(false);
+	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
 
-	const [replyButton, setReplyButton] = useState(false);
+	const [popoverOpen, setPopoverOpen] = useState(false);
 	const [addReply, setAddReply] = useState(false);
 
 	const [text, setText] = useState("");
@@ -53,7 +52,8 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 				console.log("addReplyAPI sucess");
 
 				setText("");
-				setReplySubmit((replySubmit) => !replySubmit);
+				setImage(undefined)
+				setPostSubmitted((postSubmitted) => !postSubmitted);
 			})
 			.catch((err) => {
 				console.log("addReplyAPI error");

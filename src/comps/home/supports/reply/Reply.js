@@ -6,7 +6,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { addReReplyAPI } from "../../../../apis/apiCalls";
 
 /* GLOBALS */
-import { reReplySubmitDefault, userDefault } from "../../../auth/shared/store/states";
+import { postSubmittedDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED */
 import { Reply_Container } from "./reply.styled";
@@ -24,7 +24,8 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 
 
 	const signedUser = useRecoilValue(userDefault);
-	const [reReplySubmit, setReReplySubmit] = useRecoilState(reReplySubmitDefault);
+	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
+
 	const [popoverOpen, setPopoverOpen] = useState(false);
 	const [addReply, setAddReply] = useState(false);
 
@@ -49,7 +50,10 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 			.then((res) => {
 				console.log("reReply api success");
 
-				setReReplySubmit((reReplySubmit) => !reReplySubmit);
+				setText('')
+				setImage(undefined)
+				setReplyingTo(undefined)
+				setPostSubmitted((postSubmitted) => !postSubmitted);
 			})
 			.catch((err) => {
 				console.log("reReply api error");
