@@ -340,3 +340,4 @@ export const likeReplyAPI = ({ accessToken, replyId, likeType }) => {
 		data: { likeType },
 	});
 };
+

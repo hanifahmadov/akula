@@ -128,7 +128,7 @@ export const Display_User_Avatar = styled.div(({ theme: {}, $imgWidth, $imgHeigh
 export const Content_Section = styled.div(({ theme: {}, $background, $padding }) => {
 	return {
 		width: "fit-content",
-		minWidth: "15rem",
+		minWidth: "16rem",
 		background: $background ? $background : "rgba(0, 0, 0, .05)",
 		padding: $padding ? $padding : "5px 10px",
 		borderRadius: "10px",

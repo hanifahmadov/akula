@@ -7,7 +7,16 @@ import { Textarea } from "../form/Textarea";
 import { Uploads } from "../form/Uploads";
 import { ImagePreview } from "../form/ImagePreview";
 
-export const AddReply = ({ uuid, replyingTo, signedUser, text, setText, image, setImage, handlePostClick }) => {
+export const AddReply = ({
+	uuid,
+	replyingTo,
+	signedUser,
+	text,
+	setText,
+	image,
+	setImage,
+	handlePostClick,
+}) => {
 	return (
 		<AddPost_Container className='addreply_container'>
 			<Form_Left_Column className='left_column'>
@@ -48,8 +57,8 @@ export const AddReply = ({ uuid, replyingTo, signedUser, text, setText, image, s
 
 					{replyingTo && (
 						<Replaying>
-							<span className="replying_to">replying to</span> 
-							<span className="username">@{replyingTo}</span>
+							<span className='replying_to'>replying to</span>
+							<span className='username'>@{replyingTo}</span>
 						</Replaying>
 					)}
 

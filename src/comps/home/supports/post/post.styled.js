@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
-export const AddPost_Container = styled.div(({ theme: {} }) => {
+export const AddPost_Container = styled(motion.div)(({ theme: {} }) => {
 	return {
 		display: "flex",
 		flexDirection: "row",

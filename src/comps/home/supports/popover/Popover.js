@@ -1,26 +1,17 @@
 /* NPM PACKAGES IMPORTS */
 import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-/* FONTAWESOME LIBRARY ADDING TO SETUP */
-library.add(faHeart);
+/* APIs */
+import { likeCommentAPI, likePostAPI, likeReplyAPI } from "../../../../apis/apiCalls";
 
 /* GLOBAL STATES IMPORTS  */
-/**
- * likeType will trigger to get all posts useHooks inside Homejs comps line 96.
- * this is bad idea, read the comment all the below but its what its now, will change it later.
- *
- * signedUser accessToken needed for the likePostAPI
- **/
 import { likeTypeDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED COMPONENTS */
 import { Popover_Container } from "./popover.styled";
 
-/* APIs */
-import { likeCommentAPI, likePostAPI, likeReplyAPI } from "../../../../apis/apiCalls";
+/* HELPER */
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 /** Popover  Component */
@@ -31,6 +22,7 @@ export const Popover = ({
 	commentId,
 	likes,
 	replyId,
+	subreplyId,
 	left,
 	right,
 	top,
@@ -47,6 +39,8 @@ export const Popover = ({
 	 * signedUser accessToken, likeType and postId. PostId is not a global state so that we need to pass
 	 * that id through props to this component.
 	 */
+
+	/* //# ALL LIKES ARE LIKING COMMETNS, NO NEEDED TO CREATE SAPARATE LIKE APIS ??!! NOT SURE CHECK IT OUT */
 
 	// setPopoverOpen((popoverOpen) => !popoverOpen);
 
@@ -88,14 +82,13 @@ export const Popover = ({
 					setLikeType((likeType) => !likeType);
 				})
 				.catch((err) => {
-					console.log("err comment like", err);
+					console.log("err likeCommentAPI", err);
 				});
 		}
 
 		if (replyId) {
 			likeReplyAPI({ accessToken: signedUser.accessToken, replyId, likeType: classname })
 				.then((res) => {
-					console.log(res.data);
 					console.log("likeReplyAPI has run: ");
 					setLikeType((likeType) => !likeType);
 				})
@@ -103,6 +96,16 @@ export const Popover = ({
 					console.log("err likeReplyAPI", err);
 				});
 		}
+		// if (subreplyId) {
+		// 	likeSubReplyAPI({ accessToken: signedUser.accessToken, subreplyId, likeType: classname })
+		// 		.then((res) => {
+		// 			console.log("likeSubReplyAPI has run: ");
+		// 			setLikeType((likeType) => !likeType);
+		// 		})
+		// 		.catch((err) => {
+		// 			console.log("err likeSubReplyAPI", err);
+		// 		});
+		// }
 	};
 
 	let alreadyLiked = likes && likes.length && likes.find((like) => like.owner._id == signedUser._id);

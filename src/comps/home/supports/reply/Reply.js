@@ -62,6 +62,10 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 			</Display_User_Avatar>
 
 			<div className='reply_content_and_timeline_column_right'>
+				{/** reply_main_controller_container
+				 * 	 helps mkeep the the content and timeline stay in one section
+				 * 	 in that case, its easy to hold the reaction at the end of the comment or reply
+				 */}
 				<div className='reply_main_controller_container'>
 					<Content_Section className='content_section'>
 						<div className='username'>{owner.username}</div>
@@ -116,7 +120,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 				<div>
 					{replies &&
 						replies.length > 0 &&
-						replies.map((reply, index) => <SubReply reply={reply} key={index} />)}
+						replies.map((reply, index) => <SubReply subreply={reply} key={index} />)}
 				</div>
 
 				{addReReply && (
