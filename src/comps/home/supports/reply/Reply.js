@@ -16,34 +16,35 @@ import { Bottom_Row, Content_Section, Display_User_Avatar, Timeline_Section, Top
 import { Popover } from "../popover/Popover";
 import { Timeline } from "../helpers/Timeline";
 import { ReactionCounts } from "../helpers/ReactionCounts";
-import { AddReReply } from "./AddReReply";
 import { SubReply } from "../subreply/SubReply";
+import { AddReply } from "../helpers/AddReply";
 
-export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies } }) => {
-	console.log(replies);
+export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies }, storageId }) => {
+
+
 
 	const signedUser = useRecoilValue(userDefault);
 	const [reReplySubmit, setReReplySubmit] = useRecoilState(reReplySubmitDefault);
 	const [popoverOpen, setPopoverOpen] = useState(false);
-	const [addReReply, setAddReReply] = useState(false);
+	const [addReply, setAddReply] = useState(false);
 
 	const [text, setText] = useState("");
 	const [image, setImage] = useState(undefined);
 	const [replyingTo, setReplyingTo] = useState(undefined);
 
-	const handleReplyLikeButtonClick = (e) => {
-		console.log("handle-Reply-LikeButtonClick");
+	const handleLikeButton = (e) => {
 		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
 
-	const handleReReplyButtonClick = (e) => {
+	const handleReplyButton = (e) => {
 		let referral_username = owner._id == signedUser._id ? "yourself" : owner.username;
 
 		setReplyingTo(referral_username);
-		setAddReReply((addReReply) => !addReReply);
+		setAddReply((addReply) => !addReply);
+
 	};
 
-	const handleAddReReplySubmit = (e) => {
+	const handleAddReplySubmit = (e) => {
 		addReReplyAPI({ accessToken: signedUser.accessToken, reReplyId: _id, reReplyText: text, referralId: owner._id })
 			.then((res) => {
 				console.log("reReply api success");
@@ -75,7 +76,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 					<Timeline_Section className='timeline_section'>
 						<Top_Row className='top_row'>
 							<Timeline createdAt={createdAt} size={"mini"} fontSize={".7rem"} fontWeight={500} />
-							<span className='like_button button' onClick={handleReplyLikeButtonClick}>
+							<span className='like_button button' onClick={handleLikeButton}>
 								<OutsideClickHandler
 									onOutsideClick={() => {
 										setPopoverOpen(false);
@@ -94,9 +95,9 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 							</span>
 
 							<span
-								style={{ color: addReReply ? "red" : "black" }}
+								style={{ color: addReply ? "red" : "black" }}
 								className='reply_button button'
-								onClick={handleReReplyButtonClick}
+								onClick={handleReplyButton}
 							>
 								Reply
 							</span>
@@ -120,11 +121,11 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 				<div>
 					{replies &&
 						replies.length > 0 &&
-						replies.map((reply, index) => <SubReply subreply={reply} key={index} />)}
+						replies.map((reply, index) => <SubReply subreply={reply} key={index} storageId={_id} />)}
 				</div>
 
-				{addReReply && (
-					<AddReReply
+				{addReply && (
+					<AddReply
 						uuid={_id}
 						replyingTo={replyingTo}
 						signedUser={signedUser}
@@ -132,7 +133,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 						setText={setText}
 						image={image}
 						setImage={setImage}
-						handlePostClick={handleAddReReplySubmit}
+						handlePostClick={handleAddReplySubmit}
 					/>
 				)}
 			</div>

@@ -17,10 +17,12 @@ import { Comment_Container } from "./comment.styled";
 import { Popover } from "../popover/Popover";
 import { Timeline } from "../helpers/Timeline";
 import { ReactionCounts } from "../helpers/ReactionCounts";
-import { AddReply } from "./AddReply";
+import { AddReply } from "../helpers/AddReply";
 import { Reply } from "../reply/Reply";
 
-export const Comment = ({ comment: { _id, owner, content, createdAt, likes, replies }, parentId }) => {
+export const Comment = ({ comment: { _id, owner, content, createdAt, likes, replies }, storageId }) => {
+
+
 	const signedUser = useRecoilValue(userDefault);
 	const [replySubmit, setReplySubmit] = useRecoilState(replySubmitDefault);
 	const [popoverOpen, setPopoverOpen] = useState(false);
@@ -33,12 +35,12 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 	const [replyingTo, setReplyingTo] = useState(undefined);
 
 
-	const handleCommenLikeButtonClick = (e) => {
+	const handleLikeButton= (e) => {
 		console.log("handle-Comment-LikeButtonClick");
 		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
 
-	const handleReplyButtonClick = (e) => {
+	const handleReplyButton = (e) => {
 		let referral = owner._id == signedUser._id ? "yourself" : owner.username;
 
 		setReplyingTo(referral);
@@ -78,7 +80,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 					<Timeline_Section className='timeline_section'>
 						<Top_Row className='top_row'>
 							<Timeline createdAt={createdAt} size={"mini"} fontSize={".7rem"} fontWeight={500} />
-							<span className='like_button button' onClick={handleCommenLikeButtonClick}>
+							<span className='like_button button' onClick={handleLikeButton}>
 								<OutsideClickHandler
 									onOutsideClick={() => {
 										setPopoverOpen(false);
@@ -99,7 +101,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 							<span
 								style={{ color: addReply ? "red" : "black" }}
 								className='reply_button button'
-								onClick={handleReplyButtonClick}
+								onClick={handleReplyButton}
 							>
 								Reply
 							</span>
@@ -123,7 +125,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 				<div>
 					{replies &&
 						replies.length > 0 &&
-						replies.map((reply, index) => <Reply reply={reply} key={index} />)}
+						replies.map((reply, index) => <Reply reply={reply} key={index} storageId={undefined} />)}
 				</div>
 
 				{addReply && (

@@ -40,7 +40,7 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 				{comments &&
 					comments.length > 0 &&
 					comments.map((comment, index) => {
-						return <Comment key={index}  comment={comment} parentId={_id} />;
+						return <Comment key={index}  comment={comment} storageId={undefined} />;
 					})}
 			</div>
 

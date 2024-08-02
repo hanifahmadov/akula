@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import OutsideClickHandler from "react-outside-click-handler";
 
+/* APIS */
+import { addSubReplyAPI } from "../../../../apis/apiCalls";
+
 /* GLOBALS */
 import { subReplySubmitDefault, userDefault } from "../../../auth/shared/store/states";
 
@@ -14,16 +17,15 @@ import { Bottom_Row, Content_Section, Display_User_Avatar, Timeline_Section, Top
 import { Timeline } from "../helpers/Timeline";
 import { Popover } from "../popover/Popover";
 import { ReactionCounts } from "../helpers/ReactionCounts";
-import { AddReply } from "../comment/AddReply";
+import { AddReply } from "../helpers/AddReply";
 
-export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, replies } }) => {
-	console.log("likessssss", likes);
+export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, replies }, storageId }) => {
 	const signedUser = useRecoilValue(userDefault);
 	/* get rid off all these additional submit shit, create one and make it global */
 	const [subReplySubmit, setReReplySubmit] = useRecoilState(subReplySubmitDefault);
 	const [popoverOpen, setPopoverOpen] = useState(false);
 
-	const [replyButton, setReplyButton] = useState(false);
+	const [addReply, setAddReply] = useState(false);
 	const [replyingTo, setReplyingTo] = useState(undefined);
 
 	const [text, setText] = useState("");
@@ -33,7 +35,6 @@ export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, re
 	 *  Like Button Click
 	 */
 	const handleLikeButton = (e) => {
-		console.log("handleLikeButtonClick => SubReply");
 		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
 
@@ -44,21 +45,32 @@ export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, re
 		let referral_username = owner._id == signedUser._id ? "yourself" : owner.username;
 
 		setReplyingTo(referral_username);
-		setReplyButton((replyButton) => !replyButton);
+		setAddReply((addReply) => !addReply);
 	};
 
 	/**
 	 *  handle Add Reply Submmit
 	 */
 	const handleAddReplySubmit = (e) => {
-		// addReReplyAPI({ accessToken: signedUser.accessToken, reReplyId: _id, reReplyText: text, referralId: owner._id })
-		// 	.then((res) => {
-		// 		console.log("reReply api success");
-		// 		setReReplySubmit((reReplySubmit) => !reReplySubmit);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log("reReply api error");
-		// 	});
+		/** important notes
+		 *  referalId will output who this reply refers to
+		 * 	parentId needs in the server to keep all sub replies in its replies array
+		 * 	like => reply[reply[reply(referral), reply(referral), reply(referral), ...]]
+		 * 	cant make a reply chains like => reply[reply[reply[reply....]]]
+		 */
+		addSubReplyAPI({
+			accessToken: signedUser.accessToken,
+			replyId: _id,
+			replyText: text,
+			referralId: owner._id,
+			storageId,
+		})
+			.then((res) => {
+				console.log("addSubReplyAPI  success");
+			})
+			.catch((err) => {
+				console.log("addSubReplyAPI error");
+			});
 	};
 	return (
 		<SubReply_Container>
@@ -99,7 +111,7 @@ export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, re
 							</span>
 
 							<span
-								style={{ color: replyButton ? "red" : "black" }}
+								style={{ color: addReply ? "red" : "black" }}
 								className='reply_button button'
 								onClick={handleReplyButton}
 							>
@@ -125,10 +137,10 @@ export const SubReply = ({ subreply: { _id, owner, content, createdAt, likes, re
 				<div>
 					{replies &&
 						replies.length > 0 &&
-						replies.map((reply, index) => <SubReply subreply={reply} key={index} parentId={0} />)}
+						replies.map((reply, index) => <SubReply subreply={reply} key={index} storageId={storageId} />)}
 				</div>
 
-				{replyButton && (
+				{addReply && (
 					<AddReply
 						uuid={_id}
 						replyingTo={replyingTo} // just printing the username into post container
