@@ -130,18 +130,19 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 				<>
 					{replies && replies.length > 0 && (
 						<>
-							<ViewReplies style={{ display: !viewReplies ? "flex" : 'none'}} onClick={() => setViewReplies(true)}>
+							<ViewReplies
+								style={{ display: !viewReplies ? "flex" : "none" }}
+								onClick={() => setViewReplies(true)}
+							>
 								<span>view </span>
 								<span>{replies && replies.length > 0 && replies.length}</span>
 								<span>replies</span>
 							</ViewReplies>
 
-							<div style={{ display: viewReplies ? "flex" : 'none', flexDirection: 'column'}}>
-								{replies &&
-									replies.length > 0 &&
-									replies.map((reply, index) => (
-										<Reply reply={reply} key={index} storageId={undefined} />
-									))}
+							<div style={{ display: viewReplies ? "flex" : "none", flexDirection: "column" }}>
+								{replies.map((reply, index) => (
+									<Reply reply={reply} key={index}/>
+								))}
 							</div>
 						</>
 					)}

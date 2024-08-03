@@ -11,7 +11,14 @@ import { postSubmittedDefault, userDefault } from "../../../auth/shared/store/st
 
 /* STYLED */
 import { Reply_Container } from "./reply.styled";
-import { Bottom_Row, Content_Section, Display_User_Avatar, Timeline_Section, Top_Row } from "../helpers/helpers.styled";
+import {
+	Bottom_Row,
+	Content_Section,
+	Display_User_Avatar,
+	Timeline_Section,
+	Top_Row,
+	ViewReplies,
+} from "../helpers/helpers.styled";
 
 /* HELPER */
 import { Popover } from "../popover/Popover";
@@ -21,16 +28,13 @@ import { SubReply } from "../subreply/SubReply";
 import { AddReply } from "../helpers/AddReply";
 
 export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies } }) => {
-
-
-
-
 	const signedUser = useRecoilValue(userDefault);
 	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
 
 	const [popoverOpen, setPopoverOpen] = useState(false);
 	const [currentReply, setCurrentReply] = useState(false);
-	const [referralId, setReferralId] = useState(null)
+	const [referralId, setReferralId] = useState(null);
+	const [viewReplies, setViewReplies] = useState(false);
 
 	const [unique, setUnique] = useState(1989);
 
@@ -46,22 +50,27 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 		let referral_username = owner._id == signedUser._id ? "yourself" : owner.username;
 
 		setReplyingTo(referral_username);
-		setReferralId(owner._id)
+		setReferralId(owner._id);
 		setCurrentReply(_id);
 	};
 
 	const handleAddReplySubmit = (e) => {
 		console.log("replyingTo", replyingTo);
 
-		addReplyAPI({ accessToken: signedUser.accessToken, commentId: _id, replyText: text.trim(), referralId: referralId })
+		addReplyAPI({
+			accessToken: signedUser.accessToken,
+			commentId: _id,
+			replyText: text.trim(),
+			referralId: referralId,
+		})
 			.then((res) => {
 				console.log("addReplyAPI inside Reply.js is success");
 
 				setText("");
 				setImage(undefined);
 				setReplyingTo(undefined);
-				setCurrentReply(null)
-				setReferralId(null)
+				setCurrentReply(null);
+				setReferralId(null);
 				setPostSubmitted((postSubmitted) => !postSubmitted);
 			})
 			.catch((err) => {
@@ -136,20 +145,33 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 					</Timeline_Section>
 				</div>
 
-				<div>
-					{replies &&
-						replies.length > 0 &&
-						replies.map((reply, index) => (
-							<SubReply
-								key={index}
-								subreply={reply}
-								currentReply={currentReply}
-								setCurrentReply={setCurrentReply}
-								setReplyingTo={setReplyingTo}
-								setReferralId={setReferralId}
-							/>
-						))}
-				</div>
+				<>
+					{replies && replies.length > 0 && (
+						<>
+							<ViewReplies
+								style={{ display: !viewReplies ? "flex" : "none" }}
+								onClick={() => setViewReplies(true)}
+							>
+								<span>view </span>
+								<span>{replies && replies.length > 0 && replies.length}</span>
+								<span>replies</span>
+							</ViewReplies>
+
+							<div style={{ display: viewReplies ? "flex" : "none", flexDirection: "column" }}>
+								{replies.map((reply, index) => (
+									<SubReply
+										key={index}
+										subreply={reply}
+										currentReply={currentReply}
+										setCurrentReply={setCurrentReply}
+										setReplyingTo={setReplyingTo}
+										setReferralId={setReferralId}
+									/>
+								))}
+							</div>
+						</>
+					)}
+				</>
 
 				{currentReply && (
 					<OutsideClickHandler

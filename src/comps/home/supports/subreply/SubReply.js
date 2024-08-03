@@ -16,7 +16,7 @@ import { Bottom_Row, Content_Section, Display_User_Avatar, Timeline_Section, Top
 import { Timeline } from "../helpers/Timeline";
 import { Popover } from "../popover/Popover";
 import { ReactionCounts } from "../helpers/ReactionCounts";
-import Referral from "../helpers/Referral";
+import {Referral} from "../helpers/Referral";
 
 export const SubReply = ({
 	subreply: { _id, owner, content, createdAt, likes, referral },
