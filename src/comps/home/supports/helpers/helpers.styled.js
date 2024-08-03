@@ -177,3 +177,54 @@ export const Bottom_Row = styled.div(({ theme: {}, $gap }) => {
 		gap: $gap ? $gap : "10px",
 	};
 });
+
+
+export const Referral_Container = styled.div(({ theme: {}, $gap }) => {
+	return {
+		display: "flex",
+		justifyContent: 'center',
+		alignItems:'center',
+
+		marginLeft: '6px',
+		gap: '5px',
+
+		".replied_to": {
+			paddingTop:'.9px',
+			fontSize: '0.7rem',
+			fontWeight:'400',
+			fontStyle: 'italic',
+		},
+
+		".referred": {
+			background:'rgba(124, 177, 255, .25)',
+			padding: '.5px 4px',
+			borderRadius:'10px',
+			fontWeight:'500',
+			fontSize: '0.8rem',
+		}
+
+	};
+});
+
+
+
+export const ViewReplies = styled.div(({ theme: {}, $gap }) => {
+	return {
+
+		display: "flex",
+		gap: $gap ? $gap : "3px",
+		width: "fit-content",
+
+		padding: '2px 5px',
+		marginTop:'7px',
+		fontSize: '.8rem',
+		fontWeight: '500',
+		textShadow:'1px 1px 2px rgba(0, 0, 0, .2)',
+		cursor: 'pointer'
+
+
+
+
+		
+	};
+});

@@ -42,7 +42,7 @@ export const Post_Container = styled.div(({ theme: {} }) => ({
 		gap: "10px",
 
 		width: "100%",
-		minHeight: "30rem",
+		maxHeight: "38rem",
 		overflow: "scroll",
 
 		marginTop: "1rem",

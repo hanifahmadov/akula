@@ -10,7 +10,14 @@ import { addReplyAPI } from "../../../../apis/apiCalls";
 import { postSubmittedDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED */
-import { Bottom_Row, Content_Section, Display_User_Avatar, Timeline_Section, Top_Row } from "../helpers/helpers.styled";
+import {
+	Bottom_Row,
+	Content_Section,
+	Display_User_Avatar,
+	Timeline_Section,
+	Top_Row,
+	ViewReplies,
+} from "../helpers/helpers.styled";
 import { Comment_Container } from "./comment.styled";
 
 /* HELPER */
@@ -21,20 +28,18 @@ import { AddReply } from "../helpers/AddReply";
 import { Reply } from "../reply/Reply";
 
 export const Comment = ({ comment: { _id, owner, content, createdAt, likes, replies }, storageId }) => {
-
-
 	const signedUser = useRecoilValue(userDefault);
 	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
 
 	const [popoverOpen, setPopoverOpen] = useState(false);
 	const [addReply, setAddReply] = useState(false);
+	const [viewReplies, setViewReplies] = useState(false);
 
 	const [text, setText] = useState("");
 	const [image, setImage] = useState(undefined);
 	const [replyingTo, setReplyingTo] = useState(undefined);
 
-
-	const handleLikeButton= (e) => {
+	const handleLikeButton = (e) => {
 		console.log("handle-Comment-LikeButtonClick");
 		setPopoverOpen((popoverOpen) => !popoverOpen);
 	};
@@ -47,19 +52,19 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 	};
 
 	const handleAddReplySubmit = (e) => {
-		addReplyAPI({ accessToken: signedUser.accessToken, commentId: _id, replyText: text.trim() })
+		addReplyAPI({ accessToken: signedUser.accessToken, commentId: _id, replyText: text.trim(), referralId: null })
 			.then((res) => {
 				console.log("addReplyAPI sucess");
 
 				setText("");
-				setImage(undefined)
+				setImage(undefined);
 				setPostSubmitted((postSubmitted) => !postSubmitted);
 			})
 			.catch((err) => {
 				console.log("addReplyAPI error");
 			});
 	};
-	
+
 	return (
 		<Comment_Container>
 			<Display_User_Avatar className='display_user_avatar_column_left'>
@@ -116,31 +121,62 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 								numberFontSize={".75rem"}
 								numberPadding={"0px"}
 								gap={"9px"}
-								iconNumberGap={'1px'}
+								iconNumberGap={"1px"}
 							/>
 						</Bottom_Row>
 					</Timeline_Section>
 				</div>
 
-				<div>
-					{replies &&
-						replies.length > 0 &&
-						replies.map((reply, index) => <Reply reply={reply} key={index} storageId={undefined} />)}
-				</div>
+				<>
+					{replies && replies.length > 0 && (
+						<>
+							<ViewReplies style={{ display: !viewReplies ? "flex" : 'none'}} onClick={() => setViewReplies(true)}>
+								<span>view </span>
+								<span>{replies && replies.length > 0 && replies.length}</span>
+								<span>replies</span>
+							</ViewReplies>
+
+							<div style={{ display: viewReplies ? "flex" : 'none', flexDirection: 'column'}}>
+								{replies &&
+									replies.length > 0 &&
+									replies.map((reply, index) => (
+										<Reply reply={reply} key={index} storageId={undefined} />
+									))}
+							</div>
+						</>
+					)}
+				</>
 
 				{addReply && (
-					<AddReply
-						uuid={_id}
-						replyingTo={replyingTo}
-						signedUser={signedUser}
-						text={text}
-						setText={setText}
-						image={image}
-						setImage={setImage}
-						handlePostClick={handleAddReplySubmit}
-					/>
+					<OutsideClickHandler
+						onOutsideClick={() => {
+							setAddReply(false);
+						}}
+						// disabled={!popoverOpen}
+					>
+						<AddReply
+							uuid={_id}
+							replyingTo={replyingTo}
+							signedUser={signedUser}
+							text={text}
+							setText={setText}
+							image={image}
+							setImage={setImage}
+							handlePostClick={handleAddReplySubmit}
+						/>
+					</OutsideClickHandler>
 				)}
 			</div>
 		</Comment_Container>
 	);
 };
+
+/* 
+
+<div className='d-none'>
+			{replies &&
+						replies.length > 0 &&
+						replies.map((reply, index) => <Reply reply={reply} key={index} storageId={undefined} />)}
+			 </div>
+
+*/

@@ -4,7 +4,7 @@ export const Reply_Container = styled.div(({ theme: {} }) => {
 	return {
 		display: "flex",
 		justifyContent: "flex-start",
-        marginTop:'8px',
+        marginTop:'5px',
 
 
 		".reply_content_and_timeline_column_right": {

@@ -3,7 +3,7 @@ import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 /* APIs */
-import { likeCommentAPI, likePostAPI, likeReplyAPI } from "../../../../apis/apiCalls";
+import { likeCommentAPI, likePostAPI} from "../../../../apis/apiCalls";
 
 /* GLOBAL STATES IMPORTS  */
 import { likeTypeDefault, userDefault } from "../../../auth/shared/store/states";
@@ -21,8 +21,6 @@ export const Popover = ({
 	postId,
 	commentId,
 	likes,
-	replyId,
-	subreplyId,
 	left,
 	right,
 	top,
@@ -85,27 +83,6 @@ export const Popover = ({
 					console.log("err likeCommentAPI", err);
 				});
 		}
-
-		if (replyId) {
-			likeReplyAPI({ accessToken: signedUser.accessToken, replyId, likeType: classname })
-				.then((res) => {
-					console.log("likeReplyAPI has run: ");
-					setLikeType((likeType) => !likeType);
-				})
-				.catch((err) => {
-					console.log("err likeReplyAPI", err);
-				});
-		}
-		// if (subreplyId) {
-		// 	likeSubReplyAPI({ accessToken: signedUser.accessToken, subreplyId, likeType: classname })
-		// 		.then((res) => {
-		// 			console.log("likeSubReplyAPI has run: ");
-		// 			setLikeType((likeType) => !likeType);
-		// 		})
-		// 		.catch((err) => {
-		// 			console.log("err likeSubReplyAPI", err);
-		// 		});
-		// }
 	};
 
 	let alreadyLiked = likes && likes.length && likes.find((like) => like.owner._id == signedUser._id);
