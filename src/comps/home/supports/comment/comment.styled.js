@@ -16,6 +16,7 @@ export const Comment_Container = styled.div(({ theme: {}, $commentOpen, $isFor }
 			width: "100%",
 			padding: "0px 5px",
 
+
 			".comment_main_controller_container": {
 
 				/* important */
