@@ -26,6 +26,7 @@ import {
 	faFaceSmile,
 	faThumbsDown,
 	faFaceLaughBeam,
+	faPlus
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -49,7 +50,8 @@ library.add(
 	faFaceLaughBeamRegular,
 	faThumbsDownRegular,
 	faFaceSmileRegular,
-	faThumbsUpRegular
+	faThumbsUpRegular,
+	faPlus
 );
 
 const defineType = (type) => {
@@ -82,6 +84,8 @@ const defineType = (type) => {
 			return faVideo;
 		case "faMasksTheater":
 			return faMasksTheater;
+		case "faPlus":
+			return faPlus;
 		default:
 			return null;
 	}
@@ -107,6 +111,7 @@ export const Fontawesome = ({
 	marginLeft,
 	marginRight,
 	fontSize,
+	fontWeight,
 }) => {
 	const icon = defineType(type);
 	return icon ? (
@@ -131,6 +136,7 @@ export const Fontawesome = ({
 				marginLeft,
 				marginRight,
 				fontSize,
+				fontWeight,
 			}}
 		/>
 	) : null;

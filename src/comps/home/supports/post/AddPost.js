@@ -11,6 +11,7 @@ import { Textarea } from "../form/Textarea";
 import { ImagePreview } from "../form/ImagePreview";
 
 export const AddPost = ({
+	isfor,
 	uuid,
 	signedUser,
 	text,
@@ -33,18 +34,22 @@ export const AddPost = ({
 	buttonPadding,
 	addPostPadding,
 }) => {
+
+
 	return (
-		<AddPost_Container className='addcomment_container' $addPostPadding={addPostPadding}>
+		<AddPost_Container className='addpost_container' $addPostPadding={addPostPadding}>
 			<Form_Left_Column className='left_column'>
 				<User_Avatar
 					avatar={signedUser.avatar}
 					width={avatarWidth ? avatarWidth : "3.5rem"}
 					height={avatarHeight ? avatarHeight : "3.5rem"}
 					border={avatarBorder}
+					isfor={isfor}
+
 				/>
 			</Form_Left_Column>
 
-			<Form_Right_Column className='right_column' >
+			<Form_Right_Column className='right_column'>
 				<div className='textarea_and_image_preview_wrapper'>
 					<Textarea
 						text={text}
@@ -53,6 +58,7 @@ export const AddPost = ({
 						padding={TApadding}
 						parentPadding={TAparentPadding ? TAparentPadding : "0px"}
 						fontSize={TAfontSize}
+						isfor={isfor}
 					/>
 					{image && (
 						<ImagePreview
@@ -74,13 +80,16 @@ export const AddPost = ({
 						labelHeight={labelHeight}
 						labelWidth={labelWidth}
 						gap={uploadsGap}
+						isfor={isfor}
 					/>
 
 					<Button
 						$fontSize={buttonFontSize}
 						$padding={buttonPadding}
 						$letterSpacing={"0px"}
+						$isfor={isfor}
 						onClick={handlePostClick}
+						
 					>
 						send
 					</Button>

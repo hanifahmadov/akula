@@ -3,7 +3,17 @@ import styled from "styled-components";
 // import { motion } from "framer-motion";
 
 export const Textarea_Container = styled.div(
-	({ theme: {}, $fontSize, $padding, $maxHeight, $borderRadius, $parentPadding }) => {
+	({
+		theme: {
+			device: { mobile },
+		},
+		$isfor,
+		$fontSize,
+		$padding,
+		$maxHeight,
+		$borderRadius,
+		$parentPadding,
+	}) => {
 		return {
 			display: "flex",
 			flexDirection: "column",
@@ -16,6 +26,18 @@ export const Textarea_Container = styled.div(
 
 			padding: $parentPadding ? $parentPadding : "10px 2px",
 			borderRadius: $borderRadius ? $borderRadius : "10px",
+
+			...(mobile &&
+				$isfor == "post" && {
+					padding: "4px 3px 5px 3px",
+					border: "1px solid white",
+				}),
+
+			...(mobile &&
+				$isfor == "comment" && {
+					padding: "0px 3px",
+					border: "2px solid white",
+				}),
 
 			".textarea": {
 				width: "100%",
@@ -36,16 +58,28 @@ export const Textarea_Container = styled.div(
 				"&::placeholder": {
 					color: "rgba(0, 0, 0, .25)",
 					paddingLeft: "5px",
+
+					...(mobile && {
+						fontSize: ".9rem",
+					}),
 				},
 				// border: "1px solid #ffffff30",
-			},
 
-			".addComment_icons": {
-				".addComment_image_icon": {
-					display: "inline-block",
-					marginLeft: "15px",
-					margin: "2px 15px",
-				},
+				...(mobile &&
+					$isfor == "post" && {
+						maxHeight: "6rem",
+						padding: "0px 5px",
+						lineHeight: "16px",
+						fontSize: "1rem",
+					}),
+
+				...(mobile &&
+					$isfor == "comment" && {
+						maxHeight: "6rem",
+						padding: "2px 5px",
+						lineHeight: "14px",
+						fontSize: ".9rem",
+					}),
 			},
 		};
 	}
@@ -86,83 +120,140 @@ export const Image_Preview_Container = styled.div(
 	})
 );
 
-export const Uploads_Container = styled.div(({ theme: {}, $labelHeight, $labelWidth, $gap }) => ({
-	display: "flex",
-	gap: $gap ? $gap : "10px",
-
-	".select_image, .select_video, .select_poll ": {
-		background: "rgba(0, 0, 0, 0.1)",
-		height: $labelHeight ? $labelHeight : "28px",
-		width: $labelWidth ? $labelWidth : "28px",
-
-		borderRadius: "3px",
-
-		label: {
-			height: "100%",
-			width: "100%",
-
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-
-			fontSize: "13px",
-			cursor: "pointer",
+export const Uploads_Container = styled.div(
+	({
+		theme: {
+			device: { mobile },
 		},
-	},
+		$labelHeight,
+		$labelWidth,
+		$gap,
+		$isfor,
+	}) => ({
+		display: "flex",
+		gap: $gap ? $gap : "10px",
 
-	".select_video": {
-		cursor: "not-allowed",
+		".select_image, .select_video, .select_poll ": {
+			background: "rgba(0, 0, 0, 0.1)",
+			height: $labelHeight ? $labelHeight : "28px",
+			width: $labelWidth ? $labelWidth : "28px",
 
-		"& > *": {
-			pointerEvents: "none",
-			color: "rgba(0, 0, 0, 0.2)",
+			...(mobile &&
+				$isfor == "post" && {
+					height: "20px",
+					width: "20px",
+				}),
+
+			borderRadius: "3px",
+
+			label: {
+				height: "100%",
+				width: "100%",
+
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+
+				fontSize: "13px",
+				cursor: "pointer",
+			},
 		},
-	},
 
-	".select_poll": {
-		cursor: "not-allowed",
+		".select_video": {
+			cursor: "not-allowed",
 
-		"& > *": {
-			pointerEvents: "none",
-			color: "rgba(0, 0, 0, 0.2)",
+			"& > *": {
+				pointerEvents: "none",
+				color: "rgba(0, 0, 0, 0.2)",
+			},
 		},
-	},
-}));
+
+		".select_poll": {
+			cursor: "not-allowed",
+
+			"& > *": {
+				pointerEvents: "none",
+				color: "rgba(0, 0, 0, 0.2)",
+			},
+		},
+	})
+);
 
 export const Form_Left_Column = styled.div(({ theme: {} }) => {
 	return {};
 });
 
-export const Form_Right_Column = styled.div(({ theme: {}, $padding, $buttonWrapperPadding }) => {
-	return {
-		width: "100%",
-		padding: $padding ? $padding : "0px 5px",
-
-		".textarea_and_image_preview_wrapper": {},
-
-		".media__and_submit_button_wrapper": {
-			display: "flex",
-			justifyContent: "space-between",
-
+export const Form_Right_Column = styled.div(
+	({
+		theme: {
+			device: { mobile },
+		},
+		$padding,
+		$buttonWrapperPadding,
+	}) => {
+		return {
 			width: "100%",
+			padding: $padding ? $padding : "0px 5px",
 
-			marginTop: "0.3rem",
-			padding: $buttonWrapperPadding ? $buttonWrapperPadding : "0px 5px",
-		},
-	};
-});
+			".textarea_and_image_preview_wrapper": {},
 
-export const User_Avatar_Container = styled.div(({ theme: {}, $width, $height, $border }) => {
-	return {
-		img: {
-			width: $width ? $width : "3.5rem",
-			height: $height ? $height : "3.5rem",
-			borderRadius: "50%",
-			border: $border ? $border : "2px solid rgba(255, 255, 255, 1)",
-			alignSelf: "flex-start",
+			".media__and_submit_button_wrapper": {
+				display: "flex",
+				justifyContent: "space-between",
+
+				width: "100%",
+
+				marginTop: "0.4rem",
+				padding: $buttonWrapperPadding ? $buttonWrapperPadding : "0px 5px",
+
+				...(mobile &&  {
+					marginTop: "0.2rem",
+				}),
+			},
+
+			...(mobile && {
+				padding: "0px 3px",
+			}),
+		};
+	}
+);
+
+export const User_Avatar_Container = styled.div(
+	({
+		theme: {
+			device: { mobile },
 		},
-	};
-});
+		$width,
+		$height,
+		$border,
+		$isfor,
+	}) => {
+		console.log("$isfor inside User Container Avatar", $isfor);
+		return {
+			img: {
+				width: $width ? $width : "3.5rem",
+				height: $height ? $height : "3.5rem",
+				borderRadius: "50%",
+				border: $border ? $border : "2px solid rgba(255, 255, 255, 1)",
+				alignSelf: "flex-start",
+
+				...(mobile &&
+					$isfor == "post" && {
+						width: "2.25rem",
+						height: "2.25rem",
+						border: "2px solid white",
+					}),
+
+				...(mobile &&
+					$isfor == "comment" && {
+						width: "1.7rem",
+						height: "1.7rem",
+						border: "2px solid white",
+					}),
+			},
+		};
+	}
+);
 
 export const Replaying = styled.div(({ theme: {}, $width, $height, $border }) => {
 	return {
@@ -186,7 +277,9 @@ export const Replaying = styled.div(({ theme: {}, $width, $height, $border }) =>
 
 export const Button = styled.div(
 	({
-		theme: {},
+		theme: {
+			device: { mobile },
+		},
 		$fontSize,
 		$color,
 		$background,
@@ -195,6 +288,7 @@ export const Button = styled.div(
 		$letterSpacing,
 		$hoverBackground,
 		$boredrRadius,
+		$isfor,
 	}) => {
 		return {
 			color: $color ? $color : "#fff",
@@ -214,6 +308,22 @@ export const Button = styled.div(
 			"&:hover": {
 				background: $hoverBackground ? $hoverBackground : "#000",
 			},
+
+			...(mobile &&
+				$isfor == "post" && {
+					padding: "1px 5px",
+					fontSize: ".9rem",
+					letterSpacing: "-.25px",
+					fontWeight: "600",
+				}),
+
+			...(mobile &&
+				$isfor == "comment" && {
+					padding: "1px 5px",
+					fontSize: ".9rem",
+					letterSpacing: "-.25px",
+					fontWeight: "600",
+				}),
 		};
 	}
 );

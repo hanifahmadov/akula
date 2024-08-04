@@ -81,6 +81,7 @@ export const ReactionCounts = ({
 			$numberFontWeight={numberFontWeight}
 			$numberPadding={numberPadding}
 			$numberMargin={numberMargin}
+			$likesCount={likes.length}
 		>
 			<Heart_Container className='heart_container' $heart={heart} $iconNumberGap={iconNumberGap}>
 				<Fontawesome type={"faHeart"} fontSize={iconSize} />

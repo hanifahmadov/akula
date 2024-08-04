@@ -7,6 +7,7 @@ import { Textarea_Container } from "./store.styled";
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 export const Textarea = ({
+	isfor,
 	text,
 	setText,
 	fontSize,
@@ -48,6 +49,7 @@ export const Textarea = ({
 			$maxHeight={maxHeight}
 			$borderRadius={borderRadius}
 			$parentPadding={parentPadding}
+			$isfor={isfor}
 		>
 			<textarea
 				className='textarea'

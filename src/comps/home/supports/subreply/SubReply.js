@@ -49,6 +49,7 @@ export const SubReply = ({
 	return (
 		<SubReply_Container>
 			<Display_User_Avatar className='display_user_avatar_column_left'>
+				<div className="joinline"/>
 				<img src={owner.avatar} />
 			</Display_User_Avatar>
 

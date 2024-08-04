@@ -1,7 +1,7 @@
 /** NPM IMPORTS */
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 /** Fontawesome imports and setups
  *
@@ -39,7 +39,7 @@ library.add(
 import { Links_Container } from "./navbar.styled";
 
 /** GLOBAL STATES */
-import { activeLinkDefault } from "../../auth/shared/store/states";
+import { activeLinkDefault, deviceDefault } from "../../auth/shared/store/states";
 
 /** Link is an react-router-dom element and cant send a activeLink as a prop to it.
  * so, i am gonna make a inline-styling for now, maybe later i can change it
@@ -48,6 +48,7 @@ import { activeLinkDefault } from "../../auth/shared/store/states";
 const Links = () => {
 	/** activeLink is an global state */
 	const [activeLink, setActiveLink] = useRecoilState(activeLinkDefault);
+
 
 	/** those are styles for active link and disabled links
 	 *  some navbar links are disabled, will work on it later

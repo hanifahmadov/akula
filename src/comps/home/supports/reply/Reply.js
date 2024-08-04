@@ -10,7 +10,7 @@ import { addReplyAPI } from "../../../../apis/apiCalls";
 import { postSubmittedDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED */
-import { Reply_Container } from "./reply.styled";
+import { Reply_Container, SubReplies_Wrapper } from "./reply.styled";
 import {
 	Bottom_Row,
 	Content_Section,
@@ -85,6 +85,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 	return (
 		<Reply_Container>
 			<Display_User_Avatar className='display_user_avatar_column_left'>
+				<div className='joinline' />
 				<img src={owner.avatar} />
 			</Display_User_Avatar>
 
@@ -157,7 +158,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 								<span>replies</span>
 							</ViewReplies>
 
-							<div style={{ display: viewReplies ? "flex" : "none", flexDirection: "column" }}>
+							<SubReplies_Wrapper $viewReplies={viewReplies}>
 								{replies.map((reply, index) => (
 									<SubReply
 										key={index}
@@ -168,7 +169,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 										setReferralId={setReferralId}
 									/>
 								))}
-							</div>
+							</SubReplies_Wrapper>
 						</>
 					)}
 				</>

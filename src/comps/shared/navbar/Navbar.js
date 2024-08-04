@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 /* GLOBAL STATES  & APIS*/
-import { userDefault } from "../../auth/shared/store/states";
+import { deviceDefault, userDefault } from "../../auth/shared/store/states";
 import { signoutAPI } from "../../../apis/apiCalls";
 
 /* STYLED COMPS */
@@ -11,24 +11,22 @@ import { Navbar_Container } from "./navbar.styled";
 
 /* HELPER COMPS */
 import Links from "./Links";
-
-
-
+import { Fontawesome } from "../../home/supports/fontawesome/Fontawesome";
 
 export const Navbar = () => {
+	const { tablet } = useRecoilValue(deviceDefault);
+	const signedUser = useRecoilValue(userDefault);
+	const navigate = useNavigate();
 
-    const signedUser = useRecoilValue(userDefault)
-    const navigate = useNavigate();
-
-    /** Logout click handler */
-    const handleLogoutClick = (e) => {
+	/** Logout click handler */
+	const handleLogoutClick = (e) => {
 		signoutAPI(signedUser)
 			.then((res) => {
-				console.log('Logout successful');
+				console.log("Logout successful");
 				navigate("/signin");
 			})
 			.catch((err) => {
-                console.log('Logout error');
+				console.log("Logout error");
 				console.log(err);
 			});
 	};
@@ -44,7 +42,7 @@ export const Navbar = () => {
 			 */}
 			<div className='navbar_top_row'>
 				{/*  application header */}
-				<div className='application_header'>POLARX</div>
+				<div className='application_header'>{tablet ? "PX" : "POLARX"}</div>
 
 				<div className='navbar_links_wrapper'>
 					<Links />
@@ -53,11 +51,18 @@ export const Navbar = () => {
 				{/** button opens modal to post
 				 * // TODO
 				 */}
-				<div className='post_button_from_navbar'>POST</div>
+				<div className='post_button_from_navbar'>
+					<span className='post'>POST</span>
+					<span className='plus'>
+						<Fontawesome type={"faPlus"} />
+					</span>
+				</div>
 			</div>
 
 			<div className='navbar_footer_row'>
-				<button className='logout_button' onClick={handleLogoutClick}>Logout</button>
+				<button className='logout_button' onClick={handleLogoutClick}>
+					Logout
+				</button>
 			</div>
 		</Navbar_Container>
 	);

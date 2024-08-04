@@ -63,12 +63,12 @@ export const App = () => {
 
 	// mobile
 	const mobile = useMediaQuery({
-		query: "(max-device-width: 576px)",
+		query: "(max-device-width: 500px)",
 	});
 
 	// tablet
 	const tablet = useMediaQuery({
-		query: "(max-device-width: 768px)",
+		query: "(max-device-width: 840px)",
 	});
 
 	// laptop

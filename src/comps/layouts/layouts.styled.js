@@ -7,6 +7,10 @@ import mountain from "../auth/shared/image/mountain.jpg";
 export const PersistentLayout_Container = styled.div(({ theme: {} }) => ({
 	width: "100%",
 	height: "100%",
+
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
 }));
 
 export const Loading = styled.div(({ theme: {} }) => ({
@@ -43,75 +47,76 @@ export const RegisterLayout_Container = styled.div(({ theme: {} }) => ({
 /** HOME LAYOUT CONTAINER
  *	// background: "#07151d",
  */
-export const MainLayout_Container = styled.div(({ theme: {} }) => ({
-	width: "100%",
-	height: '100svh',
+export const MainLayout_Container = styled.div(
+	({
+		theme: {
+			device: { tablet},
+		},
+	}) => ({
+		width: "100%",
+		maxWidth: "100rem",
+		height: "100svh",
 
-
-	/** SO THE SCROLL, HOW IT WORKS?
-	 * the body has overflow -hiddne, that makes the elements not jumpy when scrolling all the way top.
-	 * and Home is holding all sub comps and home is scrollable, but left navbar is sticky and it will scroll to anywhere
-	 */
-	overflow: 'scroll',
-
-
-	display: "flex",
-	justifyContent: "space-between",
-	alignItems: "flex-start",
-
-	/** LEFT COLUMN */
-	".main_left_column": {
-		/**
-		 * height is important!
-		 * left column which holds the width 21rem but when viewport squeeze it, it will shrink to down
-		 * but, the element inside it Navbar elements (top row and footer) minwith is minWidth: "148px",
-		 * which it can not go down under 148.
-		 * 
-		 * add later over here for the maxWidth or add the whole project root or body to not to grow to extra
+		/** SO THE SCROLL, HOW IT WORKS?
+		 * the body has overflow -hiddne, that makes the elements not jumpy when scrolling all the way top.
+		 * and Home is holding all sub comps and home is scrollable, but left navbar is sticky and it will scroll to anywhere
 		 */
-		width: "21rem",
-		height: "100vh",
-		
-		position: "sticky",
-		top: "0",
+		overflow: "scroll",
 
-		borderRight: ".1px solid black",
-
-		// background: "red",
-	},
-
-
-
-	/** MANIN RIGHT COLUM
-	 * 
-	 * THIS COLUM RENDERS OUTLETS
-	 * OUTLETS WRAPPER
-	 */
-	".main_right_column": {
-		/**
-		 * 	if center senction has a height then left and right section doesnt stick.
-		 */
-		// height:'100rem',
-
-		flexGrow: 1,
-		/**
-		 *  this is must be center center, when we add a text or in the middle section of the outlets,
-		 * 	it pushes the right column to the its minimum pxs
-		 * 	
-		 * 	i am gonna add a container to the middle section and will give it a fixed width so, all
-		 * 	content will be inside it and cants overflow that container, in that case that container needs to be
-		 * 	in the middle of middle section so that there is gonna be spaces aroun it. 
-		 * 
-		 * center center is a must.
-		 * 	
-		 */
 		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
+		justifyContent: "space-between",
+		alignItems: "flex-start",
 
-		// background: "blue",
-	},
-}));
+		/** LEFT COLUMN */
+		".main_left_column": {
+			/**
+			 * height is important!
+			 * left column which holds the width 21rem but when viewport squeeze it, it will shrink to down
+			 * but, the element inside it Navbar elements (top row and footer) minwith is minWidth: "148px",
+			 * which it can not go down under 148.
+			 *
+			 * add later over here for the maxWidth or add the whole project root or body to not to grow to extra
+			 */
+			flexGrow: 1,
+			maxWidth: tablet ? "fit-content" : "21rem",
+			height: "100vh",
 
+			position: "sticky",
+			top: "0",
 
+			borderRight: ".1px solid black",
 
+			// background: "red",
+		},
+
+		/** MANIN RIGHT COLUM
+		 *
+		 * THIS COLUM RENDERS OUTLETS
+		 * OUTLETS WRAPPER
+		 */
+		".main_right_column": {
+			/**
+			 * 	if center senction has a height then left and right section doesnt stick.
+			 */
+			// height:'100rem',
+
+			flexGrow: 3,
+			/**
+			 *  this is must be center center, when we add a text or in the middle section of the outlets,
+			 * 	it pushes the right column to the its minimum pxs
+			 *
+			 * 	i am gonna add a container to the middle section and will give it a fixed width so, all
+			 * 	content will be inside it and cants overflow that container, in that case that container needs to be
+			 * 	in the middle of middle section so that there is gonna be spaces aroun it.
+			 *
+			 * center center is a must.
+			 *
+			 */
+			display: "flex",
+			justifyContent: "center",
+			alignItems: "center",
+
+			// background: "blue",
+		},
+	})
+);

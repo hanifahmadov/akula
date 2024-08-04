@@ -99,6 +99,7 @@ export const Home = () => {
 				{/** fixed_width has a fixed min width  */}
 				<div className='fixed_width'>
 					<AddPost
+						isfor={"post"}
 						uuid={"1"}
 						signedUser={signedUser}
 						text={text}

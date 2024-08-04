@@ -15,9 +15,10 @@ export const ReactionCounts_Container = styled.div(
 		$numberFontWeight,
 		$numberPadding,
 		$numberMargin,
+		$likesCount
 	}) => {
 		return {
-			display: "flex",
+			display: $likesCount > 0 ? "flex" : 'none',
 			justifyContent: "flex-start",
 			alignItems: "center",
 			gap: $gap ? $gap : "20px",
@@ -123,6 +124,18 @@ export const Display_User_Avatar = styled.div(({ theme: {}, $imgWidth, $imgHeigh
 			borderRadius: "50%",
 			border: $border ? $border : "2px solid white",
 		},
+
+		position:"relative",
+
+		".joinline": {
+			height: '6px',
+			width: '6px',
+			background:'rgba(0, 0, 0, .25)',
+			position: 'absolute',
+			left: '-27px',
+			top:'12px',
+			borderRadius:'50%'
+		}
 	};
 });
 export const Content_Section = styled.div(({ theme: {}, $background, $padding }) => {

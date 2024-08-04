@@ -83,6 +83,7 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 
 			<div className='add_comment_wrapper_row_five'>
 				<AddPost
+					isfor={"comment"}
 					uuid={_id}
 					signedUser={signeddUser}
 					text={text}
@@ -93,7 +94,7 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 					avatarHeight={'2.25rem'}
 					avatarWidth={'2.25rem'}
 					avatarBorder={'2px solid white'}
-					TAheight={1}
+					TAheight={2}
 					TApadding={'8px 10px'}
 					TAfontSize={'.9rem'}
 					uploadsIconSize={'.8rem'}
