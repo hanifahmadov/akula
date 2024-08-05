@@ -27,7 +27,7 @@ import { ReactionCounts } from "../helpers/ReactionCounts";
 import { AddReply } from "../helpers/AddReply";
 import { Reply } from "../reply/Reply";
 
-export const Comment = ({ comment: { _id, owner, content, createdAt, likes, replies }, storageId }) => {
+export const Comment = ({ comment: { _id, owner, content, createdAt, likes, replies } }) => {
 	const signedUser = useRecoilValue(userDefault);
 	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
 
@@ -127,26 +127,27 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 					</Timeline_Section>
 				</div>
 
-				<>
-					{replies && replies.length > 0 && (
-						<>
-							<ViewReplies
-								style={{ display: !viewReplies ? "flex" : "none" }}
-								onClick={() => setViewReplies(true)}
-							>
-								<span>view </span>
-								<span>{replies && replies.length > 0 && replies.length}</span>
-								<span>replies</span>
-							</ViewReplies>
+				{replies && replies.length > 0 && (
+					<>
+						<ViewReplies
+							style={{ display: !viewReplies ? "flex" : "none" }}
+							onClick={() => setViewReplies(true)}
+						>
+							<span>view </span>
+							<span>{replies && replies.length > 0 && replies.length}</span>
+							<span>replies</span>
+						</ViewReplies>
 
-							<div style={{ display: viewReplies ? "flex" : "none", flexDirection: "column" }}>
-								{replies.map((reply, index) => (
-									<Reply reply={reply} key={index}/>
-								))}
-							</div>
-						</>
-					)}
-				</>
+						<div
+							className='replies_wrapper_inside_comment_comp'
+							style={{ display: viewReplies ? "flex" : "none", flexDirection: "column" }}
+						>
+							{replies.map((reply, index) => (
+								<Reply reply={reply} key={index} />
+							))}
+						</div>
+					</>
+				)}
 
 				{addReply && (
 					<OutsideClickHandler

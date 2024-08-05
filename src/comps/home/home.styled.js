@@ -58,15 +58,18 @@ export const Home_Container = styled.div(
 			".fixed_width": {
 				width: laptop ? "30rem" : "40rem",
 				height: "200rem",
+				wordBreak: 'break-all',
 
 				...(tablet && {
 					width: '100%',
 					padding: '0px 30px',
+					wordBreak: 'break-all'
 				}),
 
 				...(mobile && {
 					width: '100%',
 					padding: '0px 2px',
+					wordBreak: 'break-all'
 				})
 
 				// background: 'gray',

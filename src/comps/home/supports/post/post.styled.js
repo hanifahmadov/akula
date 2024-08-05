@@ -73,7 +73,7 @@ export const Post_Container = styled.div(
 			...(mobile && {
 				borderRadius: "5px",
 				margin: ".5rem 0px",
-				padding: "5px 3px"
+				padding: "5px 0px"
 
 			}),
 		},

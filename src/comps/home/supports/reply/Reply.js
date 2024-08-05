@@ -84,7 +84,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 
 	return (
 		<Reply_Container>
-			<Display_User_Avatar className='display_user_avatar_column_left'>
+			<Display_User_Avatar className='reply_container_display_user_avatar_column_left'>
 				<div className='joinline' />
 				<img src={owner.avatar} />
 			</Display_User_Avatar>
@@ -146,33 +146,32 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 					</Timeline_Section>
 				</div>
 
-				<>
-					{replies && replies.length > 0 && (
-						<>
-							<ViewReplies
-								style={{ display: !viewReplies ? "flex" : "none" }}
-								onClick={() => setViewReplies(true)}
-							>
-								<span>view </span>
-								<span>{replies && replies.length > 0 && replies.length}</span>
-								<span>replies</span>
-							</ViewReplies>
+				{replies && replies.length > 0 && (
+					<>
+						<ViewReplies
+							className="view_replies_wrapper"
+							style={{ display: !viewReplies ? "flex" : "none" }}
+							onClick={() => setViewReplies(true)}
+						>
+							<span>view </span>
+							<span>{replies && replies.length > 0 && replies.length}</span>
+							<span>replies</span>
+						</ViewReplies>
 
-							<SubReplies_Wrapper $viewReplies={viewReplies}>
-								{replies.map((reply, index) => (
-									<SubReply
-										key={index}
-										subreply={reply}
-										currentReply={currentReply}
-										setCurrentReply={setCurrentReply}
-										setReplyingTo={setReplyingTo}
-										setReferralId={setReferralId}
-									/>
-								))}
-							</SubReplies_Wrapper>
-						</>
-					)}
-				</>
+						<SubReplies_Wrapper className="subreplies_wrapper" $viewReplies={viewReplies}>
+							{replies.map((reply, index) => (
+								<SubReply
+									key={index}
+									subreply={reply}
+									currentReply={currentReply}
+									setCurrentReply={setCurrentReply}
+									setReplyingTo={setReplyingTo}
+									setReferralId={setReferralId}
+								/>
+							))}
+						</SubReplies_Wrapper>
+					</>
+				)}
 
 				{currentReply && (
 					<OutsideClickHandler

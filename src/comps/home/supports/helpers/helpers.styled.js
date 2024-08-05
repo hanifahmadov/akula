@@ -15,10 +15,10 @@ export const ReactionCounts_Container = styled.div(
 		$numberFontWeight,
 		$numberPadding,
 		$numberMargin,
-		$likesCount
+		$likesCount,
 	}) => {
 		return {
-			display: $likesCount > 0 ? "flex" : 'none',
+			display: $likesCount > 0 ? "flex" : "none",
 			justifyContent: "flex-start",
 			alignItems: "center",
 			gap: $gap ? $gap : "20px",
@@ -116,50 +116,94 @@ export const Dislike_Container = styled.div(({ theme: {}, $dislike, $iconNumberG
 	".dislike_number": {},
 }));
 
-export const Display_User_Avatar = styled.div(({ theme: {}, $imgWidth, $imgHeight, $width, $height, $border }) => {
-	return {
-		img: {
-			width: $imgWidth ? $imgWidth : "2.25rem",
-			height: $imgHeight ? $imgHeight : "2.25rem",
-			borderRadius: "50%",
-			border: $border ? $border : "2px solid white",
+export const Display_User_Avatar = styled.div(
+	({
+		theme: {
+			device: { mobile },
 		},
+		$imgWidth,
+		$imgHeight,
+		$width,
+		$height,
+		$border,
+	}) => {
+		return {
+			img: {
+				width: $imgWidth ? $imgWidth : "2.25rem",
+				height: $imgHeight ? $imgHeight : "2.25rem",
+				borderRadius: "50%",
+				border: $border ? $border : "2px solid white",
 
-		position:"relative",
+				...(mobile && {
+					width: "2rem",
+					height: "2rem",
+				}),
+			},
 
-		".joinline": {
-			height: '6px',
-			width: '6px',
-			background:'rgba(0, 0, 0, .25)',
-			position: 'absolute',
-			left: '-27px',
-			top:'12px',
-			borderRadius:'50%'
-		}
-	};
-});
-export const Content_Section = styled.div(({ theme: {}, $background, $padding }) => {
-	return {
-		width: "fit-content",
-		minWidth: "16rem",
-		background: $background ? $background : "rgba(0, 0, 0, .05)",
-		padding: $padding ? $padding : "5px 10px",
-		borderRadius: "10px",
+			position: "relative",
 
-		".username": {
-			width: "100%",
-			display: "flex",
-			fontWeight: "600",
-			lineHeight: "12px",
-			fontSize: ".85rem",
+			".joinline": {
+				height: "6px",
+				width: "6px",
+				background: "rgba(0, 0, 0, .3)",
+				position: "absolute",
+				left: "-22px",
+				top: "12px",
+				borderRadius: "50%",
+			},
+		};
+	}
+);
+export const Content_Section = styled.div(
+	({
+		theme: {
+			device: { mobile },
 		},
+		$background,
+		$padding,
+	}) => {
+		return {
+			width: "fit-content",
+			minWidth: "16rem",
+			wordBreak: "break-word",
+			background: $background ? $background : "rgba(0, 0, 0, .05)",
+			padding: $padding ? $padding : "5px 10px",
+			borderRadius: "10px",
 
-		".content": {
-			width: "100%",
-			fontSize: ".9rem",
-		},
-	};
-});
+			// backgroundColor: 'red',
+
+			...(mobile && {
+				width: "100%",
+				minWidth: "100%",
+				padding: "3px 5px 5px 10px",
+			}),
+
+			".username": {
+				width: "100%",
+				display: "flex",
+				fontWeight: "600",
+				lineHeight: "12px",
+				fontSize: ".85rem",
+
+				...(mobile && {
+					fontSize: "0.8rem",
+					lineHeight: "12px",
+					fontWeight: "700",
+				}),
+			},
+
+			".content": {
+				width: "100%",
+				fontSize: ".9rem",
+
+				...(mobile && {
+					fontSize: "0.85rem",
+					lineHeight: "15px",
+				}),
+			},
+		};
+	}
+);
 
 export const Timeline_Section = styled.div(({ theme: {}, $imgWidth, $imgHeight, $width, $height, $border }) => {
 	return {
@@ -170,10 +214,15 @@ export const Timeline_Section = styled.div(({ theme: {}, $imgWidth, $imgHeight, 
 	};
 });
 
-export const Top_Row = styled.div(({ theme: {}, $gap }) => {
+export const Top_Row = styled.div(({ theme: { device: { mobile }}, $gap }) => {
 	return {
 		display: "flex",
 		gap: $gap ? $gap : "10px",
+
+		...(mobile && {
+			gap: '8px',
+			marginRight: '35px'
+		}),
 
 		".button": {
 			fontSize: ".75rem",
@@ -191,53 +240,55 @@ export const Bottom_Row = styled.div(({ theme: {}, $gap }) => {
 	};
 });
 
-
 export const Referral_Container = styled.div(({ theme: {}, $gap }) => {
 	return {
 		display: "flex",
-		justifyContent: 'center',
-		alignItems:'center',
+		justifyContent: "center",
+		alignItems: "center",
 
-		marginLeft: '6px',
-		gap: '5px',
+		marginLeft: "6px",
+		gap: "5px",
 
 		".replied_to": {
-			paddingTop:'.9px',
-			fontSize: '0.7rem',
-			fontWeight:'400',
-			fontStyle: 'italic',
+			paddingTop: ".9px",
+			fontSize: "0.7rem",
+			fontWeight: "400",
+			fontStyle: "italic",
 		},
 
 		".referred": {
-			background:'rgba(124, 177, 255, .25)',
-			padding: '.5px 4px',
-			borderRadius:'10px',
-			fontWeight:'500',
-			fontSize: '0.8rem',
-		}
-
+			background: "rgba(124, 177, 255, .25)",
+			padding: ".5px 4px",
+			borderRadius: "10px",
+			fontWeight: "500",
+			fontSize: "0.8rem",
+		},
 	};
 });
 
-
-
 export const ViewReplies = styled.div(({ theme: {}, $gap }) => {
 	return {
-
 		display: "flex",
 		gap: $gap ? $gap : "3px",
 		width: "fit-content",
 
-		padding: '2px 5px',
-		marginTop:'7px',
-		fontSize: '.8rem',
-		fontWeight: '500',
-		textShadow:'1px 1px 2px rgba(0, 0, 0, .2)',
-		cursor: 'pointer'
+		padding: "2px 5px",
+		marginTop: "7px",
+		fontSize: "0.85rem",
+		fontWeight: "500",
+		textShadow: "1px 1px 2px rgba(0, 0, 0, .2)",
+		cursor: "pointer",
 
+		position:"relative",
 
+		"&::before": {
+			content: "'➤'",
+			display:'inline-block',
+			color: 'red',
+			position:'absolute',
+			top:'2.75px',
+			left: '-10px'
 
-
-		
+		}
 	};
 });
