@@ -33,20 +33,28 @@ export const Navbar_Container = styled.div(
 		".navbar_top_row": {
 			display: "flex",
 			flexDirection: "column",
+			minWidth: "148px",
 
 			...(tablet && {
 				justifyContent: "center",
 				alignItems: "center",
+				minWidth: "fit-content",
 			}),
-
-			minWidth: tablet ? "fit-content" : "148px",
 
 			/** application header - POLARX */
 			".application_header": {
-				fontSize: tablet ? "1.75rem" : "2.5rem",
-				fontSize: mobile && '1.25rem',
+				fontSize: "2.5rem",
 				fontWeight: "800",
 				letterSpacing: "1px",
+
+				...(tablet && {
+					fontSize: "1.75rem",
+				}),
+
+				...(mobile && {
+					fontSize: "1.25rem",
+					fontWeight: "900",
+				}),
 			},
 
 			/* button is disable for now, but later will be okay */
@@ -54,7 +62,7 @@ export const Navbar_Container = styled.div(
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				textAlign: 'center',
+				textAlign: "center",
 
 				color: "#fff",
 				background: "#052c6550",
@@ -80,8 +88,7 @@ export const Navbar_Container = styled.div(
 				},
 
 				".plus": {
-					
-					paddingLeft:'1.25px',
+					paddingLeft: "1.25px",
 					display: tablet ? "inline" : "none",
 				},
 			},
@@ -159,7 +166,7 @@ export const Links_Container = styled.div(
 
 			...(tablet && {
 				textAlign: "center",
-			})
+			}),
 		},
 	})
 );

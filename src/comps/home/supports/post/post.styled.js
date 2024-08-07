@@ -268,7 +268,7 @@ export const Button_Groups_Container = styled.div(
 
 			padding: "2px",
 			borderRadius: "0px",
-			letterSpacing: ".25px",
+			letterSpacing: "1px",
 
 			cursor: "pointer",
 			transition: "all .1s ease-in-out",

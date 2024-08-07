@@ -91,7 +91,7 @@ export const AddPost = ({
 						onClick={handlePostClick}
 						
 					>
-						send
+						<span>send</span>
 					</Button>
 				</div>
 			</Form_Right_Column>

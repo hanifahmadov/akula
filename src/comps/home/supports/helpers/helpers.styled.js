@@ -284,7 +284,7 @@ export const ViewReplies = styled.div(({ theme: {}, $gap }) => {
 		"&::before": {
 			content: "'➤'",
 			display:'inline-block',
-			color: 'red',
+			color: 'black',
 			position:'absolute',
 			top:'2.75px',
 			left: '-10px'

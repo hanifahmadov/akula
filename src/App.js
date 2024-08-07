@@ -1,5 +1,5 @@
 /* eslint-disable */
-/** 
+/**
  * NPM IMPORTS
  */
 import React, { Fragment, useEffect } from "react";
@@ -16,7 +16,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { backdropDefault, darkmodeDefault, deviceDefault } from "./comps/auth/shared/store/states";
 import { GlobalStyled } from "./common.styled";
 
-
 /* LAYOUTS */
 import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
 import { PersistentLayout } from "./comps/layouts/PersistentLayout";
@@ -28,13 +27,11 @@ import { Signin } from "./comps/auth/elements/Signin";
 import { Signup } from "./comps/auth/elements/Signup";
 import { Home } from "./comps/home/Home";
 
-
-
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Fragment>
 			{/* Persistent Layout will navigate("/signin") if user is not signed in */}
-			<Route element={<PersistentLayout />}>
+			{/* <Route element={<PersistentLayout />}>
 				<Route element={<RegisterLayout />}>
 					<Route path='/signin' element={<Signin />} />
 					<Route path='/signup' element={<Signup />} />
@@ -47,6 +44,11 @@ const router = createBrowserRouter(
 						<Route path='bookmarks' element={<div />} />
 					</Route>
 				</Route>
+			</Route> */}
+
+			<Route>
+				<Route path='/' element={<Signin />} />
+				<Route path='/signup' element={<Signup />} />
 			</Route>
 		</Fragment>
 	)

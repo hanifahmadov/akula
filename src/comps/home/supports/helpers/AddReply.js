@@ -7,16 +7,7 @@ import { Textarea } from "../form/Textarea";
 import { Uploads } from "../form/Uploads";
 import { ImagePreview } from "../form/ImagePreview";
 
-export const AddReply = ({
-	uuid,
-	replyingTo,
-	signedUser,
-	text,
-	setText,
-	image,
-	setImage,
-	handlePostClick,
-}) => {
+export const AddReply = ({ uuid, replyingTo, signedUser, text, setText, image, setImage, handlePostClick }) => {
 	return (
 		<AddPost_Container className='addreply_container'>
 			<Form_Left_Column className='left_column'>
@@ -63,7 +54,8 @@ export const AddReply = ({
 					)}
 
 					<Button $fontSize={".7rem"} $padding={"0px 3px"} $letterSpacing={"0px"} onClick={handlePostClick}>
-						send
+						<span className='send'>send</span>
+						<span className='arrow'>➤</span>
 					</Button>
 				</div>
 			</Form_Right_Column>

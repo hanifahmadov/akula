@@ -206,7 +206,7 @@ export const Form_Right_Column = styled.div(
 				marginTop: "0.4rem",
 				padding: $buttonWrapperPadding ? $buttonWrapperPadding : "0px 5px",
 
-				...(mobile &&  {
+				...(mobile && {
 					marginTop: "0.2rem",
 				}),
 			},
@@ -255,25 +255,43 @@ export const User_Avatar_Container = styled.div(
 	}
 );
 
-export const Replaying = styled.div(({ theme: {}, $width, $height, $border }) => {
-	return {
-		lineHeight: "10px",
-		".replying_to": {
-			fontSize: "9px",
-			fontStyle: "italic",
-			fontWeight: "400",
+export const Replaying = styled.div(
+	({
+		theme: {
+			device: { mobile },
 		},
+		$width,
+		$height,
+		$border,
+	}) => {
+		return {
+			lineHeight: "10px",
+			".replying_to": {
+				fontSize: "9px",
+				fontStyle: "italic",
+				fontWeight: "400",
 
-		".username": {
-			fontSize: "10px",
-			background: "#cfe1fd",
-			padding: "2px 4px",
-			margin: "0px 3px",
-			borderRadius: "5px",
-			fontWeight: "600",
-		},
-	};
-});
+				...(mobile && {
+					fontSize: "8px",
+				}),
+			},
+
+			".username": {
+				fontSize: "10px",
+				background: "#cfe1fd",
+				padding: "2px 4px",
+				margin: "0px 3px",
+				borderRadius: "5px",
+				fontWeight: "600",
+
+				...(mobile && {
+					fontSize: "8px",
+					padding: "2px 2px",
+				}),
+			},
+		};
+	}
+);
 
 export const Button = styled.div(
 	({
@@ -291,22 +309,53 @@ export const Button = styled.div(
 		$isfor,
 	}) => {
 		return {
-			color: $color ? $color : "#fff",
-			background: $background ? $background : "#052c65",
+			span: {
+				display: "block",
+				color: $color ? $color : "#fff",
+				background: $background ? $background : "#052c65",
 
-			fontSize: $fontSize ? $fontSize : "1rem",
-			fontWeight: $fontWeight ? $fontWeight : "600",
-			textAlign: "center",
+				fontSize: $fontSize ? $fontSize : "1rem",
+				fontWeight: $fontWeight ? $fontWeight : "600",
+				textAlign: "center",
 
-			padding: $padding ? $padding : "2px 5px",
-			borderRadius: $boredrRadius ? $boredrRadius : "2px",
-			letterSpacing: $letterSpacing ? $letterSpacing : ".25px",
+				padding: $padding ? $padding : "2px 5px",
+				borderRadius: $boredrRadius ? $boredrRadius : "2px",
+				letterSpacing: $letterSpacing ? $letterSpacing : ".25px",
 
-			cursor: "pointer",
-			transition: "all .1s ease-in-out",
+				cursor: "pointer",
+				transition: "all .1s ease-in-out",
 
-			"&:hover": {
-				background: $hoverBackground ? $hoverBackground : "#000",
+				"&:hover": {
+					background: $hoverBackground ? $hoverBackground : "#000",
+				},
+
+
+				...(mobile && {
+					fontSize: ".8rem",
+					padding: "0px 5px",
+					fontWeight: '600',
+					letterSpacing: '-0.25px',
+					lineHeight:'18px',
+				}),
+			},
+
+			".send": {
+				display: mobile ? "none" : "block",
+			},
+
+			".arrow": {
+				display: "none",
+
+				...(mobile && {
+					display: "block",
+					padding: "0px 0px 0px 1px",
+
+					lineHeight: "14px",
+
+					height: "14px",
+					width: "14px",
+					borderRadius: "50%",
+				}),
 			},
 
 			...(mobile &&

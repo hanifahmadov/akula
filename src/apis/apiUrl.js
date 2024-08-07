@@ -3,10 +3,10 @@ let apiUrl
 
 const apiUrls = {
   //: production server url
-  production:  process.env.REACT_APP_SERVER_PRO,
+  production:  process.env.REACT_APP_SERVER_PRODUCTION,
 
   //: local server 
-  development: process.env.REACT_APP_SERVER_DEV
+  development: process.env.REACT_APP_SERVER_DEVELOPENT
 }
 
 if (window.location.hostname === "localhost") {

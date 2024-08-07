@@ -54,6 +54,8 @@ export const changePwdApi = ({ oldPassword, newPassword }, accessToken) => {
 };
 
 export const signoutAPI = ({ accessToken, _id }) => {
+
+
 	return axios({
 		url: apiUrl + "/signout",
 		method: "DELETE",
@@ -70,6 +72,9 @@ export const signoutAPI = ({ accessToken, _id }) => {
 };
 
 export const useRefreshAccessApi = () => {
+
+	console.log(" <<<< api URL >>>> ", apiUrl)
+
 	return axios({
 		url: apiUrl + "/refreshAccess",
 		method: "GET",
