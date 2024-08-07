@@ -31,25 +31,23 @@ const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Fragment>
 			{/* Persistent Layout will navigate("/signin") if user is not signed in */}
-			{/* <Route element={<PersistentLayout />}>
-				<Route element={<RegisterLayout />}>
-					<Route path='/signin' element={<Signin />} />
-					<Route path='/signup' element={<Signup />} />
-				</Route>
-				<Route element={<RequireAuthLayout />}>
+			<Route element={<PersistentLayout />}>
+				{/* <Route element={<RegisterLayout />}> */}
+					<Route path='/' element={<Signin />} />
+					{/* <Route path='/signup' element={<Signup />} /> */}
+				{/* </Route> */}
+				{/* <Route element={<RequireAuthLayout />}>
 					<Route path='/' element={<MainLayout />}>
 						<Route path='/' element={<Home />} />
 						<Route path='notifications' element={<div />} />
 						<Route path='messages' element={<div />} />
 						<Route path='bookmarks' element={<div />} />
 					</Route>
-				</Route>
-			</Route> */}
-
-			<Route>
-				<Route path='/' element={<Signin />} />
-				<Route path='/signup' element={<Signup />} />
+				</Route> */}
 			</Route>
+
+
+
 		</Fragment>
 	)
 );

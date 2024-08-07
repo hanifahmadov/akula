@@ -21,6 +21,8 @@ export const PersistentLayout = () => {
 
 	const navigate = useNavigate();
 
+	console.log(" <<<< api URL >>>> ", apiUrl)
+
 	useEffect(() => {
 		let mounted = true;
 		/* Soo, trying fetch the token from the backend  */
