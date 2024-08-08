@@ -86,8 +86,9 @@ export const Navbar_Container = styled.div(
 				},
 
 				".plus": {
-					paddingLeft: "1.25px",
-					display: tablet ? "inline" : "none",
+					textAlign: "center",
+					padding:'2px',
+					display: tablet ? "block" : "none",
 				},
 			},
 		},

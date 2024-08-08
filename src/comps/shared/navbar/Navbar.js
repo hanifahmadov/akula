@@ -54,7 +54,7 @@ export const Navbar = () => {
 				<div className='post_button_from_navbar'>
 					<span className='post'>POST</span>
 					<span className='plus'>
-						<Fontawesome type={"faPlus"} />
+						<Fontawesome type={"faPlus"} fontSize={"1.1rem"} />
 					</span>
 				</div>
 			</div>
