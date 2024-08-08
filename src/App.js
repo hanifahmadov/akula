@@ -33,7 +33,7 @@ const router = createBrowserRouter(
 			{/* Persistent Layout will navigate("/signin") if user is not signed in */}
 			<Route element={<PersistentLayout />}>
 				<Route element={<RegisterLayout />}>
-					<Route path='/sigin' element={<Signin />} />
+					<Route path='/signin' element={<Signin />} />
 					<Route path='/signup' element={<Signup />} />
 				</Route>
 				<Route element={<RequireAuthLayout />}>
