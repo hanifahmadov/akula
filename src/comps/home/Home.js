@@ -109,6 +109,7 @@ export const Home = () => {
 						handlePostClick={handlePostClick}
 						TAparentPadding={"7px 0px 0px 0px"}
 						TAfontSize={"1rem"}
+						TAheight={1}
 						avatarWidth={"3rem"}
 						avatarHeight={"3rem"}
 						uploadsIconSize={"1rem"}

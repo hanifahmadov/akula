@@ -30,7 +30,7 @@ export const Textarea_Container = styled.div(
 
 			...(mobile &&
 				$isfor == "post" && {
-					padding: "5px 3px 5px 3px",
+					padding: "10px 3px 10px 10px",
 					border: "1px solid white",
 				}),
 
