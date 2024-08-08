@@ -54,7 +54,9 @@ export const Button_Groups = ({ postId, postLikes }) => {
 						postId={postId}
 						/* likes are passing because of red icon on popover */
 						likes={postLikes}
+						top={"-43px"}
 						left={"0px"}
+						translateX={'-100%'}
 					/>
 
 					<motion.div

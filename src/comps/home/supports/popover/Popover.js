@@ -25,7 +25,7 @@ export const Popover = ({
 	right,
 	top,
 	bottom,
-	beforeLeft
+	translateX
 }) => {
 	/*  getting global state likeType */
 	const [likeType, setLikeType] = useRecoilState(likeTypeDefault);
@@ -98,7 +98,7 @@ export const Popover = ({
 			$right={right}
 			$top={top}
 			$bottom={bottom}
-			$beforeLeft={beforeLeft}
+			$translateX={translateX}
 			onClick={handlePopoverClick}
 		>
 			<section className='icons'>
