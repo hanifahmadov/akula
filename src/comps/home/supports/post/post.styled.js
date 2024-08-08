@@ -256,11 +256,12 @@ export const Button_Groups_Container = styled.div(
 			position: "relative",
 		},
 
-		".button": {
+		".sikko_button": {
 			width: "6rem",
 
 			color: "#fff",
 			background: "#000",
+			border:'none',
 
 			textAlign: "center",
 			fontSize: ".9rem",
@@ -271,7 +272,7 @@ export const Button_Groups_Container = styled.div(
 			letterSpacing: "1px",
 
 			cursor: "pointer",
-			transition: "all .1s ease-in-out",
+
 
 			...(mobile && {
 				width: "5rem",

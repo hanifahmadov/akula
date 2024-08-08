@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
+import { motion } from "framer-motion";
 
 /* STYLED */
 import { Button_Groups_Container } from "./post.styled";
@@ -33,8 +34,6 @@ export const Button_Groups = ({ postId, postLikes }) => {
 
 	return (
 		<Button_Groups_Container className='button_groups_container'>
-
-
 			<OutsideClickHandler
 				onOutsideClick={() => {
 					setPopoverOpen(false);
@@ -58,17 +57,25 @@ export const Button_Groups = ({ postId, postLikes }) => {
 						left={"0px"}
 					/>
 
-					<div className='like_button button' onClick={handleLikeButtonClick}>
+					<motion.div
+						whileTap={{ backgroundColor: "#003888" }}
+						className='like_button sikko_button'
+						onClick={handleLikeButtonClick}
+					>
 						Like
-					</div>
+					</motion.div>
 				</div>
 			</OutsideClickHandler>
 
 			{/* COMMENT */}
 			<div className='comment_wrapper'>
-				<div className='comment_button button' onClick={handleCommentButtonClick}>
+				<motion.div
+					whileTap={{ backgroundColor: "#003888" }}
+					className='comment_button sikko_button'
+					onClick={handleCommentButtonClick}
+				>
 					Comment
-				</div>
+				</motion.div>
 				{/** this comment is for the next shit. for now we will provide a comment section in the below of the
 				 * post, when user click the content, the post section will be open and will show the posts, but in the furure
 				 * we will update it to take the all post comments to the modal, usign the below version.
@@ -79,16 +86,16 @@ export const Button_Groups = ({ postId, postLikes }) => {
 
 			{/* SHARE */}
 			<div className='share_wrapper'>
-				<div className='share_button button' disabled>
+				<div className='share_button sikko_button' disabled>
 					Share
 				</div>
 			</div>
 
 			{/* BOOKMARK */}
 			<div className='bookmark_wrapper'>
-				<div className='bookmark_button button'>
+				<motion.div whileTap={{ backgroundColor: "#003888" }} className='bookmark_button sikko_button'>
 					<Fontawesome type={"faRegularBookmark"} />
-				</div>
+				</motion.div>
 			</div>
 		</Button_Groups_Container>
 	);
