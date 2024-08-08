@@ -56,7 +56,6 @@ export const Button_Groups = ({ postId, postLikes }) => {
 						likes={postLikes}
 						top={"-43px"}
 						left={"0px"}
-						translateX={'-100%'}
 					/>
 
 					<motion.div

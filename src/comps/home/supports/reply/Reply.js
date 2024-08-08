@@ -115,8 +115,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 										setPopoverOpen={setPopoverOpen}
 										commentId={_id}
 										likes={likes}
-										top={"-40px"}
-										beforeLeft={'4rem'}
+										translateX={'0%'}
 									/>
 									Like
 								</OutsideClickHandler>

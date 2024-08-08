@@ -25,7 +25,7 @@ export const Popover = ({
 	right,
 	top,
 	bottom,
-	translateX
+	translateX,
 }) => {
 	/*  getting global state likeType */
 	const [likeType, setLikeType] = useRecoilState(likeTypeDefault);

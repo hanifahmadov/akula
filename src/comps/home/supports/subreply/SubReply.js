@@ -84,6 +84,8 @@ export const SubReply = ({
 										setPopoverOpen={setPopoverOpen}
 										commentId={_id}
 										likes={likes}
+										translateX={'0%'}
+
 
 									/>
 									Like
