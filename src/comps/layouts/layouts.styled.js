@@ -50,7 +50,7 @@ export const RegisterLayout_Container = styled.div(({ theme: {} }) => ({
 export const MainLayout_Container = styled.div(
 	({
 		theme: {
-			device: { tablet},
+			device: { mobile, tablet},
 		},
 	}) => ({
 		width: "100%",
@@ -87,6 +87,10 @@ export const MainLayout_Container = styled.div(
 			borderRight: ".1px solid black",
 
 			// background: "red",
+			...(mobile && {
+				borderRight: "none",
+				background:'#fbfaff'
+			})
 		},
 
 		/** MANIN RIGHT COLUM
