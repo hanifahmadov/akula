@@ -5,7 +5,7 @@ import styled from "styled-components";
 // export const Project_Content = styled.div(({ theme: {} }) => ({}));
 // export const Project_Content = styled(motion.div)(({ theme: {} }) => ({}));
 
-export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $reactElement, $left, $top }) => ({
+export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $reactElement, $left, $top, $beforeLeft }) => ({
 	height: "2.25rem",
 	width: "8rem",
 
@@ -29,7 +29,7 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $reactEl
 	pointerEvents: "none",
 
 	position: "absolute",
-	zIndex: "1",
+	zIndex: "100",
 	top: $top ? $top : "-45px",
 	left: $left ? $left : "-45px",
 
@@ -39,7 +39,7 @@ export const Popover_Container = styled.div(({ theme: {}, $popoverOpen, $reactEl
 		content: '""',
 		position: "absolute",
 		top: "100%", // Position the arrow at the bottom
-		left: "50%",
+		left: $beforeLeft ? $beforeLeft : "2.5rem",
 		transform: "translateX(-50%)",
 		borderLeft: "10px solid transparent",
 		borderRight: "10px solid transparent",

@@ -98,6 +98,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 										commentId={_id}
 										likes={likes}
 										top={"-40px"}
+										beforeLeft={"4rem"}
 									/>
 									Like
 								</OutsideClickHandler>

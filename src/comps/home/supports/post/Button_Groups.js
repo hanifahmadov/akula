@@ -43,7 +43,7 @@ export const Button_Groups = ({ postId, postLikes }) => {
 				/** this will disabled the ourside click calls if popover is closed, this is a must */
 				disabled={!popoverOpen}
 			>
-				<button className='like_wrapper'>
+				<div className='like_wrapper'>
 					{/** Post id passing down for a likepostAPI argument, please read the Popover notes
 					 * 	also popoverOpen and Setter will be update the open after the like type is clicked.
 					 * 	popoverOpen will be false right after the post like getting updated in the backed server
@@ -55,20 +55,20 @@ export const Button_Groups = ({ postId, postLikes }) => {
 						postId={postId}
 						/* likes are passing because of red icon on popover */
 						likes={postLikes}
-						left={"-13px"}
+						left={"0px"}
 					/>
 
 					<div className='like_button button' onClick={handleLikeButtonClick}>
 						Like
 					</div>
-				</button>
+				</div>
 			</OutsideClickHandler>
 
 			{/* COMMENT */}
 			<div className='comment_wrapper'>
-				<button className='comment_button button' onClick={handleCommentButtonClick}>
+				<div className='comment_button button' onClick={handleCommentButtonClick}>
 					Comment
-				</button>
+				</div>
 				{/** this comment is for the next shit. for now we will provide a comment section in the below of the
 				 * post, when user click the content, the post section will be open and will show the posts, but in the furure
 				 * we will update it to take the all post comments to the modal, usign the below version.
@@ -79,16 +79,16 @@ export const Button_Groups = ({ postId, postLikes }) => {
 
 			{/* SHARE */}
 			<div className='share_wrapper'>
-				<button className='share_button button' disabled>
+				<div className='share_button button' disabled>
 					Share
-				</button>
+				</div>
 			</div>
 
 			{/* BOOKMARK */}
 			<div className='bookmark_wrapper'>
-				<button className='bookmark_button button'>
+				<div className='bookmark_button button'>
 					<Fontawesome type={"faRegularBookmark"} />
-				</button>
+				</div>
 			</div>
 		</Button_Groups_Container>
 	);
