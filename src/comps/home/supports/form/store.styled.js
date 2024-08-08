@@ -228,7 +228,7 @@ export const User_Avatar_Container = styled.div(
 		$border,
 		$isfor,
 	}) => {
-		console.log("$isfor inside User Container Avatar", $isfor);
+
 		return {
 			img: {
 				width: $width ? $width : "3.5rem",

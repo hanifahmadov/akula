@@ -50,7 +50,7 @@ export const RegisterLayout_Container = styled.div(({ theme: {} }) => ({
 export const MainLayout_Container = styled.div(
 	({
 		theme: {
-			device: { mobile, tablet},
+			device: { mobile, tablet },
 		},
 	}) => ({
 		width: "100%",
@@ -84,13 +84,19 @@ export const MainLayout_Container = styled.div(
 			position: "sticky",
 			top: "0",
 
+			padding: "20px 10px",
 			borderRight: ".1px solid black",
+
+			...(tablet && {
+				padding: "20px 5px",
+			}),
 
 			// background: "red",
 			...(mobile && {
 				borderRight: "none",
-				background:'#fbfaff'
-			})
+				background: "rgba(158, 197, 254, 0.1)",
+				padding: "10px 2px",
+			}),
 		},
 
 		/** MANIN RIGHT COLUM
@@ -121,6 +127,19 @@ export const MainLayout_Container = styled.div(
 			alignItems: "center",
 
 			// background: "blue",
+
+			padding: "20px 10px",
+
+			...(tablet && {
+				padding: "20px 5px",
+			}),
+
+			// background: "red",
+			...(mobile && {
+				borderRight: "none",
+				background: "rgba(158, 197, 254, 0.1)",
+				padding: "10px 2px",
+			}),
 		},
 	})
 );

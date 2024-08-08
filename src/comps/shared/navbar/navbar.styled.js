@@ -26,8 +26,6 @@ export const Navbar_Container = styled.div(
 		justifyContent: "space-between",
 		alignItems: "center",
 
-		/* spacing */
-		padding: tablet ? "20px 5px" : "20px 10px",
 
 		/* TOP ROW  */
 		".navbar_top_row": {

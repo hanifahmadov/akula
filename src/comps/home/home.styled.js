@@ -48,10 +48,10 @@ export const Home_Container = styled.div(
 			justifyContent: "center",
 
 			overflowY: "auto", // Ensure content inside can scroll
-			padding: "20px 5px",
+
 
 			...(mobile && {
-				padding: '20px 2px',
+				padding: '3px 2px',
 			}),
 
 
