@@ -97,7 +97,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 										setPopoverOpen={setPopoverOpen}
 										commentId={_id}
 										likes={likes}
-										top={"-40px"}
+										top={"-41px"}
 										beforeLeft={"4rem"}
 									/>
 									Like

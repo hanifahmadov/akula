@@ -85,6 +85,7 @@ export const SubReply = ({
 										commentId={_id}
 										likes={likes}
 										top={"-40px"}
+										beforeLeft={'4rem'}
 									/>
 									Like
 								</OutsideClickHandler>
