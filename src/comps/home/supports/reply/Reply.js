@@ -27,7 +27,7 @@ import { ReactionCounts } from "../helpers/ReactionCounts";
 import { SubReply } from "../subreply/SubReply";
 import { AddReply } from "../helpers/AddReply";
 
-export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies } }) => {
+export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies }, component }) => {
 	const signedUser = useRecoilValue(userDefault);
 	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
 
@@ -84,7 +84,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 
 	return (
 		<Reply_Container>
-			<Display_User_Avatar className='reply_container_display_user_avatar_column_left'>
+			<Display_User_Avatar  $component={component} className='reply_container_display_user_avatar_column_left'>
 				<div className='joinline' />
 				<img src={owner.avatar} />
 			</Display_User_Avatar>
@@ -167,6 +167,7 @@ export const Reply = ({ reply: { _id, owner, content, createdAt, likes, replies 
 									setCurrentReply={setCurrentReply}
 									setReplyingTo={setReplyingTo}
 									setReferralId={setReferralId}
+									component={"subreply"}
 								/>
 							))}
 						</SubReplies_Wrapper>

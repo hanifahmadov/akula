@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { addCommentAPI } from "../../../../apis/apiCalls";
 
 /* GLOBALS */
-import { postSubmittedDefault, userDefault } from "../../../auth/shared/store/states";
+import { deviceDefault, postSubmittedDefault, userDefault } from "../../../auth/shared/store/states";
 
 /* STYLED */
 import { Post_Container } from "./post.styled";
@@ -28,6 +28,8 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 	// console.log("renders")
 
 	const signeddUser = useRecoilValue(userDefault);
+	const [ device, func] = useRecoilState(deviceDefault)
+
 	const [postSubmitted, setPostSubmitted] = useRecoilState(postSubmittedDefault);
 
 	/**
@@ -77,7 +79,7 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 				{comments &&
 					comments.length > 0 &&
 					comments.map((comment, index) => {
-						return <Comment key={index} comment={comment} storageId={undefined} />;
+						return <Comment key={index} comment={comment} storageId={undefined}/>;
 					})}
 			</div>
 
@@ -94,7 +96,7 @@ export const Post = ({ post: { _id, owner, createdAt, content, media, likes, com
 					avatarHeight={'2.25rem'}
 					avatarWidth={'2.25rem'}
 					avatarBorder={'2px solid white'}
-					TAheight={2}
+					TAheight={device.mobile ? 1 : 2}
 					TApadding={'8px 10px'}
 					TAfontSize={'.9rem'}
 					uploadsIconSize={'.8rem'}

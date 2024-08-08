@@ -126,18 +126,28 @@ export const Display_User_Avatar = styled.div(
 		$width,
 		$height,
 		$border,
+		$component,
 	}) => {
 		return {
 			img: {
-				width: $imgWidth ? $imgWidth : "2.25rem",
-				height: $imgHeight ? $imgHeight : "2.25rem",
+				width: $imgWidth ? $imgWidth : "2rem",
+				height: $imgHeight ? $imgHeight : "2rem",
 				borderRadius: "50%",
 				border: $border ? $border : "2px solid white",
 
-				...(mobile && {
-					width: "2rem",
-					height: "2rem",
-				}),
+
+
+				...($component == "reply" &&
+					mobile && {
+						width: "1.75rem",
+						height: "1.75rem",
+					}),
+
+				...($component == "subreply" &&
+					mobile && {
+						width: "1.5rem",
+						height: "1.5rem",
+					}),
 			},
 
 			position: "relative",
@@ -214,24 +224,31 @@ export const Timeline_Section = styled.div(({ theme: {}, $imgWidth, $imgHeight, 
 	};
 });
 
-export const Top_Row = styled.div(({ theme: { device: { mobile }}, $gap }) => {
-	return {
-		display: "flex",
-		gap: $gap ? $gap : "10px",
-
-		...(mobile && {
-			gap: '8px',
-			marginRight: '35px'
-		}),
-
-		".button": {
-			fontSize: ".75rem",
-			fontWeight: "500",
-			cursor: "pointer",
-			position: "relative",
+export const Top_Row = styled.div(
+	({
+		theme: {
+			device: { mobile },
 		},
-	};
-});
+		$gap,
+	}) => {
+		return {
+			display: "flex",
+			gap: $gap ? $gap : "10px",
+
+			...(mobile && {
+				gap: "8px",
+				marginRight: "35px",
+			}),
+
+			".button": {
+				fontSize: ".75rem",
+				fontWeight: "500",
+				cursor: "pointer",
+				position: "relative",
+			},
+		};
+	}
+);
 
 export const Bottom_Row = styled.div(({ theme: {}, $gap }) => {
 	return {
@@ -279,16 +296,15 @@ export const ViewReplies = styled.div(({ theme: {}, $gap }) => {
 		textShadow: "1px 1px 2px rgba(0, 0, 0, .2)",
 		cursor: "pointer",
 
-		position:"relative",
+		position: "relative",
 
 		"&::before": {
 			content: "'➤'",
-			display:'inline-block',
-			color: 'black',
-			position:'absolute',
-			top:'2.75px',
-			left: '-10px'
-
-		}
+			display: "inline-block",
+			color: "black",
+			position: "absolute",
+			top: "2.75px",
+			left: "-10px",
+		},
 	};
 });

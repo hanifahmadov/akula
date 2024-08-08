@@ -13,6 +13,7 @@ export const Textarea_Container = styled.div(
 		$maxHeight,
 		$borderRadius,
 		$parentPadding,
+		$TAlineHeight,
 	}) => {
 		return {
 			display: "flex",
@@ -29,13 +30,13 @@ export const Textarea_Container = styled.div(
 
 			...(mobile &&
 				$isfor == "post" && {
-					padding: "4px 3px 5px 3px",
+					padding: "5px 3px 5px 3px",
 					border: "1px solid white",
 				}),
 
 			...(mobile &&
 				$isfor == "comment" && {
-					padding: "0px 3px",
+					padding: "2px 3px",
 					border: "2px solid white",
 				}),
 
@@ -54,6 +55,7 @@ export const Textarea_Container = styled.div(
 				borderRadius: $borderRadius ? $borderRadius : "10px",
 				background: "transparent",
 				color: "black",
+				lineHeight: $TAlineHeight ? $TAlineHeight : '14px',
 
 				"&::placeholder": {
 					color: "rgba(0, 0, 0, .25)",

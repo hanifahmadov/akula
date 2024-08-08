@@ -24,6 +24,7 @@ export const SubReply = ({
 	setCurrentReply,
 	setReplyingTo,
 	setReferralId,
+	component,
 }) => {
 	const signedUser = useRecoilValue(userDefault);
 	const [popoverOpen, setPopoverOpen] = useState(false);
@@ -48,7 +49,7 @@ export const SubReply = ({
 
 	return (
 		<SubReply_Container>
-			<Display_User_Avatar className='display_user_avatar_column_left'>
+			<Display_User_Avatar className='display_user_avatar_column_left' $component={component}>
 				<div className="joinline"/>
 				<img src={owner.avatar} />
 			</Display_User_Avatar>

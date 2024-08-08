@@ -144,7 +144,7 @@ export const Comment = ({ comment: { _id, owner, content, createdAt, likes, repl
 							style={{ display: viewReplies ? "flex" : "none", flexDirection: "column" }}
 						>
 							{replies.map((reply, index) => (
-								<Reply reply={reply} key={index} />
+								<Reply reply={reply} key={index}  component={"reply"}/>
 							))}
 						</div>
 					</>

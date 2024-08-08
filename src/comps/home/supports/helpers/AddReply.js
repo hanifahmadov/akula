@@ -23,6 +23,7 @@ export const AddReply = ({ uuid, replyingTo, signedUser, text, setText, image, s
 						padding={"5px 10px"}
 						parentPadding={"0px"}
 						fontSize={".9rem"}
+						
 					/>
 					{image && (
 						<ImagePreview

@@ -18,6 +18,7 @@ export const Textarea = ({
 	height,
 	owner,
 	setDisplay,
+	TAlineHeight,
 }) => {
 	const textareaRef = useRef(null);
 
@@ -50,6 +51,7 @@ export const Textarea = ({
 			$borderRadius={borderRadius}
 			$parentPadding={parentPadding}
 			$isfor={isfor}
+			$TAlineHeight={TAlineHeight}
 		>
 			<textarea
 				className='textarea'
