@@ -84,8 +84,8 @@ export const SubReply = ({
 										setPopoverOpen={setPopoverOpen}
 										commentId={_id}
 										likes={likes}
-										top={"-40px"}
-										beforeLeft={'4rem'}
+										top={"-42px"}
+										beforeLeft={'3.75rem'}
 									/>
 									Like
 								</OutsideClickHandler>
