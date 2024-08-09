@@ -40,13 +40,10 @@ export const Popover_Container = styled.div(
 
 		position: "absolute",
 		zIndex: "100",
-		top: $top ? $top : "-42px",
+		top: $top ? $top : "-45px",
 		left: $left ? $left : "-45px",
 
-		...(mobile && {
-			top: "-45px",
-			left: "-50px",
-		}),
+	
 
 		borderRadius: "3px",
 
