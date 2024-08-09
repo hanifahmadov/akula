@@ -82,6 +82,7 @@ export const MainLayout_Container = styled.div(
 			height: "100vh",
 
 			position: "sticky",
+			position: "-webkit-sticky",
 			top: "0",
 			zIndex:1000,
 
