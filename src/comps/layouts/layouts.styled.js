@@ -83,6 +83,7 @@ export const MainLayout_Container = styled.div(
 
 			position: "sticky",
 			top: "0",
+			zIndex:1000,
 
 			padding: "20px 10px",
 			borderRight: ".1px solid black",

@@ -26,7 +26,6 @@ export const Navbar_Container = styled.div(
 		justifyContent: "space-between",
 		alignItems: "center",
 
-
 		/* TOP ROW  */
 		".navbar_top_row": {
 			display: "flex",
@@ -87,7 +86,7 @@ export const Navbar_Container = styled.div(
 
 				".plus": {
 					textAlign: "center",
-					padding:'2px',
+					padding: "2px",
 					display: tablet ? "block" : "none",
 				},
 			},
@@ -95,8 +94,10 @@ export const Navbar_Container = styled.div(
 
 		/** BOTTOM ROW FOOTER */
 		".navbar_footer_row": {
+			position: "relative",
+
 			".logout_button": {
-				display: tablet ? "none" : "block",
+				display: "block",
 				minWidth: "148px",
 				color: "#fff",
 				background: "#000",
@@ -113,6 +114,58 @@ export const Navbar_Container = styled.div(
 
 				"&:hover": {
 					// background: "#052c65",
+				},
+			},
+
+			".settings_on_mobileView": {
+				borderRadius: "5px",
+				overflow: "hidden",
+				cursor: "pointer",
+
+				".settings_img_wrapper": {
+					img: {
+						width: "1.75rem",
+						height: "1.75rem",
+						borderRadius: "5px",
+					},
+				},
+
+				".settings_account_wrapper": {
+					background: "black",
+					cursor:'auto',
+
+					height: "11rem",
+					width: "8rem",
+
+					position: "absolute",
+					left: "2rem",
+					bottom: "0",
+					zIndex: "2000",
+
+					borderRadius: "5px",
+
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "space-evenly",
+					alignItems: "center",
+
+					".button": {
+						fontSize: ".9rem",
+						border: "1px solid black",
+						padding: "2px 10px",
+						borderRadius: "5px",
+						cursor: "pointer",
+						fontWeight: "600",
+
+						background: "#e5e5e5",
+						color: "black",
+						textShadow: "1px 1px 2px rgba(0, 0, 0, .2)",
+					},
+
+					".settings_button": {
+						cursor:'not-allowed',
+						background:'gray',
+					}
 				},
 			},
 		},

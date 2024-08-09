@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 /* GLOBAL STATES  & APIS*/
 import { deviceDefault, userDefault } from "../../auth/shared/store/states";
@@ -12,10 +13,16 @@ import { Navbar_Container } from "./navbar.styled";
 /* HELPER COMPS */
 import Links from "./Links";
 import { Fontawesome } from "../../home/supports/fontawesome/Fontawesome";
+import { Account } from "../../auth/account/Account";
+import OutsideClickHandler from "react-outside-click-handler";
 
 export const Navbar = () => {
-	const { tablet } = useRecoilValue(deviceDefault);
+	const { tablet, mobile } = useRecoilValue(deviceDefault);
 	const signedUser = useRecoilValue(userDefault);
+	const resetSignedUser = useResetRecoilState(userDefault);
+
+	const [showSettings, setShowSettings] = useState(false);
+
 	const navigate = useNavigate();
 
 	/** Logout click handler */
@@ -23,12 +30,17 @@ export const Navbar = () => {
 		signoutAPI(signedUser)
 			.then((res) => {
 				console.log("Logout successful");
+				resetSignedUser();
 				navigate("/signin");
 			})
 			.catch((err) => {
 				console.log("Logout error");
 				console.log(err);
 			});
+	};
+
+	const handleSettingsAvatarClick = (e) => {
+		setShowSettings((showSettings) => !showSettings);
 	};
 	return (
 		/** Navbar Main Container
@@ -60,9 +72,37 @@ export const Navbar = () => {
 			</div>
 
 			<div className='navbar_footer_row'>
-				<button className='logout_button' onClick={handleLogoutClick}>
-					Logout
-				</button>
+				{tablet ? (
+					<div className='settings_on_mobileView'>
+						<div className='settings_img_wrapper' onClick={handleSettingsAvatarClick}>
+							<img src={signedUser.avatar} />
+						</div>
+
+						{showSettings && (
+							<OutsideClickHandler
+								onOutsideClick={() => {
+									setShowSettings(false);
+								}}
+							>
+								<div className='settings_account_wrapper'>
+									<div className='settings_button button'>Settings</div>
+
+									<motion.div
+										onClick={handleLogoutClick}
+										whileTap={{ scale: 0.95 }}
+										className='logout button'
+									>
+										Logout
+									</motion.div>
+								</div>
+							</OutsideClickHandler>
+						)}
+					</div>
+				) : (
+					<button className='logout_button' onClick={handleLogoutClick}>
+						Logout
+					</button>
+				)}
 			</div>
 		</Navbar_Container>
 	);
